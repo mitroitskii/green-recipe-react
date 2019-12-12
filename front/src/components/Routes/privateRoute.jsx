@@ -1,26 +1,25 @@
-
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import { isLoggedFetchAC } from '../../redux/actions/actions';
 
 class PrivateRoute extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       isLoggedIn: false,
       loading: true,
-    }
+    };
   }
 
   async componentDidMount() {
-    //проверка авторизации
-    this.props.isLoggedFetch()
+    // проверка авторизации
+    this.props.isLoggedFetch();
     this.setState({
       isLoggedIn: this.props.isLoggedIn,
-      loading: false
-    })
+      loading: false,
+    });
   }
 
   render() {
@@ -28,26 +27,28 @@ class PrivateRoute extends React.Component {
     return (
       <Route
         {...this.props}
-        render={props => (
-          this.props.isLoggedIn === true
-          ? <Component {...props} />
-            : this.state.loading
-              ? <span className={'statustext'}>loading</span>
-              : <Redirect to='/login' />
-        )}
-        />
-    )
+        render={props =>
+          (this.props.isLoggedIn === true ? (
+            <Component {...props} />
+          ) : this.state.loading ? (
+            <span className={'statustext'}>loading</span>
+          ) : (
+            <Redirect to="/login" />
+          ))
+        }
+      />
+    );
   }
 }
 function mapStateToProps(store) {
   return {
-    isLoggedIn: store.isLoggedIn
-  }
+    isLoggedIn: store.isLoggedIn,
+  };
 }
 function mapDispatchToProps(dispatch) {
   return {
-    isLoggedFetch: () => dispatch(isLoggedFetchAC())
-  }
+    isLoggedFetch: () => dispatch(isLoggedFetchAC()),
+  };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PrivateRoute)
+export default connect(mapStateToProps, mapDispatchToProps)(PrivateRoute);

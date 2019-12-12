@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import { BrowserRouter as Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -10,25 +11,29 @@ class Login extends React.Component {
       username: '',
       password: '',
     };
+    this.handleLogin = this.handleLogin.bind(this);
+    this.handlePassword = this.handlePassword.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
-  handleLogin = event => {
-    this.setState({ username: event.target.value })
-  };
 
-  handlePassword = event => {
-    this.setState({ password: event.target.value })
-  };
+  componentWillUnmount() {
+    this.props.clearStatus();
+  }
 
-  handleSubmit = async event => {
+  handleLogin(event) {
+    this.setState({ username: event.target.value });
+  }
+
+  handlePassword(event) {
+    this.setState({ password: event.target.value });
+  }
+
+  async handleSubmit(event) {
     event.preventDefault();
     this.props.loginFetch({
       username: this.state.username,
       password: this.state.password,
     });
-  };
-
-  componentWillUnmount() {
-    this.props.clearStatus()
   }
 
   render() {
@@ -101,4 +106,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login)
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

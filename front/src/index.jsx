@@ -1,15 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware, compose } from 'redux';
+import createSagaMiddleware from 'redux-saga';
 // import './index.css';
 import App from './components/App/App';
 import * as serviceWorker from './serviceWorker';
 
-import { Provider } from 'react-redux';
-import { createStore, applyMiddleware, compose } from 'redux';
-
 import reducer from './redux/reducers/reducer';
-
-import createSagaMiddleware from 'redux-saga';
 
 import { watchFetches } from './redux/actions/actions';
 
