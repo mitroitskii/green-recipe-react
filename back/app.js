@@ -3,6 +3,8 @@ const express = require('express');
 const useMiddleware = require('./middleware');
 
 const usersRouter = require('./routes/users');
+const recipesRouter = require('./routes/recipes');
+const parcesRouter = require('./routes/parses');
 
 const app = express();
 
@@ -17,6 +19,8 @@ mongoose.connect('mongodb://localhost:27017/GreenRecipeProject', {
 });
 
 app.use('/api/users/', usersRouter);
+app.use('/api/recipes/', recipesRouter);
+app.use('/api/parses/', parcesRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
