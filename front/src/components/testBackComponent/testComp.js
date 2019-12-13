@@ -112,3 +112,14 @@ async function getAlRecipesByUserId(userId) {
 }
 // let testUserId = "5df269b2cd6c2c3123d3def4";
 // getAlRecipesByUserId(testUserId);
+
+async function ingredientParse(productname) {
+  const response = await fetch(`${link}/api/parses/`, {
+    method: 'POST',
+    headers: { 'content-type': 'application/json' },
+    body: JSON.stringify({ productname }),
+  });
+  const respJson = await response.json();
+  console.log('respJsonReceived', respJson);
+}
+// ingredientParse('говядина');

@@ -30,7 +30,7 @@ router
       return res.send(
         JSON.stringify({ message: 'ok', recipeId: newRecipe.id }),
       );
-    } catch (err) {
+    } catch (error) {
       return res.send(JSON.stringify({ message: 'error', error }));
     }
   });
