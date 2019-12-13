@@ -1,7 +1,14 @@
 import React from 'react';
+import IngredientCard from '../IngredientCard/ingredientCard'
 
-function Home() {
-  return <div className="Home" />;
+class Home extends React.Component {
+  render() {
+    return (
+      <div className="Home">
+        <IngredientCard/>
+      </div>
+    )
+  }
 }
 
 export default Home;

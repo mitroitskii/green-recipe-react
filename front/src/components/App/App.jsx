@@ -49,7 +49,7 @@ class App extends React.Component {
                 <Route exact path="/recipes/new" component={RecipeForm} />
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/registration" component={Registration} />
-                <ceRoute exact path="/" Component={Home} />
+                <Route exact path="/" component={Home} />
               </Switch>
             </Box>
           </Box>
