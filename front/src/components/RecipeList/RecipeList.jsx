@@ -4,10 +4,10 @@ import RecipeItem from '../RecipeItem';
 
 const RecipeList = (recipes) => {
   const elements = recipes.map((item) => {
-    const { id, ...itemProps } = item;
+    const { id } = item;
     return (
       <li key={id} className="list-group-item">
-        <RecipeItem {...itemProps}
+        <RecipeItem {...item}
         />
       </li>)
   })
