@@ -4,7 +4,7 @@ const RecipeItem = (item) => {
 
   return (
     <div>
-      
+     <img></img> 
     </div>
   );
 }
