@@ -45,7 +45,7 @@ let ingredTwo = {
 
 let recipeOne = {
   name: "Denis",
-  image: "",
+  image: "https://img1.russianfood.com/dycontent/images_upl/53/sm_52955.jpg'",
   instructions: "instrructions1",
   priceTotal: "500",
   caloriesTotal: "800",
@@ -55,7 +55,7 @@ let recipeOne = {
 
 let recipeTwo = {
   name: "Artem",
-  image: "",
+  image: "https://img1.russianfood.com/dycontent/images_upl/376/sm_375300.jpg",
   instructions: "instrructions2",
   priceTotal: "600",
   caloriesTotal: "900",
@@ -63,5 +63,5 @@ let recipeTwo = {
   author: "AuthorTwo"
 };
 
-CreateOne(recipeTwo);
+CreateOne(recipeOne);
 // getAll()
