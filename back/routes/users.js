@@ -15,15 +15,15 @@ router.route('/isLogged').get((req, res) => {
 
 router.route('/registration').post(async (req, res, next) => {
   try {
-    let user = await User.findOne({ username: req.body.username });
+    const user = await User.findOne({ username: req.body.username });
     if (user) {
-      let registrationError = new Error('Такой пользователь уже существует');
+      const registrationError = new Error('Такой пользователь уже существует');
       throw registrationError;
     } else {
-      let password = await bcrypt.hash(req.body.password, saltRounds);
-      let user = new User({
+      const password = await bcrypt.hash(req.body.password, saltRounds);
+      const user = new User({
         username: req.body.username,
-        password: password,
+        password,
         email: req.body.email,
       });
       await user.save();
@@ -42,7 +42,7 @@ router.route('/registration').post(async (req, res, next) => {
 
 router.route('/login').post(async (req, res, error) => {
   try {
-    let loginError = new Error(
+    const loginError = new Error(
       'Неправильный логин или пароль. Попробуйте еще раз',
     );
     const user = await User.findOne({ username: req.body.username });

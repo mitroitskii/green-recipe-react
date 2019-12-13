@@ -105,8 +105,9 @@ async function parseProductPageVV(link) {
     result['weight'] = result['weight'].trim();
     result['currency'] = result['currency'].trim();
     if (parseFloat(result['price']) > 0) {
-      result['pricePerKilo'] =Math.round(
-        (parseFloat(result['price']) / parseFloat(result['weight'])* 1000)) ;
+      result['pricePerKilo'] = Math.round(
+        (parseFloat(result['price']) / parseFloat(result['weight'])) * 1000,
+      );
     }
 
     // console.log('result', result);
