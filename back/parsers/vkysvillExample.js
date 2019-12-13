@@ -1,4 +1,4 @@
-const { parseSearchPageVV, parseProductPageVV } = require('./vkusvill');
+const { parseSearchPageVV, parseProductPageVV } = require('./vkysvill');
 
 // тест одной страницы одного продукта
 async function TestSinglePageParse() {
