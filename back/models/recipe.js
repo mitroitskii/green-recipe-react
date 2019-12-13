@@ -10,10 +10,10 @@ const recipeSchema = new mongoose.Schema({
   author: {},
 });
 
-recipeSchema.statics.mostRecent = async function () {
-  return this.find()
-    .limit(5)
-    .exec();
-};
+// recipeSchema.statics.mostRecent = async function () {
+//   return this.find()
+//     .limit(10)
+//     .exec();
+// };
 
 module.exports = mongoose.model('Recipe', recipeSchema);
