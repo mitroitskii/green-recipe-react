@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Grommet } from 'grommet';
 import { isLoggedFetchAC } from '../../redux/actions/actions';
 
 // import './App.css';
@@ -21,16 +22,27 @@ class App extends React.Component {
   }
 
   render() {
+    const theme = {
+      global: {
+        font: {
+          family: 'Roboto',
+          size: '18px',
+          height: '20px',
+        },
+      },
+    };
     return (
       <Router>
-        <Navbar />
-        <div className="App">
-          <Switch>
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/registration" component={Registration} />
-            <PrivateRoute exact path="/" Component={Home} />
-          </Switch>
-        </div>
+        <Grommet theme={theme}>
+          <Navbar />
+          <div className="App">
+            <Switch>
+              <Route exact path="/login" component={Login} />
+              <Route exact path="/registration" component={Registration} />
+              <PrivateRoute exact path="/" Component={Home} />
+            </Switch>
+          </div>
+        </Grommet>
       </Router>
     );
   }
