@@ -8,7 +8,7 @@ async function TestSinglePageParse() {
     await parseProductPageVV(testLink),
   );
 }
-TestSinglePageParse();
+// TestSinglePageParse();
 //  {
 //   name: 'Рис шлифованный длиннозерный, 500 гр',
 //   weight: '500',

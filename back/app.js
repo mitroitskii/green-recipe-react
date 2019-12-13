@@ -18,7 +18,7 @@ mongoose.connect('mongodb://localhost:27017/GreenRecipeProject', {
 });
 
 app.use('/api/users/', usersRouter);
-app.use('/api/users/', recipesRouter);
+app.use('/api/recipes/', recipesRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
