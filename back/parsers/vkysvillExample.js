@@ -2,7 +2,7 @@ const { parseSearchPageVV, parseProductPageVV } = require('./vkysvill');
 
 // тест одной страницы одного продукта
 async function TestSinglePageParse() {
-  let testLink = '/goods/ris-shlifovannyy-dlinnozernyy-500-gr.html';
+  const testLink = '/goods/ris-shlifovannyy-dlinnozernyy-500-gr.html';
   console.log(
     'Тест парсинга одной страницы ',
     await parseProductPageVV(testLink),
@@ -24,12 +24,12 @@ async function TestSinglePageParse() {
 
 // тест одного продукта
 async function TestProductParse(productname) {
-  let testParsqReq = await parseSearchPageVV(productname);
+  const testParsqReq = await parseSearchPageVV(productname);
   console.log('Тест парсинга одного продукта', testParsqReq);
 }
 // TestProductParse('рис');
 
-let ingredients = [
+const ingredients = [
   'мёд',
   'помидор',
   'картофель',
@@ -45,7 +45,7 @@ let ingredients = [
 async function TestRecipeParseSync() {
   for (let i = 0; i < ingredients.length; i++) {
     console.log('Парсинг ингредиента', ingredients[i]);
-    result = await TestProductParse(ingredients[i]);
+    const result = await TestProductParse(ingredients[i]);
     console.log(result);
   }
 }
@@ -54,8 +54,8 @@ async function TestRecipeParseSync() {
 // появляются 503 error иногда
 async function TestRecipeParseAS() {
   await Promise.all(
-    ingredients.map(async ingredient => {
-      productParseResult = await TestProductParse(ingredient);
+    ingredients.map(async (ingredient) => {
+      const productParseResult = await TestProductParse(ingredient);
       console.log('productParseResult', productParseResult);
     }),
   );

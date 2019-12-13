@@ -1,10 +1,13 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { TextInput } from 'grommet';
 
-function RecipeForm() {
+export default function RecipeForm() {
+const [value, setValue] = React.useState('');
   return (
-    
-  )
+    <TextInput
+      placeholder="type here"
+      value={value}
+      onChange={event => setValue(event.target.value)}
+    />
+  );  
 }
-
-export default connect(mapDispatch)(RecipeForm)
