@@ -1,7 +1,7 @@
 const request = require('request-promise');
 const parse = require('cheerio');
 
-const parseSearchPageVV = async productName => {
+async function parseSearchPageVV(productName) {
   let link = encodeURI('https://vkusvill.ru/search/?q=' + productName);
   const products = [];
   try {
@@ -11,17 +11,32 @@ const parseSearchPageVV = async productName => {
       let link = parse('.ProductCard__link', this).attr('href');
       links.push(link);
     });
-    console.log('links', links);
+    // console.log('links', links);
 
-    links.forEach(element => {
-      products.push(parseProductPageVV(element));
-    });
+    // Синхронный запуск
+    // for (let i = 0; i < links.length; i++) {
+    //   productInfo = await parseProductPageVV(links[i]);
+    //   console.log('productInfo'), productInfo;
+    //   products.push(productInfo);
+    // }
+
+    // Асинхронный запуск
+    await Promise.all(
+      links.map(async link => {
+        productInfo = await parseProductPageVV(link);
+        // console.log('productInfo', productInfo);
+        products.push(productInfo);
+      }),
+    );
+
+    // console.log('products', products);
+    return products;
   } catch (err) {
     return err;
   }
-};
+}
 
-const parseProductPageVV = async link => {
+async function parseProductPageVV(link) {
   try {
     const fullLink = 'https://vkusvill.ru' + link;
     const html = await request(encodeURI(fullLink));
@@ -42,17 +57,26 @@ const parseProductPageVV = async link => {
       currency: parse('.Price__unit', html)
         .text()
         .trim(),
-      kcal: parse('.DetailsList__value', html)
-        .text()
-        .trim(),
-
       link: fullLink,
     };
 
+    // калорийность и другая пищевая ценность не везде есть
+    nutritionDict = {};
+    parse('.DetailsList__item', html).map(function() {
+      let value = parse('.DetailsList__value', this).text();
+      let name = parse('.DetailsList__text', this).text();
+      try {
+        nutritionDict[name] = value;
+      } catch (error) {}
+    });
+    result['kcal'] = 0;
+    if ('ккал' in nutritionDict) {
+      result['kcal'] = nutritionDict['ккал'];
+    }
+
     // обработка разных неудобных весов
     let weight = result.weight;
-
-    // могут быть варианты // Вес/объем: // Вес  //       мл л г кг
+    // могут быть варианты // Вес/объем: // Вес  //   мл л г кг
     let weightWithType = [];
     if (weight.indexOf('Вес/объем:') !== -1) {
       weight = weight.slice(weight.indexOf('Вес/объем:') + 11);
@@ -78,18 +102,13 @@ const parseProductPageVV = async link => {
       result['weight'] = (parseFloat(weightWithType[0]) * 1000).toString();
     }
 
-    let kcal = result.kcal;
-    // console.log("kcal before", kcal);
-
-    if (kcal.indexOf(',') !== -1) {
-      result['kcal'] = kcal.slice(0, kcal.indexOf(','));
-    }
-
     result['weight'] = result['weight'].trim();
     result['currency'] = result['currency'].trim();
-    console.log('result', result);
+    // console.log('result', result);
     return result;
   } catch (err) {
     return err;
   }
-};
+}
+
+module.exports = { parseProductPageVV, parseSearchPageVV };
