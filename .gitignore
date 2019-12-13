@@ -117,3 +117,6 @@ build
 
 # misc
 .DS_Store
+
+# security
+sessions
