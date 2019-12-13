@@ -8,7 +8,19 @@ async function TestSinglePageParse() {
     await parseProductPageVV(testLink),
   );
 }
-// TestSinglePageParse();
+TestSinglePageParse();
+//  {
+//   name: 'Рис шлифованный длиннозерный, 500 гр',
+//   weight: '500',
+//   rating: '4.8',
+//   price: '53',
+//   currency: 'руб/шт',
+//   link: 'https://vkusvill.ru/goods/ris-shlifovannyy-dlinnozernyy-500-gr.html',
+//   kcal: '321',
+//   weightAbsoulte: '500',
+//   measureType: 'г',
+//   pricePerKilo: 106
+// }
 
 // тест одного продукта
 async function TestProductParse(productname) {
