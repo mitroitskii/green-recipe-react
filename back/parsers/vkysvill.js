@@ -1,5 +1,6 @@
 const request = require('request-promise');
 const parse = require('cheerio');
+const Ingredient = require('../models/ingredient');
 
 async function parseSearchPageVV(productName) {
   let link = encodeURI('https://vkusvill.ru/search/?q=' + productName);
@@ -110,8 +111,11 @@ async function parseProductPageVV(link) {
       );
     }
 
-    // console.log('result', result);
-    return result;
+    console.log('result', result);
+
+    const newIngredient = new Ingredient(result);
+
+    return newIngredient;
   } catch (err) {
     return err;
   }
