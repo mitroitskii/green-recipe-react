@@ -11,6 +11,7 @@ import Navbar from '../Navbar/navbar';
 import Login from '../Login/login';
 import Registration from '../Registration/registration';
 import RecipeForm from '../RecipeForm/RecipeForm';
+import RecipePage from '../RecipePage/RecipePage';
 
 import PrivateRoute from '../Routes/privateRoute';
 import HomeRoute from '../Routes/homeRoute';
@@ -49,6 +50,7 @@ class App extends React.Component {
                 <Route exact path="/recipes/new" component={RecipeForm} />
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/registration" component={Registration} />
+                <Route exact path="/recipepage" component={RecipePage} />
                 <PrivateRoute exact path="/" Component={Home} />
               </Switch>
             </Box>
