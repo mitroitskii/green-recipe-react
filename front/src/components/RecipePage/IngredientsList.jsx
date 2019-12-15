@@ -3,7 +3,8 @@ import { connect } from "react-redux";
 
 // import { logoutFetchAC } from '../../redux/actions/actions';
 
-class Navbar extends React.Component {
+class IngredientsList extends React.Component {
+  const 
   render() {
     return (
       <ul>
@@ -27,4 +28,4 @@ function mapDispatchToProps(dispatch) {
   //   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Navbar);
+export default connect(mapStateToProps, mapDispatchToProps)(IngredientsList);

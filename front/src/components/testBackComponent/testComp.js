@@ -123,3 +123,5 @@ async function ingredientParse(productname) {
   console.log('respJsonReceived', respJson);
 }
 ingredientParse('говядина');
+
+
