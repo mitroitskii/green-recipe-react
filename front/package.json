@@ -4,6 +4,7 @@
   "dependencies": {
     "grommet": "^2.8.1",
     "grommet-icons": "^4.4.0",
+    "node-fetch": "^2.6.0",
     "grommet-theme-hpe": "^0.4.2",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
