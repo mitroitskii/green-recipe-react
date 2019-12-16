@@ -35,6 +35,14 @@ router
     }
   });
 
+router.get('/price', async (req, res) => {
+
+});
+
+router.get('/calorific', async (req, res) => {
+
+});
+
 // api/recipes/:id
 router
   .route('/:id')
