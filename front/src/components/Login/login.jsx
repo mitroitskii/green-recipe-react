@@ -9,7 +9,7 @@ class Login extends React.Component {
     super(props);
     this.state = {
       username: '',
-      password: '',
+      password: ''
     };
     this.handleLogin = this.handleLogin.bind(this);
     this.handlePassword = this.handlePassword.bind(this);
@@ -32,7 +32,7 @@ class Login extends React.Component {
     event.preventDefault();
     this.props.loginFetch({
       username: this.state.username,
-      password: this.state.password,
+      password: this.state.password
     });
   }
 
@@ -44,26 +44,30 @@ class Login extends React.Component {
             <h1>Login</h1>
             <p>Please login</p>
             <hr />
-            <label>
-              <b>Username</b>
-            </label>
-            <input
-              type="text"
-              placeholder="Username"
-              name="username"
-              required
-              onChange={this.handleLogin}
-            />
-            <label>
-              <b>Password</b>
-            </label>
-            <input
-              type="password"
-              placeholder="Enter Password"
-              name="password"
-              required
-              onChange={this.handlePassword}
-            />
+            <p>
+              <label>
+                <b>Username</b>
+              </label>
+              <input
+                type="text"
+                placeholder="Username"
+                name="username"
+                required
+                onChange={this.handleLogin}
+              />
+            </p>
+            <p>
+              <label>
+                <b>Password</b>
+              </label>
+              <input
+                type="password"
+                placeholder="Enter Password"
+                name="password"
+                required
+                onChange={this.handlePassword}
+              />
+            </p>
             <hr />
             <button type="submit" className={'loginbtn'}>
               Login
@@ -88,7 +92,7 @@ function mapStateToProps(store) {
   return {
     isLoggedIn: store.isLoggedIn,
     logRegloadingFetch: store.logRegloadingFetch,
-    logRegstatusError: store.logRegstatusError,
+    logRegstatusError: store.logRegstatusError
   };
 }
 
@@ -102,7 +106,7 @@ function mapStateToProps(store) {
 function mapDispatchToProps(dispatch) {
   return {
     loginFetch: data => dispatch(loginFetchAC(data)),
-    clearStatus: () => dispatch(clearStatusAC()),
+    clearStatus: () => dispatch(clearStatusAC())
   };
 }
 
