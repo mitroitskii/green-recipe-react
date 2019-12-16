@@ -27,7 +27,7 @@ async function TestProductParse(productname) {
   const testParsqReq = await parseSearchPageVV(productname);
   console.log('Тест парсинга одного продукта', testParsqReq);
 }
-// TestProductParse('рис');
+TestProductParse('перец');
 
 const ingredients = [
   'мёд',

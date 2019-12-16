@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
-import { Grommet, Box, Meter, Stack, Text } from "grommet";
-import { grommet } from "grommet/themes";
+import { Grommet, Box, Meter, Stack, Text } from 'grommet';
+import { grommet } from 'grommet/themes';
 
 export default class LabelledMeter extends Component {
   render() {
@@ -18,7 +18,7 @@ export default class LabelledMeter extends Component {
               size="xsmall"
               thickness="small"
             />
-            <Box direction="row" align="center" pad={{ bottom: "small" }}>
+            <Box direction="row" align="center" pad={{ bottom: 'small' }}>
               <Text size="large" weight="bold">
                 {meterValue}
               </Text>

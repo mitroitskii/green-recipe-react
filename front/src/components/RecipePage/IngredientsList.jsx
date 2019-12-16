@@ -1,31 +1,46 @@
-import React from "react";
-import { connect } from "react-redux";
+import React from 'react';
+// import { connect } from 'react-redux';
 
 // import { logoutFetchAC } from '../../redux/actions/actions';
 
-class IngredientsList extends React.Component {
-  const 
+export default class IngredientsList extends React.Component {
   render() {
+    const { ingredients, portions, defaultPortions } = this.props;
+
+    // ratio=
+    console.log('portions', portions);
+    console.log('defaultPortions', defaultPortions);
+
+    const ratio = portions / defaultPortions;
+    // иметь ввиду что тут не мняется quantity ингредиента, рендерим корректно но не меняя свойство каждого ингредиента
     return (
       <ul>
-        <li>
-            
-        </li>
+        {ingredients.map(ingredient => (
+          <li key={Math.random()}>
+            {' '}
+            {ingredient.name}{' '}
+            <p>{`Вес: ${Math.round(ingredient.inputWeight * ratio)}
+             гр Ккал: ${Math.round(ingredient.calories * ingredient.inputWeight * ratio / 100)} 
+              Цена: ${Math.ceil(ingredient.inputWeight * ratio / ingredient.weight) * ingredient.price} 
+              руб Шт: ${Math.ceil(ingredient.inputWeight * ratio / ingredient.weight)}`}</p>
+          </li>
+        ))}
+        {/* <li  /> */}
       </ul>
     );
   }
 }
 
-function mapStateToProps(store) {
-  //   return {
-  //     isLoggedIn: store.isLoggedIn,
-  //   };
-}
+// function mapStateToProps(store) {
+//   //   return {
+//   //     isLoggedIn: store.isLoggedIn,
+//   //   };
+// }
 
-function mapDispatchToProps(dispatch) {
-  //   return {
-  //     logoutFetch: () => dispatch(logoutFetchAC()),
-  //   };
-}
+// function mapDispatchToProps(dispatch) {
+//   //   return {
+//   //     logoutFetch: () => dispatch(logoutFetchAC()),
+//   //   };
+// }
 
-export default connect(mapStateToProps, mapDispatchToProps)(IngredientsList);
+// export default connect(mapStateToProps, mapDispatchToProps)(IngredientsList);
