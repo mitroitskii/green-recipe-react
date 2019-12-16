@@ -16,14 +16,30 @@ export default class RecipePage extends Component {
     ingredients: RecipeExample.ingredients,
     priceTotal: RecipeExample.priceTotal,
     caloriesTotal: RecipeExample.caloriesTotal,
+    name: '',
+    image: '',
+    instructions:[]
     
   }
 
   async componentDidMount() {
-    const testId = '5df38fa342403c7b25a04d2d';
+    const testId = '5df7d217ac19db414e433ac9';
     const response = await fetch(`http://localhost:5000/api/recipes/${testId}`);
     const respJson = await response.json();
     console.log('respJsonReceived', respJson);
+    // respJson.recipe
+    const {portions,ingredients,priceTotal,caloriesTotal,name,image,instructions} = respJson.recipe
+
+    this.setState(() => ({ 
+      defaultPortions: portions,
+    portions,
+    ingredients,
+    priceTotal,
+      caloriesTotal,
+      name,
+      image,
+    instructions
+     }));
 
   }
 
@@ -75,12 +91,12 @@ export default class RecipePage extends Component {
         >
           <Box background="brand" gridArea="header">
 
-            <Heading margin="small">{RecipeExample.name}</Heading>
+            <Heading margin="small">{this.state.name}</Heading>
           </Box>
 
           <Box gridArea="photo">
             {/* <Grommet theme={grommet}> */}
-            <Image src={RecipeExample.image} />
+            <Image src={this.state.image} />
             {/* </Grommet> */}
           </Box>
 
@@ -106,7 +122,7 @@ export default class RecipePage extends Component {
           </Box>
 
           <Box animation="slideDown" align="start" gridArea="footer">
-            <InstructionsList list={RecipeExample.instructions} />
+            <InstructionsList list={this.state.instructions} />
           </Box>
         </Grid>
       </Grommet>
