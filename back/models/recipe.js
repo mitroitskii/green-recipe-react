@@ -3,12 +3,12 @@ const mongoose = require('mongoose');
 const recipeSchema = new mongoose.Schema({
   name: String,
   image: String,
-  ingredients: [],
-  instructions: [],
-  portions: Number,
+  instructions: Array,
   priceTotal: Number,
   caloriesTotal: Number,
-  author: {},
+  ingredients: Array,
+  author: String,
+  portions: Number,
 });
 
 // recipeSchema.statics.mostRecent = async function () {
