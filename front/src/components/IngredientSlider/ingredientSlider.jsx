@@ -6,7 +6,6 @@ export default class IngredientSlider extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      children: [],
       activeItemIndex: 0,
     };
   }
