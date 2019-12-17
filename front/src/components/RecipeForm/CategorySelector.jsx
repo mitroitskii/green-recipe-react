@@ -29,7 +29,7 @@ export default class CategorySelector extends Component {
     this.setState({ selected: [...nextSelected].sort() });
   };
 
-  renderSeason = season => (  
+  renderCategory = season => (
     <Button
       key={`season_tag_${season}`}
       href="#"
@@ -71,7 +71,7 @@ export default class CategorySelector extends Component {
 
   render() {
     return (
-      <Box fill align="center" justify="center">
+      <Box fill align="start" justify="center">
         <Select
           closeOnChange={false}
           multiple
@@ -79,7 +79,7 @@ export default class CategorySelector extends Component {
             <Box wrap direction="row" width="medium">
               {this.state.selected && this.state.selected.length ? (
                 this.state.selected.map(index =>
-                  this.renderSeason(Categories[index])
+                  this.renderCategory(Categories[index])
                 )
               ) : (
                 <Box

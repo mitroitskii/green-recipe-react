@@ -89,7 +89,7 @@ async function parseProductPageVV(link) {
       weightWithType = weight.split(/(?<=^\S+)\s/);
     }
 
-    result['weightAbsoulte'] = weightWithType[0];
+    result['weightAbsolute'] = weightWithType[0];
     result['measureType'] = weightWithType[1];
     if (weightWithType[1] === 'г') {
       result['weight'] = weightWithType[0];

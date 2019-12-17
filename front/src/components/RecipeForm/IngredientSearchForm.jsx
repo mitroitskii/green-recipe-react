@@ -1,0 +1,43 @@
+import React, { useState } from 'react';
+import { Box, TextInput, Button, Text } from 'grommet';
+import { FormClose } from 'grommet-icons';
+
+export default function IngredientSearchForm(props) {
+  const { setSearch } = props;
+  const [string, setString] = useState('');
+  return (
+    <>
+      <TextInput
+        placeholder="Введите название ингредиента"
+        value={string}
+        onChange={event => setString(event.target.value)}
+      />
+      <Box wrap direction="row" width="small">
+        <Button
+          href="#"
+          onClick={(event) => {
+            event.preventDefault();
+            event.stopPropagation();
+            const search = string;
+            setSearch();
+          }}
+          onFocus={event => event.stopPropagation()}  
+        >
+          <Box
+            align="center"
+            direction="row"
+            gap="xsmall"
+            pad={{ vertical: 'xsmall', horizontal: 'small' }}
+            margin="xsmall"
+            background="accent-1"
+            round="large"
+          >
+            <Text size="small" color="white">
+              Найти
+            </Text>
+          </Box>
+        </Button>
+      </Box>
+    </>
+  );
+}

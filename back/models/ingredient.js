@@ -7,7 +7,7 @@ class Ingredient {
     this.currency = input.currency;
     this.link = input.link;
     this.calories = input.kcal;
-    this.weightAbsoulte = input.weightAbsoulte;
+    this.weightAbsolute = input.weightAbsolute;
     this.measureType = input.measureType;
     this.pricePerKilo = input.pricePerKilo;
     this.priceTotal = this.priceTotal();
