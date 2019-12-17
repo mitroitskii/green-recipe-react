@@ -17,31 +17,33 @@ export default class IngredientCard extends React.Component {
         this.props.setIngredients(updatedIngredients)
     }
     render() {
-        const style = {
-            width: "100%"
-        }
         return (
             <Box className={"wrapper"}>
                 <Box direction="column" height="100%" width="100%">
                     <Box height="100%" width="100%" background={{ "image": `url(${this.props.ingredient.imageLink})`, "position": 'center' }}></Box>
                     <Box className={"bottom"} direction="row-responsive" height="35%" width="100%">
-                        <Box className={"details"} height='100%' width="70%" direction="column" justify="center" align="center" pad='10px' position="fixed">
+                        <Box className={"details"} height='100%' width="70%" direction="column" align="center" pad='10px'>
                             <Box>
-                                <marquee behavior="alternate" scrollamount="2" direction="right"><Text style={style} alignSelf="center" size = "xlarge" > { this.props.ingredient.name }</Text></marquee>
+                                <marquee behavior="alternate" scrollamount="2" direction="right"><Text size="xlarge" textAlign="start"> {this.props.ingredient.name}</Text></marquee>
                             </Box>
-                            <Text style={style} alignSelf="center" size="large">Цена: {this.props.ingredient.price}</Text>
-                            <Text style={style} alignSelf="center" size="large">Вес: {this.props.ingredient.weight}</Text>
+                            <Text size="large">Цена: {this.props.ingredient.price} {this.props.ingredient.currency}.</Text>
+                            <Text size="large">Вес: {this.props.ingredient.weight} {this.props.ingredient.measureType}.</Text>
                         </Box>
-                        <Box fit="content" align="center" justify="center" onClick={this.handleClick} ><AddCircle size="large"/>Добавить в рецепт</Box>
+                        <Box fit="content" align="center" justify="center"
+                            border={[{ side: "left" }]}
+                            hoverIndicator onClick={this.handleClick}>
+                            <AddCircle size="large" />
+                            <Text alignSelf="center" size="medium">Добавить в рецепт</Text>
+                            </Box>
                         {/* <Button icon={<AddCircle size="large" />} fit="content" align="center" justify="center" label="Добавить в рецепт" onClick={this.handleClick} /> */}
                     </Box>
                 </Box>
-                <div className={"inside"}>
+                {/* <div className={"inside"}>
                     <div className={"icon"}><i className={"material-icons"}>info</i></div>
                     <div className={"contents"}>
                         информация о товаре
                         </div>
-                </div>
+                </div> */}
             </Box >
         )
     }
