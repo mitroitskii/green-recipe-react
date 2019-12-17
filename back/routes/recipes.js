@@ -18,6 +18,7 @@ router
       return res.send(JSON.stringify({ message: 'ok', recipes }));
     } catch (error) {
       return res.send(JSON.stringify({ message: 'error', error }));
+
     }
   })
   // создать один новый рецепт POST

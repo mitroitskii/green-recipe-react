@@ -20,6 +20,8 @@ const initialState = {
   logRegstatusError: '',
   registrationStatus: '',
   questions: [],
+  userId: '',
+  userName:''
 };
 
 export default function(state = initialState, action) {
@@ -37,6 +39,8 @@ export default function(state = initialState, action) {
         isLoggedIn: action.isLoggedIn,
         logRegloadingFetch: false,
         logRegstatusError: '',
+        userId: action.userId,
+        userName: action.userName
       };
     }
     case IS_LOGGED_ERROR: {
@@ -61,6 +65,8 @@ export default function(state = initialState, action) {
         isLoggedIn: action.isLoggedIn,
         logRegloadingFetch: false,
         logRegstatusError: '',
+        userId: action.userId,
+        userName: action.userName
       };
     }
     case LOGIN_ERROR: {
@@ -105,6 +111,8 @@ export default function(state = initialState, action) {
         isLoggedIn: action.isLoggedIn,
         logRegloadingFetch: false,
         logRegstatusError: '',
+        userId: '',
+        userName: ''
       };
     }
     case LOGOUT_ERROR: {
