@@ -80,10 +80,10 @@ export default function RecipeForm() {
           />
         ))}
       <IngredientSearchForm setSearch={setSearch} />
-      {/* <TextInput onChange={event => setSearch(event.target.value)} /> */}
       {search && (
         <IngredientSlider
           search={search}
+          setSearch={setSearch}
           ingredients={ingredients}
           setIngredients={setIngredients}
         />

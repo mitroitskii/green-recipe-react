@@ -8,6 +8,7 @@ export default function IngredientCard(props) {
   const handleClick = () => {
     const updatedIngredients = props.ingredients.concat([props.ingredient]);
     props.setIngredients(updatedIngredients);
+    props.setSearch('');
   };
   return (
     <Box className={'wrapper'}>

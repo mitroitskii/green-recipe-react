@@ -15,6 +15,7 @@ export default class IngredientSlider extends React.Component {
   async componentDidMount() {
     try {
       const search = this.props.search;
+      console.log(search);
       const response = await fetch('http://localhost:5000/api/parses/', {
         method: 'POST',
         headers: { 'Content-type': 'application/json' },
@@ -32,7 +33,7 @@ export default class IngredientSlider extends React.Component {
   }
 
   async componentDidUpdate(prevProps) {
-    if (this.props !== prevProps) {
+    if (this.props.search !== prevProps.search) {
       const search = this.props.search;
       console.log(search);
       const response = await fetch('http://localhost:5000/api/parses/', {
@@ -76,8 +77,9 @@ export default class IngredientSlider extends React.Component {
           {this.state.children.map(ingredient => (
             <IngredientCard
               key={ingredient.id}
-              ingredients={this.props.ingredients}
+              setSearch={this.props.setSearch}
               ingredient={ingredient}
+              ingredients={this.props.ingredients}
               setIngredients={this.props.setIngredients}
             />
           ))}
