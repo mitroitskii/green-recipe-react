@@ -11,6 +11,7 @@ import Navbar from '../Navbar/navbar';
 import Login from '../Login/login';
 import Registration from '../Registration/registration';
 import RecipeForm from '../RecipeForm/RecipeForm';
+import RecipePage from '../RecipePage/RecipePage';
 
 import PrivateRoute from '../Routes/privateRoute';
 import HomeRoute from '../Routes/homeRoute';
@@ -37,8 +38,8 @@ class App extends React.Component {
     //   },
     // };
     return (
-      <Router>
-        <Grommet theme={hpe}>
+      <Router >
+        <Grommet theme={hpe} >
           <Box fill>
             <AppBar>
               <Navbar />
@@ -46,9 +47,11 @@ class App extends React.Component {
             <Box direction="row" flex overflow={{ horizontal: 'hidden' }} />
             <Box flex align="center" justify="center">
               <Switch>
+                <Route exact path="/recipes" Component={Home} />
                 <Route exact path="/recipes/new" component={RecipeForm} />
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/registration" component={Registration} />
+                <Route exact path="/recipes/:id" component={RecipePage} />
                 <PrivateRoute exact path="/" Component={Home} />
               </Switch>
             </Box>
@@ -74,13 +77,13 @@ const AppBar = props => (
 
 function mapStateToProps(store) {
   return {
-    isLoggedIn: store.isLoggedIn
+    isLoggedIn: store.isLoggedIn,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    isLoggedFetch: () => dispatch(isLoggedFetchAC())
+    isLoggedFetch: () => dispatch(isLoggedFetchAC()),
   };
 }
 

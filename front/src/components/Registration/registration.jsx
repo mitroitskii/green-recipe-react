@@ -3,6 +3,12 @@ import { BrowserRouter as Redirect } from "react-router-dom";
 import { connect } from 'react-redux'
 import { registerFetchAC, clearStatusAC } from '../../redux/actions/actions';
 
+
+import { Box, Text, Button } from 'grommet';
+import { Form, TextInputField, PasswordInputField, EmailInputField, validators } from 'grommet-controls';
+
+
+
 class Registration extends React.Component {
   constructor() {
     super();
@@ -12,7 +18,7 @@ class Registration extends React.Component {
       email: '',
     };
   }
-  handleLogin = (event) => {
+  handleUsername = (event) => {
     this.setState({ username: event.target.value });
   }
 
@@ -36,29 +42,6 @@ class Registration extends React.Component {
   componentWillUnmount() {
     this.props.clearStatus()
   }
-  //проверка авторизации
-  //   const response = await fetch("http://localhost:5000/api/registration", {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json'
-  //     },
-  //     body: JSON.stringify({
-  //       username: this.state.username,
-  //       password: this.state.password,
-  //       email: this.state.email,
-  //     })
-  //   });
-  //   if (response.status === 200) {
-  //     let result = await response.json()
-  //     console.log(result);
-  //     this.setState({
-  //       registrationStatus:result.registrationstatus
-  //     })
-
-  //   } else {
-  //     console.log(`ERROR: ${response.status}`);
-  //   }
-  // }
 
   render() {
     return (
@@ -69,7 +52,7 @@ class Registration extends React.Component {
             <p>Please register yourself</p>
             <hr />
             <label><b>Username</b></label>
-            <input type="text" placeholder="Username" name="username" required onChange={this.handleLogin} />
+            <input type="text" placeholder="Username" name="username" required onChange={this.handleUsername} />
             <label><b>Password</b></label>
             <input type="password" placeholder="Enter Password" name="password" required onChange={this.handlePassword} />
             <label><b>Email</b></label>
@@ -83,7 +66,7 @@ class Registration extends React.Component {
             ? <span className={'statustext'}>loading</span>
             : this.props.logRegstatusError
               ? <span className={'statustext'}>{this.props.logRegstatusError}</span>
-              :<span className={'statustext'}>{this.props.registrationStatus}</span> } 
+              : <span className={'statustext'}>{this.props.registrationStatus}</span>}
         </div>
       </div>
     )
@@ -98,13 +81,6 @@ function mapStateToProps(store) {
   }
 }
 
-// Без ActionCreator
-// function mapDispatchToProps(dispatch) {
-//   return {
-//     addTodo: (taskName) => dispatch( {type: 'ADD_TODO', title: taskName} )
-//   }
-// }
-
 function mapDispatchToProps(dispatch) {
   return {
     registerFetch: data => dispatch(registerFetchAC(data)),
@@ -113,3 +89,26 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Registration)
+
+///Форма по Grommet.Почему-то не вводится текст
+
+//< Form
+// basis = 'medium'
+// focusFirstChild = { false}
+// onSubmit = { this.handleSubmit }
+//>
+  //   <TextInputField label='Username' name='username' onChange={this.handleLogin} />
+  //   <EmailInputField label='Email' name='email' validation={[validators.required(), validators.email()]} onChange={this.handlePassword} />
+  //   <PasswordInputField
+  //     label='Password'
+  //     name='password'
+  //     validation={
+  //       [validators.required(), validators.minLength(5), validators.alphaNumeric()]
+  //     }
+  //     onChange={this.handleEmail}
+  //   />
+  //   <Box pad={{ vertical: 'medium' }} align='end'>
+  //     <Button hoverIndicator='background' primary={true} type='submit' label='Save profile' />
+  //   </Box>
+//</Form >
+

@@ -6,13 +6,14 @@ class Ingredient {
     this.price = input.price;
     this.currency = input.currency;
     this.link = input.link;
+    this.imageLink = input.imageLink;
     this.calories = input.kcal;
     this.weightAbsolute = input.weightAbsolute;
     this.measureType = input.measureType;
     this.pricePerKilo = input.pricePerKilo;
-    this.priceTotal = this.priceTotal();
-    this.caloriesTotal = this.calTotal();
     this.quantity = 1;
+    this.caloriesTotal = this.calTotal();
+    this.priceTotal = this.priceTotal();
   }
 
   calTotal() {

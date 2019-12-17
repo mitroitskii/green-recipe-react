@@ -1,14 +1,15 @@
 import React from 'react';
 
 const RecipeItem = (item) => {
-  const { recipeName, recipeImg, recipeID, recipeCost, recipeWeight, recipeCalorificValue } = item;
+  const { name, image, _id, instructions, priceTotal, caloriesTotal } = item;
+  // вернуть инструкции по желанию
   return (
     <div>
-      <img src={recipeImg} alt={recipeName} ></img>
-      <Link to={'/recipe/' + recipeID}> recipeName </Link>
-      <p>Стоимость рецепта: {recipeCost} </p>
-      <p>Вес: {recipeWeight} </p>
-      <p>Каллорийность: {recipeCalorificValue}</p>
+      <img src={image} alt={name} ></img>
+      <a href={'/recipes/' + _id}>{name} </a>
+      {/* <p>Рецепт: {instructions.substr(0, 50) + '...'}</p> */}
+      <p>Стоимость рецепта: {priceTotal} </p>
+      <p>Каллорийность: {caloriesTotal}</p>
     </div>
   );
 }
