@@ -2,6 +2,7 @@ import React from 'react';
 
 const RecipeItem = (item) => {
   const { name, image, _id, instructions, priceTotal, caloriesTotal } = item;
+  // вернуть инструкции по желанию
   return (
     <div>
       <img src={image} alt={name} ></img>
