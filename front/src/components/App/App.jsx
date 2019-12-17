@@ -47,6 +47,7 @@ class App extends React.Component {
             <Box direction="row" flex overflow={{ horizontal: 'hidden' }} />
             <Box flex align="center" justify="center">
               <Switch>
+                <Route exact path="/recipes" Component={Home} />
                 <Route exact path="/recipes/new" component={RecipeForm} />
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/registration" component={Registration} />

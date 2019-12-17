@@ -35,6 +35,32 @@ router
     }
   });
 
+router.get('/price', async (req, res) => {
+  let sortFlag = 1;
+  if (req.query.direction !== 'up') {
+    sortFlag = -1;
+  }
+  try {
+    const recipes = await Recipe.find().sort({ priceTotal: sortFlag });
+    return res.send(JSON.stringify({ message: 'ok', recipes }));
+  } catch (error) {
+    return res.send(JSON.stringify({ message: 'error', error }));
+  }
+});
+
+router.get('/calorific', async (req, res) => {
+  let sortFlag = 1;
+  if (req.query.direction !== 'up') {
+    sortFlag = -1;
+  }
+  try {
+    const recipes = await Recipe.find().sort({ caloriesTotal: sortFlag });
+    return res.send(JSON.stringify({ message: 'ok', recipes }));
+  } catch (error) {
+    return res.send(JSON.stringify({ message: 'error', error }));
+  }
+});
+
 // api/recipes/:id
 router
   .route('/:id')
