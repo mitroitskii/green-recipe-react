@@ -20,7 +20,7 @@ sagaMiddleware.run(watchFetches);
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <App height="100%" width="100%" />
   </Provider>,
   document.getElementById('root'),
 );

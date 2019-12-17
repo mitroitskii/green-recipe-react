@@ -4,6 +4,10 @@ import { BrowserRouter as Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { loginFetchAC, clearStatusAC } from '../../redux/actions/actions';
 
+// import { Box, Text, Button } from 'grommet';
+// import { TextInputField, Form, PasswordInputField, EmailInputField, CheckBoxField, validators } from 'grommet-controls';
+
+
 class Login extends React.Component {
   constructor(props) {
     super(props);
@@ -11,7 +15,7 @@ class Login extends React.Component {
       username: '',
       password: ''
     };
-    this.handleLogin = this.handleLogin.bind(this);
+    this.handleUsername = this.handleUsername.bind(this);
     this.handlePassword = this.handlePassword.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -20,7 +24,7 @@ class Login extends React.Component {
     this.props.clearStatus();
   }
 
-  handleLogin(event) {
+  handleUsername(event) {
     this.setState({ username: event.target.value });
   }
 
@@ -32,7 +36,7 @@ class Login extends React.Component {
     event.preventDefault();
     this.props.loginFetch({
       username: this.state.username,
-      password: this.state.password
+      password: this.state.password,
     });
   }
 
@@ -53,7 +57,7 @@ class Login extends React.Component {
                 placeholder="Username"
                 name="username"
                 required
-                onChange={this.handleLogin}
+                onChange={this.handleUsername}
               />
             </p>
             <p>
@@ -80,8 +84,8 @@ class Login extends React.Component {
           ) : this.props.isLoggedIn ? (
             <Redirect to="/" />
           ) : (
-            <span className={'statustext'}>{this.props.logRegstatusError}</span>
-          )}
+                <span className={'statustext'}>{this.props.logRegstatusError}</span>
+              )}
         </div>
       </div>
     );
@@ -96,12 +100,6 @@ function mapStateToProps(store) {
   };
 }
 
-// Без ActionCreator
-// function mapDispatchToProps(dispatch) {
-//   return {
-//     addTodo: (taskName) => dispatch( {type: 'ADD_TODO', title: taskName} )
-//   }
-// }
 
 function mapDispatchToProps(dispatch) {
   return {
@@ -111,3 +109,33 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
+
+
+///Форма по Grommet.Почему-то не вводится текст в username
+
+{/* <Form
+  basis='medium'
+  focusFirstChild={false}
+  {...this.props}
+  onSubmit={this.handleSubmit}
+>
+  <TextInputField label='Username' name='username' onChange={this.handleUsername} />
+  <PasswordInputField
+    label={(
+      <Box direction='row' align='center' justify='between'>Password</Box>
+    )}
+    description='Password'
+    name='password'
+    validation={
+      [validators.required(), validators.minLength(5), validators.alphaNumeric()]
+    }
+    onChange={this.handlePassword}
+  />
+  <Box pad={{ vertical: 'medium' }} align='end'>
+    <Button hoverIndicator='background' primary={true} type='submit' label='Save profile' />
+  </Box>
+  <Box direction='row' alignSelf='center' gap='small' align='center'></Box>
+</Form> */}
+
+
+
