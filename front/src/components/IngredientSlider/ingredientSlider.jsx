@@ -8,22 +8,21 @@ export default class IngredientSlider extends React.Component {
     this.state = {
       children: [],
       activeItemIndex: 0,
-    }
+    };
   }
-async componentDidMount() {
-
-  let search = 'рис'
-  const response = await fetch(`http://localhost:5000'/api/parses/`, {
-    method: 'POST',
-    headers: { 'Content-type': 'application/json' },
-    body: JSON.stringify({ search}),
-  });
-  const ingredients = await response.json();
-  console.log('respJsonReceived', ingredients );
-}
+  async componentDidMount() {
+    const search = 'рис';
+    const response = await fetch('http://localhost:5000\'/api/parses/', {
+      method: 'POST',
+      headers: { 'Content-type': 'application/json' },
+      body: JSON.stringify({ search }),
+    });
+    const ingredients = await response.json();
+    console.log('respJsonReceived', ingredients);
+  }
   render() {
     return (
-      <div style={{ "padding": "0 60px", maxWidth:"1614px", "margin": "0 auto" }}>
+      <div style={{ padding: '0 60px', maxWidth: '1614px', margin: '0 auto' }}>
         <ItemsCarousel
           infiniteLoop={false}
           gutter={12}
@@ -33,17 +32,19 @@ async componentDidMount() {
           alwaysShowChevrons={false}
           numberOfCards={3}
           slidesToScroll={1}
-          outsideChevron={true}
+          outsideChevron
           showSlither={false}
           firstAndLastGutter={false}
           activeItemIndex={this.state.activeItemIndex}
-          requestToChangeActive={value => this.setState({ activeItemIndex: value })}
+          requestToChangeActive={value =>
+            this.setState({ activeItemIndex: value })
+          }
           rightChevron={'>'}
           leftChevron={'<'}
         >
-          {this.state.children.map((elem, i) => { return <IngredientCard key={i} ingredient={elem} /> })}
+          {this.state.children.map((elem, i) => <IngredientCard key={i} ingredient={elem} />)}
         </ItemsCarousel>
       </div>
-    )
+    );
   }
 }
