@@ -42,7 +42,7 @@ async function parseProductPageVV(link) {
     const fullLink = 'https://vkusvill.ru' + link;
     const html = await request(encodeURI(fullLink));
 
-    const result = {
+    let result = {
       name: parse('.Product__title', html)
         .text()
         .trim(),
@@ -52,14 +52,22 @@ async function parseProductPageVV(link) {
       rating: parse('.Rating__text', html)
         .text()
         .trim(),
-      price: parse('.Price__value', html)
+      price: parse('.Price.Price--lg > .Price__value', html)
         .text()
         .trim(),
-      currency: parse('.Price__unit', html)
+      currency: parse('.Price.Price--lg > .Price__unit', html)
         .text()
         .trim(),
+
       link: fullLink,
     };
+
+    // parse('.Price.Price--lg > .Price__value', html).map(function() {});
+
+    parse('.ProductGallery__image', html).map(function() {
+      let Imagelink = parse('.lazyload', this).attr('data-src');
+      result['imageLink'] = 'https://vkusvill.ru' + Imagelink;
+    });
 
     // калорийность и другая пищевая ценность не везде есть
     nutritionDict = {};
@@ -102,15 +110,42 @@ async function parseProductPageVV(link) {
       weightWithType[0] = weightWithType[0].replace(',', '.');
       result['weight'] = (parseFloat(weightWithType[0]) * 1000).toString();
     }
+    result['price'] = result['price'].replace(/\s/, '');
+    // console.log('price before', result['price']);
+    // console.log('typeof price before', typeof result['price']);
+
+    result['price'] = parseFloat(result['price']);
+    // console.log('price after', result['price']);
+    // console.log('typeof price after', typeof result['price']);
 
     result['weight'] = result['weight'].trim();
     result['currency'] = result['currency'].trim();
-    if (parseFloat(result['price']) > 0) {
-      result['pricePerKilo'] = Math.round(
-        (parseFloat(result['price']) / parseFloat(result['weight'])) * 1000,
-      );
+
+    result['weight'] = parseFloat(result['weight']);
+    // console.log('result[weight]', result['weight']);
+    // console.log('typeof result[weight]', typeof result['weight']);
+    if (isNaN(result['weight'])) {
+      // console.log('ERROR NAN WEIGHT');
+      // console.log('result[price]', result['price']);
+      result['weight'] = 1000;
+      result['weightAbsoulte'] = 1;
+      result['measureType'] = 'кг';
+      result['pricePerKilo'] = parseFloat(result['price']);
+    } else {
+      if (result['currency'] === 'руб/кг') {
+        result['pricePerKilo'] = parseFloat(result['price']);
+        result['price'] = Math.round(
+          (result['pricePerKilo'] * result['weight']) / 1000,
+        );
+      } else {
+        result['pricePerKilo'] = Math.round(
+          (parseFloat(result['price']) / parseFloat(result['weight'])) * 1000,
+        );
+      }
     }
 
+    result['kcal'] = parseFloat(result['kcal']);
+    // result['inputWeight'] = result['weight'];
     console.log('result', result);
 
     const newIngredient = new Ingredient(result);
