@@ -148,4 +148,4 @@ async function ingredientParse(productname) {
   const respJson = await response.json();
   console.log('respJsonReceived', respJson);
 }
-// ingredientParse('рис');
+ingredientParse('рис');

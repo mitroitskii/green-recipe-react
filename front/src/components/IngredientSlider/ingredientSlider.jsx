@@ -2,7 +2,7 @@ import React from 'react';
 import ItemsCarousel from 'react-items-carousel';
 import IngredientCard from '../IngredientCard/ingredientCard';
 
-export default class Home extends React.Component {
+export default class IngredientSlider extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -10,24 +10,16 @@ export default class Home extends React.Component {
       activeItemIndex: 0,
     }
   }
-componentDidMount() {
-  // const response = await fetch("http://localhost:5000/api/", {
-  //   credentials: "include"
-  // })
-  // if (response.status === 200) {
-  //   let result = await response.json()
-  //   let isLoggedIn = result.isLoggedIn
-  //   this.props.sessionChecker(isLoggedIn)
-  //   this.setState({
-  //     isLoggedIn,
-  //     loading: false
-  //   })
-  //   // if (isLoggedIn !== true) {
-  //   //   this.props.history.push('/login')
-  //   // }
-  // } else {
-  //   console.log(`ERROR: ${response.status}`);
-  // }
+async componentDidMount() {
+
+  let search = 'рис'
+  const response = await fetch(`http://localhost:5000'/api/parses/`, {
+    method: 'POST',
+    headers: { 'Content-type': 'application/json' },
+    body: JSON.stringify({ search}),
+  });
+  const ingredients = await response.json();
+  console.log('respJsonReceived', ingredients );
 }
   render() {
     return (

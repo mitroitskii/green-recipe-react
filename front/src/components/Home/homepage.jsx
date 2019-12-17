@@ -1,26 +1,13 @@
 import React from 'react';
-<<<<<<< HEAD
-import ItemsCarousel from 'react-items-carousel';
+import RecipeList from '../RecipeList';
 import IngredientSlider from '../IngredientSlider/ingredientSlider';
 
-=======
-import RecipeList from '../RecipeList';
-
-
-function Home() {
+export default function Home() {
   return (
     <div className="Home">
       <RecipeList />
+      <IngredientSlider/>
     </div>
   )
 }
->>>>>>> develop
 
-export default class Home extends React.Component {
-
-  render() {
-    return (
-      <IngredientSlider/>
-    )
-  }
-}
