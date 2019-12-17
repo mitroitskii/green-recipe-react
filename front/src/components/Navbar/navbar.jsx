@@ -27,7 +27,7 @@ class Navbar extends React.Component {
                 </Link>
               </li>
               <li>
-                <Link to={'/users/' + this.props.userId}>{this.props.userName}</Link>
+                <Link to={'/users/' + this.props.userName}>{this.props.userName}</Link>
               </li>
             </ul>
           </nav>
