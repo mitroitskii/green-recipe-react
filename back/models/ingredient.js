@@ -1,5 +1,6 @@
 class Ingredient {
   constructor(input = {}) {
+    this.id = input.id;
     this.name = input.name;
     this.weight = input.weight;
     this.rating = input.rating;
@@ -8,7 +9,7 @@ class Ingredient {
     this.link = input.link;
     this.imageLink = input.imageLink;
     this.calories = input.kcal;
-    this.weightAbsoulte = input.weightAbsoulte;
+    this.weightAbsolute = input.weightAbsolute;
     this.measureType = input.measureType;
     this.pricePerKilo = input.pricePerKilo;
     this.quantity = 1;
