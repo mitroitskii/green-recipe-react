@@ -5,8 +5,8 @@ const RecipeItem = (item) => {
   return (
     <div>
       <img src={image} alt={name} ></img>
-      <a href={'/recipe/' + _id}>{name} </a>
-      <p>Рецепт: {instructions.substr(0, 50) + '...'}</p>
+      <a href={'/recipes/' + _id}>{name} </a>
+      {/* <p>Рецепт: {instructions.substr(0, 50) + '...'}</p> */}
       <p>Стоимость рецепта: {priceTotal} </p>
       <p>Каллорийность: {caloriesTotal}</p>
     </div>
