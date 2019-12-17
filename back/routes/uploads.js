@@ -7,7 +7,7 @@ const multer = require('multer');
 
 const storage = multer.diskStorage({
   destination(req, file, cb) {
-    cb(null, './uploadsstorage');
+    cb(null, './uploads/recipe-images');
   },
 
   filename(req, file, cb) {
@@ -73,7 +73,7 @@ router.get(
     const storageWay = `${__dirname.slice(
       0,
       __dirname.indexOf('routes'),
-    )}uploadsstorage/`;
+    )}uploads/recipe-images/`;
     res.sendFile(`${storageWay}${req.params.id}`);
   },
   // img src = link to api

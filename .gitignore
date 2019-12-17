@@ -118,5 +118,8 @@ build
 # misc
 .DS_Store
 
+# images
+uploads
+
 # security
 sessions

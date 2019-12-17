@@ -41,7 +41,7 @@ export default class RecipePage extends Component {
       name,
       // image,
       // image: 'http://localhost:5000/uploadssimple/e49d63ab434fb425c01e359bee93116e',
-      image: 'http://localhost:5000/api/uploads/1576594618526weatherpics.jpg',
+      image: 'http://localhost:5000/api/uploads/1576595592679weatherpics.jpg',
       
     instructions
      }));
