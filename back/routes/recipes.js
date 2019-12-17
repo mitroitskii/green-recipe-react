@@ -92,8 +92,7 @@ router
   .delete(async (req, res) => {
     try {
       const deleteResult = await Recipe.deleteOne({ _id: req.params.id });
-      console.log('deleteResult', deleteResult);
-
+      console.log('Delete', deleteResult);
       return res.send(JSON.stringify({ message: 'ok' }));
     } catch (error) {
       return res.send(JSON.stringify({ message: 'error', error }));
