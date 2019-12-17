@@ -2,30 +2,42 @@ import React, { Component } from 'react';
 
 export default class SortPanel extends Component {
   state = {
-    direction: 'up'
+    directionCal: '',
+    directionPrice: ''
   }
 
-  toggle = () => {
-    switch (this.state.direction) {
-      case 'up': this.setState({ direction: 'down' });
+  toggleCal = () => {
+    switch (this.state.directionCal) {
+      case 'up': this.setState({ directionCal: 'down', directionPrice: '' });
         break;
-      case 'down': this.setState({ direction: 'up' });
+      case 'down': this.setState({ directionCal: 'up', directionPrice: '' });
         break;
+      default: this.setState({ directionCal: 'up', directionPrice: '' })
+    }
+  }
+
+  togglePrice = () => {
+    switch (this.state.directionPrice) {
+      case 'up': this.setState({ directionPrice: 'down', directionCal: '' });
+        break;
+      case 'down': this.setState({ direcdirectionPricetionCal: 'up', directionCal: '' });
+        break;
+      default: this.setState({ directionPrice: 'up', directionCal: '' })
     }
   }
 
   render() {
     const { recipesFromApiSortingByPrice, recipesFromApiSortingByCalories } = this.props;
-    const { direction } = this.state
+    const { directionCal, directionPrice } = this.state
     return (
       <div>
         <button>Удиви меня!</button>
         <span>Сортировать:</span>
-        <button onClick={() => { recipesFromApiSortingByPrice(direction); this.toggle() }}>
-          По цене {(direction === 'up') && '▲'} {(direction === 'down') && '▼'}
+        <button onClick={() => { recipesFromApiSortingByPrice(directionPrice); this.togglePrice() }}>
+          По цене {(directionPrice === 'up') && '▲'} {(directionPrice === 'down') && '▼'}
         </button>
-        <button onClick={() => { recipesFromApiSortingByCalories(direction); this.toggle() }}>
-          По каллорийности {(direction === 'up') && '▲'} {(direction === 'down') && '▼'}
+        <button onClick={() => { recipesFromApiSortingByCalories(directionCal); this.toggleCal() }}>
+          По каллорийности {(directionCal === 'up') && '▲'} {(directionCal === 'down') && '▼'}
         </button>
       </div>
     );
