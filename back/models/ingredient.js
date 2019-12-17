@@ -1,18 +1,23 @@
 class Ingredient {
-
   constructor(input = {}) {
     this.name = input.name;
-    this.quantity = input.quantity || 1;
+    this.weight = input.weight;
+    this.rating = input.rating;
     this.price = input.price;
-    this.priceTotal = this.priceTotal();
-    this.weight = input.weight || 200;
-    this.calories = input.calories;
-    this.caloriesTotal = this.calTotal();
+    this.currency = input.currency;
     this.link = input.link;
+    this.imageLink = input.imageLink;
+    this.calories = input.kcal;
+    this.weightAbsoulte = input.weightAbsoulte;
+    this.measureType = input.measureType;
+    this.pricePerKilo = input.pricePerKilo;
+    this.quantity = 1;
+    this.caloriesTotal = this.calTotal();
+    this.priceTotal = this.priceTotal();
   }
 
   calTotal() {
-    return Math.round(this.weight / 100 * this.calories);
+    return Math.round((this.weight / 100) * this.calories);
   }
 
   priceTotal() {
