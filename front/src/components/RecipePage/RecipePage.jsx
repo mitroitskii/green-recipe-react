@@ -6,16 +6,16 @@ import InstructionsList from './Instructions';
 import IngredientsList from "./IngredientsList"
 import LabelledMeter from './Meter';
 
-const { RecipeExample } = require('./RecipeExample');
+// const { RecipeExample } = require('./RecipeExample');
 
 export default class RecipePage extends Component {
 
   state = {
-    defaultPortions:RecipeExample.portions,
-    portions: RecipeExample.portions,
-    ingredients: RecipeExample.ingredients,
-    priceTotal: RecipeExample.priceTotal,
-    caloriesTotal: RecipeExample.caloriesTotal,
+    defaultPortions:0,
+    portions: 0,
+    ingredients: [],
+    priceTotal: 0,
+    caloriesTotal: 0,
     name: '',
     image: '',
     instructions:[]
@@ -23,10 +23,13 @@ export default class RecipePage extends Component {
   }
 
   async componentDidMount() {
-    const testId = '5df7d217ac19db414e433ac9';
+    const { id } = this.props.match.params;
+    // console.log("id of page", id);
+    
+    const testId = '5df87e189fb92116d2af03c4';
     const response = await fetch(`http://localhost:5000/api/recipes/${testId}`);
     const respJson = await response.json();
-    console.log('respJsonReceived', respJson);
+    // console.log('respJsonReceived', respJson);
     // respJson.recipe
     const {portions,ingredients,priceTotal,caloriesTotal,name,image,instructions} = respJson.recipe
 
@@ -49,7 +52,7 @@ export default class RecipePage extends Component {
     this.state.ingredients.map((ingredient) => {
       totalCalories+=ingredient.calories * ingredient.inputWeight * ratio / 100
     })
-    return totalCalories
+    return Math.round(totalCalories)
   }
 
   countTotalPrice() {
@@ -60,7 +63,7 @@ export default class RecipePage extends Component {
       
       totalPrice+=ingredient.price*quantity
     })
-    return totalPrice
+    return Math.round(totalPrice)
   }
 
   async setPortions(value) {

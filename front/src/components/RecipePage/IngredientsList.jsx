@@ -7,9 +7,6 @@ export default class IngredientsList extends React.Component {
   render() {
     const { ingredients, portions, defaultPortions } = this.props;
 
-    // ratio=
-    console.log('portions', portions);
-    console.log('defaultPortions', defaultPortions);
 
     const ratio = portions / defaultPortions;
     // иметь ввиду что тут не мняется quantity ингредиента, рендерим корректно но не меняя свойство каждого ингредиента

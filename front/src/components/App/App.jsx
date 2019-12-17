@@ -50,7 +50,7 @@ class App extends React.Component {
                 <Route exact path="/recipes/new" component={RecipeForm} />
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/registration" component={Registration} />
-                <Route exact path="/recipepage" component={RecipePage} />
+                <Route exact path="/recipes/:id" component={RecipePage} />
                 <PrivateRoute exact path="/" Component={Home} />
               </Switch>
             </Box>
@@ -76,13 +76,13 @@ const AppBar = props => (
 
 function mapStateToProps(store) {
   return {
-    isLoggedIn: store.isLoggedIn
+    isLoggedIn: store.isLoggedIn,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    isLoggedFetch: () => dispatch(isLoggedFetchAC())
+    isLoggedFetch: () => dispatch(isLoggedFetchAC()),
   };
 }
 

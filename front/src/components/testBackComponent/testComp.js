@@ -26,14 +26,18 @@ const ingredOne = {
   currency: 'руб/шт',
   link: 'https://vkusvill.ru/goods/ris-shlifovannyy-dlinnozernyy-500-gr.html',
   imageLink: 'https://vkusvill.ru/upload/resize/114789/114789_530x300x85_c.jpg',
-  kcal: 321,
+  calories: 321,
   weightAbsoulte: '500',
   measureType: 'г',
   pricePerKilo: 106,
+  quantity: 1,
+  caloriesTotal: 1605,
+  priceTotal: 53,
+  inputWeight: 170,
 };
 
 const ingredTwo = {
-  name: 'Окунь филе на коже зам.',
+  name: 'Окунь филе на коже зам.',
   weight: 600,
   rating: '4.7',
   price: 367,
@@ -47,6 +51,7 @@ const ingredTwo = {
   quantity: 1,
   caloriesTotal: 594,
   priceTotal: 367,
+  inputWeight: 500,
 };
 
 const recipeOne = {
@@ -87,7 +92,7 @@ const recipeTwo = {
   // author: req.session.userId
 };
 
-// CreateOne(recipeOne);
+CreateOne(recipeOne);
 // getAll()
 
 async function getOneRecipebyId(recipeId) {
@@ -143,4 +148,4 @@ async function ingredientParse(productname) {
   const respJson = await response.json();
   console.log('respJsonReceived', respJson);
 }
-// ingredientParse('окунь');
+// ingredientParse('рис');
