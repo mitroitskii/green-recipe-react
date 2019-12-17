@@ -1,9 +1,22 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+
 
 export default class SortPanel extends Component {
   state = {
     directionCal: '',
-    directionPrice: ''
+    directionPrice: '',
+    id: ''
+  }
+
+  componentDidMount() {
+    this.randomRecipesFromApi();
+  }
+
+  randomRecipesFromApi = async () => {
+    const recipeId = await fetch('/api/recipes/random');
+    const respJson = await recipeId.json();
+    this.setState({ id: respJson.id });
   }
 
   toggleCal = () => {
@@ -28,18 +41,18 @@ export default class SortPanel extends Component {
 
   render() {
     const { recipesFromApiSortingByPrice, recipesFromApiSortingByCalories } = this.props;
-    const { directionCal, directionPrice } = this.state
+    const { directionCal, directionPrice, id } = this.state
     return (
       <div>
-        <button>Удиви меня!</button>
+        <Link to={'/recipes/' + id}><button>Удиви меня!</button></Link>
         <span>Сортировать:</span>
         <button onClick={() => { recipesFromApiSortingByPrice(directionPrice); this.togglePrice() }}>
           По цене {(directionPrice === 'up') && '▲'} {(directionPrice === 'down') && '▼'}
         </button>
         <button onClick={() => { recipesFromApiSortingByCalories(directionCal); this.toggleCal() }}>
-          По каллорийности {(directionCal === 'up') && '▲'} {(directionCal === 'down') && '▼'}
+          По калорийности {(directionCal === 'up') && '▲'} {(directionCal === 'down') && '▼'}
         </button>
-      </div>
+      </div >
     );
   }
 }
