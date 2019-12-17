@@ -5,7 +5,7 @@ import IngredientSlider from '../IngredientSlider/ingredientSlider';
 export default function Home() {
   return (
     <div className="Home">
-      <RecipeList />
+      {/* <RecipeList /> */}
       <IngredientSlider/>
     </div>
   )

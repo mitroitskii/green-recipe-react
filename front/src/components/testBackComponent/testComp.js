@@ -92,7 +92,7 @@ const recipeTwo = {
   // author: req.session.userId
 };
 
-CreateOne(recipeOne);
+// CreateOne(recipeOne);
 // getAll()
 
 async function getOneRecipebyId(recipeId) {
