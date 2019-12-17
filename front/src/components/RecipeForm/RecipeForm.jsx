@@ -23,7 +23,7 @@ export default function RecipeForm() {
       pricePerKilo: 650,
       priceTotal: null,
       caloriesTotal: 128,
-      quantity: 1,
+      quantity: 1
     },
     {
       id: 'jjsfoefo88344',
@@ -39,7 +39,7 @@ export default function RecipeForm() {
       pricePerKilo: 1290,
       priceTotal: null,
       caloriesTotal: 755,
-      quantity: 1,
+      quantity: 1
     },
     {
       id: 'llloo399233',
@@ -55,8 +55,8 @@ export default function RecipeForm() {
       pricePerKilo: 724,
       priceTotal: null,
       caloriesTotal: null,
-      quantity: 1,
-    },
+      quantity: 1
+    }
   ];
   const hrs = [
     '0',
@@ -71,7 +71,7 @@ export default function RecipeForm() {
     '9',
     '10',
     '11',
-    '12',
+    '12'
   ];
   const mins = [
     '0',
@@ -85,7 +85,7 @@ export default function RecipeForm() {
     '40',
     '45',
     '50',
-    '55',
+    '55'
   ];
   const [name, setName] = useState('');
   const [hours, setHours] = useState('');
