@@ -4,8 +4,8 @@ import { BrowserRouter as Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { loginFetchAC, clearStatusAC } from '../../redux/actions/actions';
 
-import { Box, Text, Button } from 'grommet';
-import { TextInputField, Form, PasswordInputField, EmailInputField, CheckBoxField, validators } from 'grommet-controls';
+// import { Box, Text, Button } from 'grommet';
+// import { TextInputField, Form, PasswordInputField, EmailInputField, CheckBoxField, validators } from 'grommet-controls';
 
 
 class Login extends React.Component {
@@ -36,7 +36,7 @@ class Login extends React.Component {
     event.preventDefault();
     this.props.loginFetch({
       username: this.state.username,
-      password: this.state.password
+      password: this.state.password,
     });
   }
 

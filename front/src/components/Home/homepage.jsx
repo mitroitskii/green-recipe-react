@@ -1,14 +1,13 @@
 import React from 'react';
-import IngredientCard from '../IngredientCard/ingredientCard'
+import ItemsCarousel from 'react-items-carousel';
+import IngredientSlider from '../IngredientSlider/ingredientSlider';
 
-class Home extends React.Component {
+
+export default class Home extends React.Component {
+
   render() {
     return (
-      <div className="Home">
-        <IngredientCard/>
-      </div>
+      <IngredientSlider/>
     )
   }
 }
-
-export default Home;
