@@ -38,8 +38,8 @@ class App extends React.Component {
     //   },
     // };
     return (
-      <Router>
-        <Grommet theme={hpe}>
+      <Router >
+        <Grommet /*theme={theme}*/>
           <Box fill>
             <AppBar>
               <Navbar />
