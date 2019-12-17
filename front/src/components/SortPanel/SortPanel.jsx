@@ -47,10 +47,10 @@ export default class SortPanel extends Component {
         <Link to={'/recipes/' + id}><button>Удиви меня!</button></Link>
         <span>Сортировать:</span>
         <button onClick={() => { recipesFromApiSortingByPrice(directionPrice); this.togglePrice() }}>
-          По цене {(directionPrice === 'up') && '▲'} {(directionPrice === 'down') && '▼'}
+          По цене {(directionPrice === 'up') && '▼'} {(directionPrice === 'down') && '▲'}
         </button>
         <button onClick={() => { recipesFromApiSortingByCalories(directionCal); this.toggleCal() }}>
-          По калорийности {(directionCal === 'up') && '▲'} {(directionCal === 'down') && '▼'}
+          По калорийности {(directionCal === 'up') && '▼'} {(directionCal === 'down') && '▲'}
         </button>
       </div >
     );
