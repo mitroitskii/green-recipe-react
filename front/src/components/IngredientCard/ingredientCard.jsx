@@ -1,16 +1,10 @@
 import React from 'react';
-import { Grommet, Box, Button, Text } from 'grommet';
+import { Box, Text } from 'grommet';
 import { AddCircle } from 'grommet-icons';
 
 import './ingredientCard.css';
 
 export default class IngredientCard extends React.Component {
-  // state = {
-  //     name: "Яйца деревенские",
-  //     href: "url" + "(" + "https://vkusvill.ru/upload/resize/94714/94714_530x300x85_c.jpg" + ")",
-  //     price: "60 руб.",
-  //     weight: "300 г.",
-  // }
   handleClick() {
     const updatedIngredients = this.props.ingredients.concat([
       this.props.ingredient,
@@ -76,15 +70,14 @@ export default class IngredientCard extends React.Component {
               <AddCircle size="large" />
               Добавить в рецепт
             </Box>
-            {/* <Button icon={<AddCircle size="large" />} fit="content" align="center" justify="center" label="Добавить в рецепт" onClick={this.handleClick} /> */}
+            <div className={'inside'}>
+              <div className={'icon'}>
+                <i className={'material-icons'}>info</i>
+              </div>
+              <div className={'contents'}>информация о товаре</div>
+            </div>
           </Box>
         </Box>
-        <div className={'inside'}>
-          <div className={'icon'}>
-            <i className={'material-icons'}>info</i>
-          </div>
-          <div className={'contents'}>информация о товаре</div>
-        </div>
       </Box>
     );
   }

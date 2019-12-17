@@ -1,5 +1,6 @@
 class Ingredient {
   constructor(input = {}) {
+    this.id = input.id;
     this.name = input.name;
     this.weight = input.weight;
     this.rating = input.rating;

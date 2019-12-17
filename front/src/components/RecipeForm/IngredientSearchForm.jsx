@@ -3,13 +3,13 @@ import { Box, TextInput, Button, Text } from 'grommet';
 
 export default function IngredientSearchForm(props) {
   const { setSearch } = props;
-  const [string, setString] = useState('');
+  const [value, setValue] = useState('');
   return (
     <>
       <TextInput
         placeholder="Введите название ингредиента"
-        value={string}
-        onChange={event => setString(event.target.value)}
+        value={value}
+        onChange={event => setValue(event.target.value)}
       />
       <Box wrap direction="row" width="small">
         <Button
@@ -17,8 +17,7 @@ export default function IngredientSearchForm(props) {
           onClick={(event) => {
             event.preventDefault();
             event.stopPropagation();
-            const search = string;
-            setSearch();
+            setSearch(value);
           }}
           onFocus={event => event.stopPropagation()}  
         >

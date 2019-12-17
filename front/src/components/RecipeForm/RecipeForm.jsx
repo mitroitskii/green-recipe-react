@@ -4,59 +4,10 @@ import { NumberInput } from 'grommet-controls';
 import CategorySelector from './CategorySelector';
 import IngredientList from './IngredientList';
 import IngredientSearchForm from './IngredientSearchForm';
+import IngredientSlider from '../IngredientSlider/ingredientSlider';
 import Instructions from './Instructions';
 
 export default function RecipeForm() {
-  const ingrs = [
-    {
-      id: 'qw42qedwawe233',
-      name: 'Пюре мясное «Говядина»',
-      weight: '100',
-      rating: '4.8',
-      price: '65',
-      currency: 'руб/шт',
-      link: 'https://vkusvill.ru/goods/pyure-myasnoe-govyadina.html',
-      calories: '128',
-      weightAbsoulte: '100',
-      measureType: 'г',
-      pricePerKilo: 650,
-      priceTotal: null,
-      caloriesTotal: 128,
-      quantity: 1,
-    },
-    {
-      id: 'jjsfoefo88344',
-      name: 'Говядина лопатка б/к',
-      weight: '500',
-      rating: '4.1',
-      price: '645',
-      currency: 'руб/кг',
-      link: 'https://vkusvill.ru/goods/govyadina-lopatka-b-k.html',
-      calories: '151',
-      weightAbsoulte: '500',
-      measureType: 'г',
-      pricePerKilo: 1290,
-      priceTotal: null,
-      caloriesTotal: 755,
-      quantity: 1,
-    },
-    {
-      id: 'llloo399233',
-      name: 'Говядина с томленой картошкой',
-      weight: '250',
-      rating: '4.4',
-      price: '181',
-      currency: 'руб/шт',
-      link: 'https://vkusvill.ru/goods/govyadina-s-tomlenoy-kartoshkoy.html',
-      calories: '228,6',
-      weightAbsoulte: '250',
-      measureType: 'г',
-      pricePerKilo: 724,
-      priceTotal: null,
-      caloriesTotal: null,
-      quantity: 1,
-    },
-  ];
   const hrs = [
     '0',
     '1',
@@ -70,7 +21,7 @@ export default function RecipeForm() {
     '9',
     '10',
     '11',
-    '12',
+    '12'
   ];
   const mins = [
     '0',
@@ -84,14 +35,14 @@ export default function RecipeForm() {
     '40',
     '45',
     '50',
-    '55',
+    '55'
   ];
   const [name, setName] = useState('');
   const [hours, setHours] = useState('');
   const [minutes, setMinutes] = useState('');
   const [portions, setPortions] = useState(1);
   const [search, setSearch] = useState('');
-  const [ingredients, setIngredients] = useState(ingrs);
+  const [ingredients, setIngredients] = useState([]);
   const [instructions, setInstructions] = useState([]);
   return (
     <Box
@@ -129,6 +80,14 @@ export default function RecipeForm() {
           />
         ))}
       <IngredientSearchForm setSearch={setSearch} />
+      {/* <TextInput onChange={event => setSearch(event.target.value)} /> */}
+      {search && (
+        <IngredientSlider
+          search={search}
+          ingredients={ingredients}
+          setIngredients={setIngredients}
+        />
+      )}
       <p>Инструкции</p>
       <Instructions
         instructions={instructions}

@@ -1,6 +1,7 @@
 const request = require('request-promise');
 const parse = require('cheerio');
 const Ingredient = require('../models/ingredient');
+const uuidv1 = require('uuid/v1');
 
 async function parseSearchPageVV(productName) {
   let link = encodeURI('https://vkusvill.ru/search/?q=' + productName);
@@ -43,6 +44,7 @@ async function parseProductPageVV(link) {
     const html = await request(encodeURI(fullLink));
 
     let result = {
+      id: uuidv1(),
       name: parse('.Product__title', html)
         .text()
         .trim(),
