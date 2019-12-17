@@ -19,7 +19,7 @@ export default class CategorySelector extends Component {
 
   onRemoveSelected = season => {
     const seasonIndex = Categories.indexOf(season);
-    const selected = (this.state.selected = this.state.selected.filter(
+    const selected = (this.state.selected.filter(
       selectedSeason => selectedSeason !== seasonIndex
     ));
     this.setState({ selected });

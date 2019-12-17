@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Box, TextInput, Button } from 'grommet';
 import { FormClose } from 'grommet-icons';
 

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Box, TextInput, Button, Text } from 'grommet';
-import { FormClose } from 'grommet-icons';
 
 export default function IngredientSearchForm(props) {
   const { setSearch } = props;

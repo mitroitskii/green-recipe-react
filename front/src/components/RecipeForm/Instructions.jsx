@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { Box, TextArea } from 'grommet';
+import React from 'react';
+import { TextArea } from 'grommet';
 
 export default function Instruction(props) {
-  const { instructions, setInstructions } = props;
+  const { setInstructions } = props;
   return (
     <TextArea
       fill
