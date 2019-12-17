@@ -92,7 +92,7 @@ const recipeTwo = {
   // author: req.session.userId
 };
 
-CreateOne(recipeOne);
+// CreateOne(recipeOne);
 // getAll()
 
 async function getOneRecipebyId(recipeId) {
@@ -148,4 +148,4 @@ async function ingredientParse(productname) {
   const respJson = await response.json();
   console.log('respJsonReceived', respJson);
 }
-// ingredientParse('рис');
+ingredientParse('помидор');

@@ -39,7 +39,10 @@ export default class RecipePage extends Component {
     priceTotal,
       caloriesTotal,
       name,
-      image,
+      // image,
+      // image: 'http://localhost:5000/uploadssimple/e49d63ab434fb425c01e359bee93116e',
+      image: 'http://localhost:5000/api/uploads/1576594618526weatherpics.jpg',
+      
     instructions
      }));
 
