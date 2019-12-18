@@ -1,7 +1,7 @@
 import React from 'react';
 import { TextArea } from 'grommet';
 
-export default function Instruction(props) {
+export default function Instructions(props) {
   const { setInstructions } = props;
   return (
     <TextArea

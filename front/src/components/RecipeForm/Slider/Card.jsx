@@ -2,13 +2,30 @@ import React from 'react';
 import { Box, Text } from 'grommet';
 import { AddCircle } from 'grommet-icons';
 
-import './ingredientCard.css';
+import './Card.css';
 
-export default function IngredientCard(props) {
+export default function Card(props) {
+  const {
+    ingredient,
+    ingredients,
+    setIngredients,
+    setPriceTotal,
+    setCaloriesTotal,
+    setSearch
+  } = props;
   const handleClick = () => {
-    const updatedIngredients = props.ingredients.concat([props.ingredient]);
-    props.setIngredients(updatedIngredients);
-    props.setSearch('');
+    const updatedIngredients = ingredients.concat([ingredient]);
+    ingredient.priceTotal = ingredient.quantity * ingredient.price;
+    ingredient.caloriesTotal = (ingredient.weight / 100) * ingredient.calories;
+    ingredient.inputWeight = ingredient.weight;
+    setIngredients(updatedIngredients);
+    setCaloriesTotal(
+      ingredients.reduce((acc, ingr) => acc + ingr.caloriesTotal, 0),
+    );
+    setPriceTotal(
+      ingredients.reduce((acc, ingr) => acc + ingr.priceTotal, 0),
+    );
+    setSearch('');
   };
   return (
     <Box className={'wrapper'}>
@@ -17,7 +34,7 @@ export default function IngredientCard(props) {
           height="100%"
           width="100%"
           background={{
-            image: `url(${props.ingredient.imageLink})`,
+            image: `url(${ingredient.imageLink})`,
             position: 'center'
           }}
         />
@@ -39,15 +56,15 @@ export default function IngredientCard(props) {
               <marquee behavior="alternate" scrollamount="2" direction="right">
                 <Text size="xlarge" textAlign="start">
                   {' '}
-                  {props.ingredient.name}
+                  {ingredient.name}
                 </Text>
               </marquee>
             </Box>
             <Text size="large">
-              Цена: {props.ingredient.price} {props.ingredient.currency}.
+              Цена: {ingredient.price} {ingredient.currency}.
             </Text>
             <Text size="large">
-              Вес: {props.ingredient.weight} {props.ingredient.measureType}.
+              Вес: {ingredient.weight} {ingredient.measureType}.
             </Text>
           </Box>
           <Box
