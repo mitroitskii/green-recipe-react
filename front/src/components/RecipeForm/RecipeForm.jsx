@@ -23,7 +23,7 @@ export default function RecipeForm() {
     '9',
     '10',
     '11',
-    '12'
+    '12',
   ];
   const mins = [
     '0',
@@ -37,7 +37,7 @@ export default function RecipeForm() {
     '40',
     '45',
     '50',
-    '55'
+    '55',
   ];
   const [name, setName] = useState('');
   const [hours, setHours] = useState('0');
