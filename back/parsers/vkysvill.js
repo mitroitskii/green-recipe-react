@@ -32,8 +32,16 @@ async function parseSearchPageVV(productName) {
     );
 
     // console.log('products', products);
-    return products;
+    // if (products.length !== 0) {
+      
+      return products;
+    // } else {
+    //   res.status(400).json(products);
+    // }
+
+
   } catch (err) {
+    // res.status(400).json(err.message);
     return err;
   }
 }
