@@ -66,8 +66,9 @@ export default function RecipeForm() {
           instructions,
           category,
           priceTotal,
-          caloriesTotal
-        })
+          caloriesTotal,
+        }),
+        credentials: 'include',
       });
       if (response.status === 200) {
         const { recipeId } = await response.json();
