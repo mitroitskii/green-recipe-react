@@ -79,13 +79,13 @@ class Login extends React.Component {
           </div>
         </form>
         <div>
-          {this.props.logRegloadingFetch ? (
-            <span className={'statustext'}>loading</span>
-          ) : this.props.isLoggedIn ? (
-            <Redirect to="/" />
-          ) : (
-                <span className={'statustext'}>{this.props.logRegstatusError}</span>
-              )}
+          {
+          this.props.loadingFetch 
+          ? (<span className={'statustext'}>loading</span>) 
+          : this.props.isLoggedIn ? (
+            <Redirect to="/" />) 
+            : (<span className={'statustext'}>{this.props.logRegstatusError}</span>)
+            }
         </div>
       </div>
     );
@@ -95,7 +95,7 @@ class Login extends React.Component {
 function mapStateToProps(store) {
   return {
     isLoggedIn: store.isLoggedIn,
-    logRegloadingFetch: store.logRegloadingFetch,
+    loadingFetch: store.loadingFetch,
     logRegstatusError: store.logRegstatusError
   };
 }

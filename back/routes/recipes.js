@@ -30,7 +30,7 @@ router
       author: req.session.userId,
       authorName: req.session.username,
     };
-    console.log(recipe);
+    console.log(req.session);
     const newRecipe = new Recipe(recipe);
     try {
       await newRecipe.save();

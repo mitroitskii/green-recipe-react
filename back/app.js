@@ -14,10 +14,13 @@ useMiddleware(app);
 // Подключаем mongoose.
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost:27017/GreenRecipeProject', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+mongoose.connect(
+  'mongodb+srv://test:test@cluster0-anezw.mongodb.net/green-recipe?retryWrites=true&w=majority',
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  },
+);
 
 app.use('/api/users/', usersRouter);
 app.use('/api/recipes/', recipesRouter);

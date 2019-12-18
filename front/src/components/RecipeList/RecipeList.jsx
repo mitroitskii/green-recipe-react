@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import RecipeItem from '../RecipeItem';
 import SortPanel from '../SortPanel';
+import './recipe-list.css'
 
 export default class RecipeList extends Component {
 

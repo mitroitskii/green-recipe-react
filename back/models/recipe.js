@@ -12,7 +12,7 @@ const recipeSchema = new mongoose.Schema({
   priceTotal: String,
   caloriesTotal: String,
   author: String,
-  authorName: String,
+  authorName: { type: String, default: 'Аноним' },
 });
 
 // recipeSchema.statics.mostRecent = async function () {

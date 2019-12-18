@@ -62,7 +62,7 @@ class Registration extends React.Component {
           </div>
         </form>
         <div>
-          {this.props.logRegloadingFetch
+          {this.props.loadingFetch
             ? <span className={'statustext'}>loading</span>
             : this.props.logRegstatusError
               ? <span className={'statustext'}>{this.props.logRegstatusError}</span>
@@ -75,7 +75,7 @@ class Registration extends React.Component {
 
 function mapStateToProps(store) {
   return {
-    logRegloadingFetch: store.logRegloadingFetch,
+    loadingFetch: store.loadingFetch,
     logRegstatusError: store.logRegstatusError,
     registrationStatus: store.registrationStatus,
   }
