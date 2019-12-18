@@ -39,7 +39,7 @@ const RecipeItem = (item) => {
       </Grid>
     </Link>
   );
-}
+};
 
 
 export default RecipeItem;

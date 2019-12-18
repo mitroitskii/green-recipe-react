@@ -15,8 +15,16 @@ export const REGISTER_ERROR = "REGISTER_ERROR";
 export const FETCHED_REGISTER = "FETCHED_REGISTER";
 ////////////////////////////////////////////////////////////
 export const CLEAR_STATUS = "CLEAR_STATUS";
-///////////////////////LOGOUT//////////////////////
+///////////////////////LOGOUT//////////////////////////////
 export const LOGOUT_REQUEST = "LOGOUT_REQUEST";
 export const LOGOUT_GOT_RESPONSE = "LOGOUT_GOT_RESPONSE";
 export const LOGOUT_ERROR = "LOGOUT_ERROR";
 export const FETCHED_LOGOUT = "FETCHED_LOGOUT";
+
+///////////////////////PARSE////////////////////////////////
+export const PARSE_REQUEST = "PARSE_REQUEST";
+export const PARSE_GOT_RESPONSE = "PARSE_GOT_RESPONSE";
+export const PARSE_ERROR = "PARSE_ERROR";
+export const FETCHED_PARSE = "FETCHED_PARSE";
+///////////////////SetCARDDimensions//////////////////
+export const SET_CARD_DIMENSIONS = "SET_CARD_DIMENSIONS";
