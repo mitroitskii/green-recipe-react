@@ -172,8 +172,8 @@ export const parseGotResponseAC = (result) => {
   return { type: PARSE_GOT_RESPONSE, ingredientsParsed: result.ingredients, }
 };
 
-export const parseErrorAC = (error) => {
-  return { type: PARSE_ERROR, parseError: error.message, }
+export const parseErrorAC = (err) => {
+  return { type: PARSE_ERROR, parseError: err, }
 };
 
 export function* parseFetchAsyncAC(action) {
@@ -187,14 +187,14 @@ export function* parseFetchAsyncAC(action) {
       if (response.status === 200) {
         const result = yield call(() => response.json());
         yield put(parseGotResponseAC(result));
-        
         yield put(setCardDimensionsAC(action.data))
-      } else {
-        console.log(`ERROR: ${response.status}`);
+      } else if (response.status === 204) {
+        let err = true
+        yield put(parseErrorAC(err))
       }
-  } catch(error) {
-    console.log(error);
-  }
+    } catch (error) {
+      console.log(error);
+    }
 }
 
 export const parseFetchAC = (data) => {

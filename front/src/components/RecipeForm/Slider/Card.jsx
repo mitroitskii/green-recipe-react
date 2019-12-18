@@ -59,7 +59,7 @@ export default class IngredientCard extends React.Component {
             </Box>
             <Box
               fit="content"
-              alignContent="center"
+              align="center"
               direction="column"
               justify="center"
               border={[{ side: 'left' }]}
@@ -67,9 +67,9 @@ export default class IngredientCard extends React.Component {
               onClick={this.handleClick}
             >
               <AddCircle size="medium" />
-              <Text size="small" alignSelf="center">
-                Добавить в рецепт
-              </Text>
+                <Text size="small" textAlign="center" >
+                  Добавить в рецепт
+                </Text>
             </Box>
             {/* <Button icon={<AddCircle size="large" />} fit="content" align="center" justify="center" label="Добавить в рецепт" onClick={handleClick} /> */}
           </Box>
