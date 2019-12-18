@@ -1,10 +1,10 @@
 import React from 'react';
 import ItemsCarousel from 'react-items-carousel';
-import IngredientCard from '../IngredientCard/ingredientCard';
+import Card from './Card';
 import { Button } from 'grommet';
 import { CaretNext, CaretPrevious } from 'grommet-icons';
 
-export default class IngredientSlider extends React.Component {
+export default class Slider extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -34,20 +34,22 @@ export default class IngredientSlider extends React.Component {
 
   async componentDidUpdate(prevProps) {
     if (this.props.search !== prevProps.search) {
-      const search = this.props.search;
-      console.log(search);
-      const response = await fetch('http://localhost:5000/api/parses/', {
-        method: 'POST',
-        headers: { 'Content-type': 'application/json' },
-        body: JSON.stringify({ productname: search })
-      });
-      if (response.status === 200) {
-        const ingredients = await response.json();
-        console.log(ingredients);
-        this.setState({ children: ingredients.ingredients });
-        console.log(this.state.children);
-      } else {
-        console.log(`ERROR: ${response.status}`);
+      try {
+        const search = this.props.search;
+        console.log(search);
+        const response = await fetch('http://localhost:5000/api/parses/', {
+          method: 'POST',
+          headers: { 'Content-type': 'application/json' },
+          body: JSON.stringify({ productname: search })
+        });
+        if (response.status === 200) {
+          const ingredients = await response.json();
+          this.setState({ children: ingredients.ingredients });
+        } else {
+          console.log(`ERROR: ${response.status}`);
+        }
+      } catch (error) {
+        console.log(error);
       }
     }
   }
@@ -75,12 +77,14 @@ export default class IngredientSlider extends React.Component {
           leftChevron={<Button icon={<CaretPrevious size="large" />} />}
         >
           {this.state.children.map(ingredient => (
-            <IngredientCard
+            <Card
               key={ingredient.id}
               setSearch={this.props.setSearch}
               ingredient={ingredient}
               ingredients={this.props.ingredients}
               setIngredients={this.props.setIngredients}
+              setCaloriesTotal={this.props.setCaloriesTotal}
+              setPriceTotal={this.props.setPriceTotal}
             />
           ))}
         </ItemsCarousel>
