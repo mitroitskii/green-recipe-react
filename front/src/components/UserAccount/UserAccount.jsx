@@ -46,7 +46,7 @@ class UserAccount extends Component {
             return (
               <li key={item._id}>
                 <RecipeItem {...item} />
-                <Link to={'/recipes/' + item._id}><button>Редактировать</button></Link>
+                <Link to={'/recipes/' + item._id + '/edit'}><button>Редактировать</button></Link>
                 <button onClick={() => this.deleteRecipe(item._id)}>Удалить</button>
               </li>
             )

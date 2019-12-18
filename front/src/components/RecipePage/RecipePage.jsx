@@ -11,15 +11,15 @@ import LabelledMeter from './Meter';
 export default class RecipePage extends Component {
 
   state = {
-    defaultPortions:0,
+    defaultPortions: 0,
     portions: 0,
     ingredients: [],
     priceTotal: 0,
     caloriesTotal: 0,
     name: '',
     image: '',
-    instructions:[]
-    
+    instructions: []
+
   }
 
   async componentDidMount() {
@@ -30,37 +30,37 @@ export default class RecipePage extends Component {
     const respJson = await response.json();
     // console.log('respJsonReceived', respJson);
     // respJson.recipe
-    const {portions,ingredients,priceTotal,caloriesTotal,name,image,instructions} = respJson.recipe
+    const { portions, ingredients, priceTotal, caloriesTotal, name, image, instructions } = respJson.recipe
 
-    this.setState(() => ({ 
+    this.setState(() => ({
       defaultPortions: portions,
-    portions,
-    ingredients,
-    priceTotal,
+      portions,
+      ingredients,
+      priceTotal,
       caloriesTotal,
       name,
       image,
-    instructions
-     }));
+      instructions
+    }));
 
   }
 
   countTotalCalories() {
     let ratio = this.state.portions / this.state.defaultPortions;
-    let totalCalories=0
+    let totalCalories = 0
     this.state.ingredients.map((ingredient) => {
-      totalCalories+=ingredient.calories * ingredient.inputWeight * ratio / 100
+      totalCalories += ingredient.calories * ingredient.inputWeight * ratio / 100
     })
     return Math.round(totalCalories)
   }
 
   countTotalPrice() {
     let ratio = this.state.portions / this.state.defaultPortions;
-    let totalPrice=0
+    let totalPrice = 0
     this.state.ingredients.map((ingredient) => {
       let quantity = Math.ceil(ingredient.inputWeight * ratio / ingredient.weight)
-      
-      totalPrice+=ingredient.price*quantity
+
+      totalPrice += ingredient.price * quantity
     })
     return Math.round(totalPrice)
   }
@@ -68,7 +68,7 @@ export default class RecipePage extends Component {
   async setPortions(value) {
     await this.setState(() => ({ portions: value }));
     // const ratio = this.state.portions / this.state.defaultPortions;
-    
+
     this.setState(() => ({ caloriesTotal: this.countTotalCalories() }));
     this.setState(() => ({ priceTotal: this.countTotalPrice() }));
 
@@ -111,8 +111,8 @@ export default class RecipePage extends Component {
             <LabelledMeter meterValue={this.state.caloriesTotal} meterType={'Ккал'} />
             <LabelledMeter meterValue={this.state.priceTotal} meterType={'Руб'} />
           </Box>
-          <Box width = "250px" gridArea="sizeChooser" >
-             Выберите размер блюда
+          <Box width="250px" gridArea="sizeChooser" >
+            Выберите размер блюда
             {/* <SizeChooser value={6} /> */}
             <NumberInput
               min={1}
