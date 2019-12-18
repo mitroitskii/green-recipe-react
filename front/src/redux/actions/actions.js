@@ -7,7 +7,7 @@ export const isLoggedRequestAC = () => {
 };
 
 export const isLoggedGotResponseAC = (result) => {
-  return { type: IS_LOGGED_GOT_RESPONSE, isLoggedIn: result.isLoggedIn, }
+  return { type: IS_LOGGED_GOT_RESPONSE, isLoggedIn: result.isLoggedIn, userId: result.userId, userName: result.userName }
 };
 
 export const isLoggedErrorAC = (error) => {
@@ -41,7 +41,7 @@ export const loginRequestAC = () => {
 
 
 export const loginGotResponseAC = (result) => {
-  return { type: LOGIN_GOT_RESPONSE, isLoggedIn: result.isLoggedIn }
+  return { type: LOGIN_GOT_RESPONSE, isLoggedIn: result.isLoggedIn, userId: result.userId, userName: result.userName }
 };
 
 export const loginErrorAC = (err) => {
