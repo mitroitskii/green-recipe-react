@@ -8,7 +8,7 @@ const RecipeItem = (item) => {
   return (
     <Grid
       margin='medium'
-      rows={['x small', 'small']}
+      rows={['fit', 'small']}
       columns={['small', 'medium']}
       gap="small"
       areas={[
@@ -27,7 +27,7 @@ const RecipeItem = (item) => {
           alignSelf='start'
         />
       </Box>
-      <Box gridArea='text' background='accent-1'>
+      <Box gridArea='text' background='ligth-2'>
         <Text>Количество ингредиентов: {ingredients.length}</Text>
         <Text>Стоимость рецепта: {priceTotal} руб. </Text>
         <Text>Калорийность: {caloriesTotal} ккал </Text>
