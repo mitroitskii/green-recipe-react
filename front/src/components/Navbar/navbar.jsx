@@ -12,6 +12,8 @@ class Navbar extends React.Component {
 
   render() {
     if (this.props.isLoggedIn) {
+      console.log(this.props);
+      console.log(this.props.isLoggedIn);
       return (
         <header role="banner">
           <nav className={'navbar'}>
@@ -20,8 +22,16 @@ class Navbar extends React.Component {
                 <Link to="/">HOME</Link>
               </li>
               <li>
+                <Link to="/recipes/new">Добавить новый рецепт</Link>
+              </li>
+              <li>
                 <Link to="/login" onClick={this.logout.bind(this)}>
                   LOGOUT
+                </Link>
+              </li>
+              <li>
+                <Link to={`/users/${this.props.userName}`}>
+                  {this.props.userName}
                 </Link>
               </li>
             </ul>
@@ -40,6 +50,9 @@ class Navbar extends React.Component {
               <li>
                 <Link to="/registration">REGISTRATION</Link>
               </li>
+              <li>
+                <Link to="/recipes/new">Добавить новый рецепт</Link>
+              </li>
             </ul>
           </nav>
         </div>
@@ -51,12 +64,14 @@ class Navbar extends React.Component {
 function mapStateToProps(store) {
   return {
     isLoggedIn: store.isLoggedIn,
+    userId: store.userId,
+    userName: store.userName
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    logoutFetch: () => dispatch(logoutFetchAC()),
+    logoutFetch: () => dispatch(logoutFetchAC())
   };
 }
 

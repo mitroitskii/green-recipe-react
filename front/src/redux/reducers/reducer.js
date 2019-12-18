@@ -24,6 +24,8 @@ const initialState = {
   logRegstatusError: '',
   registrationStatus: '',
   questions: [],
+  userId: '',
+  userName:'',
   ingredientsParsed: [],
   cardHeight: '',
   cardWidth: '',
@@ -45,6 +47,8 @@ export default function (state = initialState, action) {
         isLoggedIn: action.isLoggedIn,
         loadingFetch: false,
         logRegstatusError: '',
+        userId: action.userId,
+        userName: action.userName
       };
     }
     case IS_LOGGED_ERROR: {
@@ -69,6 +73,8 @@ export default function (state = initialState, action) {
         isLoggedIn: action.isLoggedIn,
         loadingFetch: false,
         logRegstatusError: '',
+        userId: action.userId,
+        userName: action.userName
       };
     }
     case LOGIN_ERROR: {
@@ -123,6 +129,8 @@ export default function (state = initialState, action) {
         isLoggedIn: action.isLoggedIn,
         loadingFetch: false,
         logRegstatusError: '',
+        userId: '',
+        userName: ''
       };
     }
     case LOGOUT_ERROR: {

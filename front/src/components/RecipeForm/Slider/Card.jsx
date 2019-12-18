@@ -4,19 +4,39 @@ import { AddCircle } from 'grommet-icons';
 
 import './Card.css';
 
-import { connect } from 'react-redux'
-import { setCardDimensionsAC } from '../../../redux/actions/actions';
-
 export default class IngredientCard extends React.Component {
   handleClick = () => {
-    const updatedIngredients = this.props.ingredients.concat([this.props.ingredient]);
-    this.props.setIngredients(updatedIngredients);
-    // this.props.setOpen(!(this.props.open))
-    this.props.setSearch('');
+    const {
+      ingredient,
+      ingredients,
+      setIngredients,
+      setPriceTotal,
+      setCaloriesTotal,
+      setSearch,
+      errors,
+      setError
+    } = this.props;
+    const updatedIngredients = ingredients.concat([ingredient]);
+    ingredient.priceTotal = ingredient.quantity * ingredient.price;
+    ingredient.caloriesTotal = (ingredient.weight / 100) * ingredient.calories;
+    ingredient.inputWeight = ingredient.weight;
+    setIngredients(updatedIngredients);
+    setCaloriesTotal(
+      ingredients.reduce((acc, ingr) => acc + ingr.caloriesTotal, 0),
+    );
+    setPriceTotal(
+      ingredients.reduce((acc, ingr) => acc + ingr.priceTotal, 0),
+    );
+    setError({ ...errors, ingredients: '' });
+    setSearch('');
   };
   render() {
     return (
-      <Box width={String(this.props.cardWidth) + "px"} height={String(this.props.cardHeight + "px")} className={'wrapper'}>
+      <Box
+        width={String(this.props.cardWidth) + 'px'}
+        height={String(this.props.cardHeight + 'px')}
+        className={'wrapper'}
+      >
         <Box direction="column" height="100%" width="100%">
           <Box
             height="100%"
@@ -42,7 +62,11 @@ export default class IngredientCard extends React.Component {
             >
               <Box>
                 <Box width="100%">
-                  <marquee behavior="alternate" scrollamount="2" direction="right">
+                  <marquee
+                    behavior="alternate"
+                    scrollamount="2"
+                    direction="right"
+                  >
                     <Text size="medium" textAlign="start" width="100%">
                       {' '}
                       {this.props.ingredient.name}
@@ -51,11 +75,13 @@ export default class IngredientCard extends React.Component {
                 </Box>
               </Box>
               <Text size="medium">
-                Цена: {this.props.ingredient.price} {this.props.ingredient.currency}.
-            </Text>
+                Цена: {this.props.ingredient.price}{' '}
+                {this.props.ingredient.currency}.
+              </Text>
               <Text size="medium">
-                Вес: {this.props.ingredient.weight} {this.props.ingredient.measureType}.
-            </Text>
+                Вес: {this.props.ingredient.weight}{' '}
+                {this.props.ingredient.measureType}.
+              </Text>
             </Box>
             <Box
               fit="content"

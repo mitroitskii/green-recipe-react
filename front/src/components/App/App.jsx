@@ -17,6 +17,7 @@ import PrivateRoute from '../Routes/privateRoute';
 import HomeRoute from '../Routes/homeRoute';
 
 import Home from '../Home/homepage';
+import UserAccount from '../UserAccount';
 
 class App extends React.Component {
   async componentDidMount() {
@@ -52,7 +53,9 @@ class App extends React.Component {
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/registration" component={Registration} />
                 <Route exact path="/recipes/:id" component={RecipePage} />
+                <PrivateRoute exact path="/users/:id" Component={UserAccount} />
                 <PrivateRoute exact path="/" Component={Home} />
+                <PrivateRoute exact path="/recipes/:id/edit" Component={RecipeForm} />
               </Switch>
             </Box>
           </Box>
@@ -78,6 +81,7 @@ const AppBar = props => (
 function mapStateToProps(store) {
   return {
     isLoggedIn: store.isLoggedIn,
+    userId: store.userId
   };
 }
 

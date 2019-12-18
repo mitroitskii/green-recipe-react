@@ -18,13 +18,20 @@ router
       return res.send(JSON.stringify({ message: 'ok', recipes }));
     } catch (error) {
       return res.send(JSON.stringify({ message: 'error', error }));
+
     }
   })
   // создать один новый рецепт POST
   .post(async (req, res) => {
     console.log('Received Post one request');
     //   console.log('req.body', req.body);
-    const newRecipe = new Recipe(req.body);
+    const recipe = {
+      ...req.body,
+      author: req.session.userId,
+      authorName: req.session.username,
+    };
+    console.log(req.session);
+    const newRecipe = new Recipe(recipe);
     try {
       await newRecipe.save();
       return res.send(
@@ -35,6 +42,8 @@ router
     }
   });
 
+
+//  возвращает отсортированные по стоимости рецепты 
 router.get('/price', async (req, res) => {
   let sortFlag = 1;
   if (req.query.direction !== 'up') {
@@ -48,6 +57,7 @@ router.get('/price', async (req, res) => {
   }
 });
 
+// возвращает отсортированные по каллориям рецепты
 router.get('/calorific', async (req, res) => {
   let sortFlag = 1;
   if (req.query.direction !== 'up') {
@@ -56,6 +66,17 @@ router.get('/calorific', async (req, res) => {
   try {
     const recipes = await Recipe.find().sort({ caloriesTotal: sortFlag });
     return res.send(JSON.stringify({ message: 'ok', recipes }));
+  } catch (error) {
+    return res.send(JSON.stringify({ message: 'error', error }));
+  }
+});
+
+// возвращает один случайный рецепт
+router.get('/random', async (req, res) => {
+  try {
+    const recipes = await Recipe.find();
+    const randIndex = Math.floor(Math.random() * (recipes.length))
+    return res.send(JSON.stringify({ message: 'ok', id: recipes[randIndex]._id }));
   } catch (error) {
     return res.send(JSON.stringify({ message: 'error', error }));
   }
@@ -77,8 +98,7 @@ router
   .delete(async (req, res) => {
     try {
       const deleteResult = await Recipe.deleteOne({ _id: req.params.id });
-      console.log('deleteResult', deleteResult);
-
+      console.log('Delete', deleteResult);
       return res.send(JSON.stringify({ message: 'ok' }));
     } catch (error) {
       return res.send(JSON.stringify({ message: 'error', error }));

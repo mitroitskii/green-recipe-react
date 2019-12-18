@@ -4,30 +4,30 @@ import IngredientCard from './Card';
 import { Button,Text } from 'grommet';
 import { CaretNext, CaretPrevious } from 'grommet-icons';
 
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import { parseFetchAC } from '../../../redux/actions/actions';
-import Preloader from "../../Preloader/preloader"
+import Preloader from '../../Preloader/preloader';
 
 class Slider extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       numberOfCards: 1,
-      activeItemIndex: 0,
+      activeItemIndex: 0
     };
   }
   async componentDidMount() {
     try {
       const cardWidth = 365;
       const cardHeight = 325;
-      const search = this.props.search
+      const search = this.props.search;
       const data = { search, cardWidth, cardHeight };
       this.props.parseFetch(data);
-      let ingredientQuantity = this.props.ingredientsParsed.length;
+      const ingredientQuantity = this.props.ingredientsParsed.length;
       if (ingredientQuantity >= 3) {
-        this.setState({ numberOfCards: 3 })
+        this.setState({ numberOfCards: 3 });
       } else {
-        this.setState({ numberOfCards: ingredientQuantity })
+        this.setState({ numberOfCards: ingredientQuantity });
       }
       // const response = await fetch('http://localhost:5000/api/parses/', {
       //   method: 'POST',
@@ -49,15 +49,19 @@ class Slider extends React.Component {
     try {
       const cardWidth = 365;
       const cardHeight = 325;
-      if (this.props.search !== prevProps.search || this.props.ingredientsParsed.length !== prevProps.ingredientsParsed.length) {
-        const search = this.props.search
+      if (
+        this.props.search !== prevProps.search ||
+        this.props.ingredientsParsed.length !==
+          prevProps.ingredientsParsed.length
+      ) {
+        const search = this.props.search;
         const data = { search, cardWidth, cardHeight };
         this.props.parseFetch(data);
-        let ingredientQuantity = this.props.ingredientsParsed.length;
+        const ingredientQuantity = this.props.ingredientsParsed.length;
         if (ingredientQuantity >= 3) {
-          this.setState({ numberOfCards: 3 })
+          this.setState({ numberOfCards: 3 });
         } else {
-          this.setState({ numberOfCards: ingredientQuantity })
+          this.setState({ numberOfCards: ingredientQuantity });
         }
         // const response = await fetch('http://localhost:5000/api/parses/', {
         //   method: 'POST',
@@ -111,19 +115,23 @@ class Slider extends React.Component {
             >
               {this.props.ingredientsParsed.map(ingredient => (
                 <IngredientCard
-                  key={ingredient.id}
-                  setSearch={this.props.setSearch}
-                  ingredient={ingredient}
-                  ingredients={this.props.ingredients}
-                  setIngredients={this.props.setIngredients}
-                  cardHeight={this.props.cardHeight}
-                  cardWidth={this.props.cardWidth}
+                key={ingredient.id}
+                setSearch={this.props.setSearch}
+                ingredient={ingredient}
+                ingredients={this.props.ingredients}
+                setIngredients={this.props.setIngredients}
+                setCaloriesTotal={this.props.setCaloriesTotal}
+                setPriceTotal={this.props.setPriceTotal}
+                errors={this.props.errors}
+                setError={this.props.setError}
+                cardHeight={this.props.cardHeight}
+                cardWidth={this.props.cardWidth}
                 // setOpen={this.props.setOpen}
                 // open={this.props.open}
                 />
               ))}
             </ItemsCarousel>
-          </div>)
+          </div>
     );
   }
 }
@@ -136,11 +144,9 @@ function mapStateToProps(store) {
     parseError: store.parseError
   }
 }
-
 function mapDispatchToProps(dispatch) {
   return {
-    parseFetch: data => dispatch(parseFetchAC(data)),
-  }
+    parseFetch: data => dispatch(parseFetchAC(data))
+  };
 }
-
-export default connect(mapStateToProps, mapDispatchToProps)(Slider)
+export default connect(mapStateToProps, mapDispatchToProps)(Slider);
