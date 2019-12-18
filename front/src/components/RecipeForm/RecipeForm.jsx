@@ -65,7 +65,7 @@ export default function RecipeForm(props) {
   });
   
   if (props.recipe) {
-    const { name, hours, minutes, portions, portions, priceTotal, caloriesTotal } = props.recipe;
+    const { name, hours, minutes, portions, priceTotal, caloriesTotal } = props.recipe;
 
   }
 
