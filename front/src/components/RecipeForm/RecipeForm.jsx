@@ -11,36 +11,37 @@ import Instruction from './Instruction';
 import Submit from './Submit';
 import Uploader from '../Uploader/uploader'
 
+const hrs = [
+  '0',
+  '1',
+  '2',
+  '3',
+  '4',
+  '5',
+  '6',
+  '7',
+  '8',
+  '9',
+  '10',
+  '11',
+  '12'
+];
+const mins = [
+  '0',
+  '5',
+  '10',
+  '15',
+  '20',
+  '25',
+  '30',
+  '35',
+  '40',
+  '45',
+  '50',
+  '55'
+];
+
 export default function RecipeForm(props) {
-  const hrs = [
-    '0',
-    '1',
-    '2',
-    '3',
-    '4',
-    '5',
-    '6',
-    '7',
-    '8',
-    '9',
-    '10',
-    '11',
-    '12'
-  ];
-  const mins = [
-    '0',
-    '5',
-    '10',
-    '15',
-    '20',
-    '25',
-    '30',
-    '35',
-    '40',
-    '45',
-    '50',
-    '55'
-  ];
   const [name, setName] = useState('');
   const [hours, setHours] = useState('0');
   const [minutes, setMinutes] = useState('0');
@@ -55,15 +56,18 @@ export default function RecipeForm(props) {
   ]);
   const [id, setId] = useState('');
   const [image, setImage] = useState('');
-  const err = {
+  const [errors, setError] = useState({
     name: '',
     image: '',
     ingredients: '',
     instructions: '',
     category: ''
-  };
+  });
+  
+  if (props.recipe) {
+    const { name, hours, minutes, portions, portions, priceTotal, caloriesTotal } = props.recipe;
 
-  const [errors, setError] = useState(err);
+  }
 
   const clickSubmit = async () => {
     // debugger;
@@ -115,7 +119,7 @@ export default function RecipeForm(props) {
           const { recipeId } = await response.json();
           setId(recipeId);
         } else {
-          setError({ ...errors, error: `ERROR: ${response.status}` });
+          setError({ ...errors, server: `ERROR: ${response.status}` });
         }
       } catch (error) {
         setError({ ...errors, server: error });
