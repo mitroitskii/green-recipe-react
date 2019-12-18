@@ -11,7 +11,7 @@ class Navbar extends React.Component {
   }
 
   render() {
-    if (this.props.isLoggedIn) {
+    if (this.props.isLoggedIn === true) {
       console.log(this.props);
       console.log(this.props.isLoggedIn);
       return (
