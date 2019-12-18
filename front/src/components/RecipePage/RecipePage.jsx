@@ -107,76 +107,92 @@ export default class RecipePage extends Component {
 
   render() {
     return (
-      <Grid
-        rows={["small", "flex", "xsmall", "small"]}
-        // columns={["3/5", "2/5"]}
-        columns={["flex", "flex"]}
-        areas={[
-          ["header", "header"],
-          ["photo", "ingredients"],
-          ["info", "sizeChooser"],
-          ["footer", "footer"]
-        ]}
-        gap="small"
+      <Box
+        direction="column"
+        width="100%"
+        justify="center"
+        align="center"
+        
       >
-        <Box
-          elevation="medium"
-          direction="column"
+
+      
+
+      
+      {/* //   rows={["small", "flex", "xsmall", "small"]}
+      //   // columns={["3/5", "2/5"]}
+      //   columns={["flex", "flex"]}
+      //   areas={[
+        //     ["header", "header"],
+        //     ["photo", "ingredients"],
+      //     ["info", "sizeChooser"],
+      //     ["footer", "footer"]
+      //   ]}
+      //   gap="small"
+      // > */}
+      <Box
+      // elevation="medium"
+      direction="column"
           animation="fadeIn"
-          background="brand"
-          gridArea="header"
+           width="100%"
         >
+          <Heading level={5}>Автор: {this.state.category}</Heading>
+      
           <Heading level={2}>{this.state.name}</Heading>
           <Heading level={3}>Автор: {this.state.authorName}</Heading>
         </Box>
 
-        <Box elevation="medium" animation="fadeIn" gridArea="photo">
+        <Box width="100%"
+          // elevation="medium"
+          animation="fadeIn" >
           <Image
             height="100%"
             width="100%"
             elevation="medium"
             src={this.state.image}
-          />
+            />
         </Box>
 
-        <Box elevation="medium" animation="fadeIn" gridArea="ingredients">
+        <Box
+          // elevation="medium"
+           width="100%"
+          animation="fadeIn" >
           <IngredientsList
             defaultPortions={this.state.defaultPortions}
             portions={this.state.portions}
             ingredients={this.state.ingredients}
-          />
+            />
         </Box>
 
         <Box
+           width="100%"
           justify="around"
           animation="fadeIn"
           direction="row"
-          gridArea="info"
-          elevation="medium"
-        >
+          // elevation="medium"
+          >
           <LabelledMeter
             infoRecipe
             meterValue={this.state.caloriesTotal}
             meterType={"Ккал"}
-          />
+            />
           <LabelledMeter
             meterValue={this.state.priceTotal}
             meterType={"Рублей"}
-          />
+            />
           {/* <LabelledMeter meterValue={`${this.state.hours}:${this.state.minutes}`} meterType={'Минут'} /> */}
           <LabelledMeter
             meterValue={
               parseFloat(this.state.hours) * 60 + parseFloat(this.state.minutes)
             }
             meterType={"Минут"}
-          />
+            />
         </Box>
         <Box
-          elevation="medium"
+          // elevation="medium"
+           width="100%"
           direction="row"
           animation="fadeIn"
-          gridArea="sizeChooser"
-        >
+          >
           <div>
             Выберите размер блюда
             {/* <SizeChooser value={6} /> */}
@@ -186,7 +202,7 @@ export default class RecipePage extends Component {
               value={this.state.portions}
               suffix="  порций"
               onChange={({ target: { value } }) => this.setPortions(value)}
-            />
+              />
           </div>
 
           <Paragraph>
@@ -196,11 +212,11 @@ export default class RecipePage extends Component {
         </Box>
 
         <Box
-          elevation="medium"
+           width="100%"
+          // elevation="medium"
           animation="fadeIn"
           align="start"
-          gridArea="footer"
-        >
+          >
           <Heading level={3}>Инструкции:</Heading>
 
           {this.state.instructions.map((el, index) => (
@@ -209,7 +225,7 @@ export default class RecipePage extends Component {
             </Text>
           ))}
         </Box>
-      </Grid>
+          </Box>
     );
   }
 }

@@ -41,7 +41,15 @@ class App extends React.Component {
     return (
       <Router >
         <Grommet theme={hpe} >
-          <Box fill>
+          <Box
+            width="1000px"
+            elevation="large"
+            // margin="auto"
+            margin={{
+              left: '25%',
+              right: '25%',
+            }}
+          >
             <AppBar>
               <Navbar />
             </AppBar>
@@ -80,7 +88,7 @@ const AppBar = props => (
 function mapStateToProps(store) {
   return {
     isLoggedIn: store.isLoggedIn,
-    userId: store.userId
+    userId: store.userId,
   };
 }
 
