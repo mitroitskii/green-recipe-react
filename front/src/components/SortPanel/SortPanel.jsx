@@ -50,7 +50,7 @@ export default class SortPanel extends Component {
         margin='xsmall'
         rows={['fit']}
         columns={['fit', 'fit', 'fit', 'fit']}
-        gap="small"
+        gap='small'
         areas={[
           { name: 'surprise', start: [0, 0], end: [1, 0] },
           { name: 'sort', start: [1, 0], end: [2, 0] },

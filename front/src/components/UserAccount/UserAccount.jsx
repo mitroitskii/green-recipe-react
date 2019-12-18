@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import RecipeItem from '../RecipeItem';
 import { Link } from 'react-router-dom';
+import { Box, Button } from 'grommet';
 
 class UserAccount extends Component {
 
@@ -40,20 +41,21 @@ class UserAccount extends Component {
     const { recipes } = this.state;
 
     return (
-      <>
-        <ul>
-          {recipes.map((item) => {
-            return (
-              <li key={item._id}>
-                <RecipeItem {...item} />
-                <Link to={'/recipes/' + item._id + '/edit'}><button>Редактировать</button></Link>
-                <button onClick={() => this.deleteRecipe(item._id)}>Удалить</button>
-              </li>
-            )
-          })
-          }
-        </ul>
-      </>
+      <Box>
+        {recipes.map((item) => {
+          return (
+            <Box direction='column' justify='center' align='center'>
+              <RecipeItem {...item} />
+              <Box direction='row'>
+                <Link to={'/recipes/' + item._id + '/edit'}><Button margin='xsmall'>Редактировать</Button></Link>
+                <Button margin='xsmall' onClick={() => this.deleteRecipe(item._id)}>Удалить</Button>
+              </Box>
+            </Box>
+          )
+        })
+        }
+
+      </Box>
     )
   }
 }
