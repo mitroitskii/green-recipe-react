@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Box, Button, Text } from 'grommet';
+import { Grid, Box, Button, Text } from 'grommet';
 
 
 export default class SortPanel extends Component {
@@ -46,12 +46,30 @@ export default class SortPanel extends Component {
     const priceButton = (directionPrice === 'up') ? 'По цене ▼' : (directionPrice === 'down') ? 'По цене ▲' : 'По цене';
     const calorieButton = (directionCal === 'up') ? 'По калорийности ▼' : (directionCal === 'down') ? 'По калорийности ▲' : 'По калорийности';
     return (
-      <Box>
-        <Link to={'/recipes/' + id}><Button label='Удиви меня!' /></Link>
-        <Text>Сортировать:</Text>
-        <Button label={priceButton} onClick={() => { recipesFromApiSortingByPrice(directionPrice); this.togglePrice() }} />
-        <Button label={calorieButton} onClick={() => { recipesFromApiSortingByCalories(directionCal); this.toggleCal() }} />
-      </Box>
+      <Grid
+        margin='xsmall'
+        rows={['fit']}
+        columns={['fit', 'fit', 'fit', 'fit']}
+        gap="small"
+        areas={[
+          { name: 'surprise', start: [0, 0], end: [1, 0] },
+          { name: 'sort', start: [1, 0], end: [2, 0] },
+          { name: 'sortButton1', start: [2, 0], end: [3, 0] },
+          { name: 'sortButton2', start: [3, 0], end: [4, 0] },
+        ]}>
+        <Box gridArea='surprise'>
+          <Link to={'/recipes/' + id}><Button label='Удиви меня!' /></Link>
+        </Box>
+        <Box gridArea='sort'>
+          <Text margin='xsmall'>Сортировать:</Text>
+        </Box>
+        <Box gridArea='sortButton1'>
+          <Button label={priceButton} onClick={() => { recipesFromApiSortingByPrice(directionPrice); this.togglePrice() }} />
+        </Box>
+        <Box gridArea='sortButton2'>
+          <Button label={calorieButton} onClick={() => { recipesFromApiSortingByCalories(directionCal); this.toggleCal() }} />
+        </Box>
+      </Grid>
     );
   }
 }
