@@ -7,6 +7,8 @@ import Ingredient from './Ingredient';
 import Search from './Search';
 import Slider from './Slider/Slider';
 import Instructions from './Instructions';
+import Uploader from '../Uploader/uploader';
+
 import Submit from './Submit';
 
 export default function RecipeForm() {
@@ -23,7 +25,7 @@ export default function RecipeForm() {
     '9',
     '10',
     '11',
-    '12'
+    '12',
   ];
   const mins = [
     '0',
@@ -37,7 +39,7 @@ export default function RecipeForm() {
     '40',
     '45',
     '50',
-    '55'
+    '55',
   ];
   const [name, setName] = useState('');
   const [hours, setHours] = useState('0');
@@ -50,7 +52,8 @@ export default function RecipeForm() {
   const [ingredients, setIngredients] = useState([]);
   const [instructions, setInstructions] = useState([]);
   const [id, setId] = useState('');
-  const image = 'http://galleria.restaserver.ru/pub/12/items/2991/824-824.jpg';
+  const [image, setImage] = useState('');
+  // const image = 'http://galleria.restaserver.ru/pub/12/items/2991/824-824.jpg';
   const clickSubmit = async () => {
     try {
       const response = await fetch('http://localhost:5000/api/recipes/', {
@@ -66,8 +69,9 @@ export default function RecipeForm() {
           instructions,
           category,
           priceTotal,
-          caloriesTotal
-        })
+          caloriesTotal,
+        }),
+        credentials: 'include',
       });
       if (response.status === 200) {
         const { recipeId } = await response.json();
@@ -83,32 +87,33 @@ export default function RecipeForm() {
     return <Redirect to={`/recipes/${id}`} />;
   }
   return (
-    <Box
-      justify="between"
-      gap="medium"
-      width="large"
-      height="medium"
-      alignContent="stretch"
-      pad="medium"
-      margin="medium"
-      fill="vertical"
-    >
-      <p>Новый рецепт</p>
-      <TextInput
-        placeholder="Название рецепта"
-        value={name}
-        onChange={event => setName(event.target.value)}
-      />
-      <p>Количество порций</p>
-      <NumberInput
-        min={1}
-        max={12}
-        value={portions}
-        suffix="  порций"
-        onChange={({ target: { value } }) => setPortions(value)}
-      />
-      <p>Ингредиенты</p>
-      {ingredients &&
+    <>
+      <Box
+        justify="between"
+        gap="medium"
+        width="large"
+        height="medium"
+        alignContent="stretch"
+        pad="medium"
+        margin="medium"
+        fill="vertical"
+      >
+        <p>Новый рецепт</p>
+        <TextInput
+          placeholder="Название рецепта"
+          value={name}
+          onChange={event => setName(event.target.value)}
+        />
+        <p>Количество порций</p>
+        <NumberInput
+          min={1}
+          max={12}
+          value={portions}
+          suffix="  порций"
+          onChange={({ target: { value } }) => setPortions(value)}
+        />
+        <p>Ингредиенты</p>
+        {ingredients &&
         ingredients.map(ingredient => (
           <Ingredient
             key={ingredient.id}
@@ -119,44 +124,47 @@ export default function RecipeForm() {
             setCaloriesTotal={setCaloriesTotal}
           />
         ))}
-      <Search setSearch={setSearch} />
-      {search && (
-        <Slider
-          search={search}
-          setSearch={setSearch}
-          ingredients={ingredients}
-          setIngredients={setIngredients}
-          setCaloriesTotal={setCaloriesTotal}
-          setPriceTotal={setPriceTotal}
+        <Search setSearch={setSearch} />
+        {search && (
+          <Slider
+            search={search}
+            setSearch={setSearch}
+            ingredients={ingredients}
+            setIngredients={setIngredients}
+            setCaloriesTotal={setCaloriesTotal}
+            setPriceTotal={setPriceTotal}
+          />
+        )}
+        <p>Инструкции</p>
+        <Instructions
+          instructions={instructions}
+          setInstructions={setInstructions}
         />
-      )}
-      <p>Инструкции</p>
-      <Instructions
-        instructions={instructions}
-        setInstructions={setInstructions}
-      />
-      <p>Категория</p>
-      <Category category={category} setCategory={setCategory} />
-      <p>Время приготовления</p>
-      <Select
-        id="hours"
-        name="hours"
-        placeholder="часов"
-        dropHeight="small"
-        options={hrs}
-        value={hours}
-        onChange={({ option }) => setHours(option)}
-      />
-      <Select
-        id="minutes"
-        name="minutes"
-        placeholder="минут"
-        dropHeight="small"
-        options={mins}
-        value={minutes}
-        onChange={({ option }) => setMinutes(option)}
-      />
-      <Submit clickSubmit={clickSubmit} />
-    </Box>
+        <p>Категория</p>
+        <Category category={category} setCategory={setCategory} />
+        <p>Время приготовления</p>
+        <Select
+          id="hours"
+          name="hours"
+          placeholder="часов"
+          dropHeight="small"
+          options={hrs}
+          value={hours}
+          onChange={({ option }) => setHours(option)}
+        />
+        <Select
+          id="minutes"
+          name="minutes"
+          placeholder="минут"
+          dropHeight="small"
+          options={mins}
+          value={minutes}
+          onChange={({ option }) => setMinutes(option)}
+        />
+        {/* <MyUploader/> */}
+        <Uploader setImage={setImage} />
+        <Submit clickSubmit={clickSubmit} />
+      </Box>
+    </>
   );
 }

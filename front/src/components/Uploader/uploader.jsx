@@ -3,7 +3,7 @@ import Dropzone from 'react-dropzone'
 import './uploader.css';
 
 
-export default class MyUploader extends Component { 
+export default class Uploader extends Component { 
 
 
   state = {
@@ -11,6 +11,8 @@ export default class MyUploader extends Component {
   }
 
   send = async acceptedFile => {
+    console.log("clicked");
+    
     // e.preventDefault();
     const link = "http://localhost:5000/api/uploads/";
     const img = new FormData();
@@ -23,20 +25,38 @@ export default class MyUploader extends Component {
 
     const respJson = await response.json();
     const path = respJson.path;
-    // console.log("path:", path);
+    console.log("path:", path);
+    alert('ваше фото добавлено к рецепту !')
+    this.props.setImage(path)
   };
-  render() {
+//   render() {
+//     return (
+//       <Dropzone onDrop={acceptedFile => this.send(acceptedFile)}>
+//   {() => (
+//     <section >
+//             <div className="drop-container">
+//         {/* <input  /> */}
+//         <p>Добавьте фото вашего рецепта</p>
+//       </div>
+//     </section>
+//   )}
+// </Dropzone>
+//     );
+//   }
+// }
+
+ render() {
     return (
       <Dropzone onDrop={acceptedFile => this.send(acceptedFile)}>
-  {() => (
-    <section >
-      <div className="drop-container">
-        {/* <input /> */}
-        <p>Добавьте фото вашего рецепта</p>
-      </div>
-    </section>
-  )}
-</Dropzone>
+        {({ getRootProps, getInputProps }) => (
+          <section>
+            <div className="drop-container" {...getRootProps()}>
+              <input {...getInputProps()} />
+              <p>Добавьте фото вашего рецепта</p>
+            </div>
+          </section>
+        )}
+      </Dropzone>
     );
   }
 }
