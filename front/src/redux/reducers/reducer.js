@@ -12,22 +12,30 @@ import {
   LOGOUT_REQUEST,
   LOGOUT_GOT_RESPONSE,
   LOGOUT_ERROR,
+  PARSE_REQUEST,
+  PARSE_GOT_RESPONSE,
+  PARSE_ERROR,
+  SET_CARD_DIMENSIONS,
 } from '../types/types';
 
 const initialState = {
   isLoggedIn: false,
-  logRegloadingFetch: false,
+  loadingFetch: false,
   logRegstatusError: '',
   registrationStatus: '',
   questions: [],
+  ingredientsParsed: [],
+  cardHeight: '',
+  cardWidth: '',
 };
 
-export default function(state = initialState, action) {
+export default function (state = initialState, action) {
   switch (action.type) {
+    ///////////////////////isLoggedChecking//////////////////////
     case IS_LOGGED_REQUEST: {
       return {
         ...state,
-        logRegloadingFetch: true,
+        loadingFetch: true,
         logRegstatusError: '',
       };
     }
@@ -35,23 +43,23 @@ export default function(state = initialState, action) {
       return {
         ...state,
         isLoggedIn: action.isLoggedIn,
-        logRegloadingFetch: false,
+        loadingFetch: false,
         logRegstatusError: '',
       };
     }
     case IS_LOGGED_ERROR: {
       return {
         ...state,
-        logRegloadingFetch: false,
+        loadingFetch: false,
         logRegstatusError: action.logRegstatusError,
       };
     }
-
+    ///////////////////////LOGIN////////////////////////////////
     case LOGIN_REQUEST: {
       return {
         ...state,
         isLoggedIn: false,
-        logRegloadingFetch: true,
+        loadingFetch: true,
         logRegstatusError: '',
       };
     }
@@ -59,28 +67,29 @@ export default function(state = initialState, action) {
       return {
         ...state,
         isLoggedIn: action.isLoggedIn,
-        logRegloadingFetch: false,
+        loadingFetch: false,
         logRegstatusError: '',
       };
     }
     case LOGIN_ERROR: {
       return {
         ...state,
-        logRegloadingFetch: false,
+        loadingFetch: false,
         logRegstatusError: action.logRegstatusError,
       };
     }
+    ////////////////////REGISTRATION////////////////////////////
     case REGISTER_REQUEST: {
       return {
         ...state,
-        logRegloadingFetch: true,
+        loadingFetch: true,
         logRegstatusError: '',
       };
     }
     case REGISTER_GOT_RESPONSE: {
       return {
         ...state,
-        logRegloadingFetch: false,
+        loadingFetch: false,
         registrationStatus: action.registrationStatus,
         logRegstatusError: '',
       };
@@ -88,14 +97,23 @@ export default function(state = initialState, action) {
     case REGISTER_ERROR: {
       return {
         ...state,
-        logRegloadingFetch: false,
+        loadingFetch: false,
         logRegstatusError: action.logRegstatusError,
       };
     }
+    case CLEAR_STATUS: {
+      return {
+        ...state,
+        loadingFetch: false,
+        logRegstatusError: '',
+        registrationStatus: '',
+      };
+    }
+    ////////////////////LOGOUT////////////////////////////
     case LOGOUT_REQUEST: {
       return {
         ...state,
-        logRegloadingFetch: true,
+        loadingFetch: true,
         logRegstatusError: '',
       };
     }
@@ -103,23 +121,46 @@ export default function(state = initialState, action) {
       return {
         ...state,
         isLoggedIn: action.isLoggedIn,
-        logRegloadingFetch: false,
+        loadingFetch: false,
         logRegstatusError: '',
       };
     }
     case LOGOUT_ERROR: {
       return {
         ...state,
-        logRegloadingFetch: false,
+        loadingFetch: false,
         logRegstatusError: action.logRegstatusError,
       };
     }
-    case CLEAR_STATUS: {
+    ////////////////////PARSE////////////////////////////
+    case PARSE_REQUEST: {
       return {
         ...state,
-        logRegloadingFetch: false,
-        logRegstatusError: '',
-        registrationStatus: '',
+        loadingFetch: true,
+        parseError: '',
+      };
+    }
+    case PARSE_GOT_RESPONSE: {
+      return {
+        ...state,
+        loadingFetch: false,
+        ingredientsParsed: action.ingredientsParsed,
+        parseError: '',
+      };
+    }
+    case PARSE_ERROR: {
+      return {
+        ...state,
+        loadingFetch: false,
+        parseError: action.parseError,
+      };
+    }
+    //////////////////SET_CARD_DIMENSIONS///////////////////
+    case SET_CARD_DIMENSIONS: {
+      return {
+        ...state,
+        cardHeight: action.cardHeight,
+        cardWidth: action.cardWidth,
       };
     }
     default:

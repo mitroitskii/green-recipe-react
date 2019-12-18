@@ -1,5 +1,5 @@
 import { put, call, takeEvery } from "redux-saga/effects";
-import { IS_LOGGED_GOT_RESPONSE, IS_LOGGED_ERROR, FETCHED_IS_LOGGED, LOGIN_REQUEST, LOGIN_GOT_RESPONSE, LOGIN_ERROR, FETCHED_LOGIN, REGISTER_REQUEST, REGISTER_GOT_RESPONSE, REGISTER_ERROR, FETCHED_REGISTER, CLEAR_STATUS, IS_LOGGED_REQUEST, LOGOUT_REQUEST, LOGOUT_GOT_RESPONSE, LOGOUT_ERROR, FETCHED_LOGOUT} from '../types/types'
+import { IS_LOGGED_GOT_RESPONSE, IS_LOGGED_ERROR, FETCHED_IS_LOGGED, LOGIN_REQUEST, LOGIN_GOT_RESPONSE, LOGIN_ERROR, FETCHED_LOGIN, REGISTER_REQUEST, REGISTER_GOT_RESPONSE, REGISTER_ERROR, FETCHED_REGISTER, CLEAR_STATUS, IS_LOGGED_REQUEST, LOGOUT_REQUEST, LOGOUT_GOT_RESPONSE, LOGOUT_ERROR, FETCHED_LOGOUT, PARSE_REQUEST, PARSE_GOT_RESPONSE, PARSE_ERROR, FETCHED_PARSE, SET_CARD_DIMENSIONS} from '../types/types'
 
 /////////////////////isLoggedChecking//////////////////////
 export const isLoggedRequestAC = () => {
@@ -162,6 +162,55 @@ export const logoutFetchAC = () => {
   return { type: FETCHED_LOGOUT, }
 };
 
+////////////////////////PARSE//////////////////////////////
+
+export const parseRequestAC = () => {
+  return { type: PARSE_REQUEST, }
+};
+
+export const parseGotResponseAC = (result) => {
+  return { type: PARSE_GOT_RESPONSE, ingredientsParsed: result.ingredients, }
+};
+
+export const parseErrorAC = (error) => {
+  return { type: PARSE_ERROR, parseError: error.message, }
+};
+
+export function* parseFetchAsyncAC(action) {
+  try {
+    yield put(parseRequestAC());
+    const response = yield fetch('http://localhost:5000/api/parses/', {
+        method: 'POST',
+        headers: { 'Content-type': 'application/json' },
+        body: JSON.stringify({ productname: action.data.search })
+      });
+      if (response.status === 200) {
+        const result = yield call(() => response.json());
+        yield put(parseGotResponseAC(result));
+        
+        yield put(setCardDimensionsAC(action.data))
+      } else {
+        console.log(`ERROR: ${response.status}`);
+      }
+  } catch(error) {
+    console.log(error);
+  }
+}
+
+export const parseFetchAC = (data) => {
+  return { type: FETCHED_PARSE, data }
+};
+
+////////////////////////setCardDimensions///////////////////
+
+export const setCardDimensionsAC = (data) => {
+  return {
+    type: SET_CARD_DIMENSIONS,
+    cardHeight: data.cardHeight,
+    cardWidth: data.cardWidth,
+  }
+};
+
 /////////////////////WatchFetches//////////////////////////
 
 export function* watchFetches() {
@@ -169,6 +218,7 @@ export function* watchFetches() {
   yield takeEvery(FETCHED_LOGIN, loginFetchAsyncAC);
   yield takeEvery(FETCHED_REGISTER, registerFetchAsyncAC);
   yield takeEvery(FETCHED_LOGOUT, logoutFetchAsyncAC);
+  yield takeEvery(FETCHED_PARSE, parseFetchAsyncAC);
 };
 
 ///////////////////clearStatusAC//////////////////////
@@ -176,43 +226,3 @@ export function* watchFetches() {
 export const clearStatusAC = () => {
   return { type: CLEAR_STATUS }
 }
-
-
-
-
-// export const SessionCheckerAC = (isLoggedIn) => {
-//   return {
-//     type: SESSION_CHECKER,
-//     isLoggedIn: isLoggedIn
-//   }
-// };
-
-
-// export const loginFetchAC = (data) => {
-//   return async (dispatch) => {
-//     try {
-//       dispatch(loginRequestAC())
-//       const response = await fetch("http://localhost:5000/api/login", {
-//         method: 'POST',
-//         credentials: "include",
-//         headers: {
-//           'Content-Type': 'application/json'
-//         },
-//         body: JSON.stringify({
-//           username: data.username,
-//           password: data.password,
-//         })
-//       });
-//       if (response.status === 200) {
-//         let result = await response.json()
-//         dispatch(loginGotResponseAC(result))
-//       } else if (response.status === 400) {
-//         console.log(`ERROR: ${response.status}`);
-//         let err = await response.json()
-//         dispatch(loginErrorAC(err))
-//       }
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   }
-// }

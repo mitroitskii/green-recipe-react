@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import { Box, TextInput, Select } from 'grommet';
+import { Box, TextInput, Select, Collapsible } from 'grommet';
 import { NumberInput } from 'grommet-controls';
 import CategorySelector from './CategorySelector';
 import IngredientList from './IngredientList';
 import IngredientSearchForm from './IngredientSearchForm';
-import IngredientSlider from '../IngredientSlider/ingredientSlider';
+import IngredientSlider from './Slider/Slider';
 import Instructions from './Instructions';
 
-export default function RecipeForm() {
+export default function RecipeForm(props) {
   const hrs = [
     '0',
     '1',
@@ -44,6 +44,7 @@ export default function RecipeForm() {
   const [search, setSearch] = useState('');
   const [ingredients, setIngredients] = useState([]);
   const [instructions, setInstructions] = useState([]);
+  // const [open, setOpen] = useState(false);
   return (
     <Box
       justify="between"
@@ -55,6 +56,7 @@ export default function RecipeForm() {
       margin="medium"
       fill="vertical"
     >
+
       <p>Новый рецепт</p>
       <TextInput
         placeholder="Название рецепта"
@@ -79,14 +81,18 @@ export default function RecipeForm() {
             setIngredients={setIngredients}
           />
         ))}
-      <IngredientSearchForm setSearch={setSearch} />
+      <IngredientSearchForm setSearch={setSearch} /*setOpen={setOpen}*/ />
       {search && (
-        <IngredientSlider
-          search={search}
-          setSearch={setSearch}
-          ingredients={ingredients}
-          setIngredients={setIngredients}
-        />
+        // <Collapsible open={open} {...props}>
+          <IngredientSlider
+            search={search}
+            setSearch={setSearch}
+            ingredients={ingredients}
+            setIngredients={setIngredients}
+            // setOpen={setOpen}
+            // open={open}
+          />
+        // </Collapsible>
       )}
       <p>Инструкции</p>
       <Instructions

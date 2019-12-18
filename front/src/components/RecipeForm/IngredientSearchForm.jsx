@@ -18,6 +18,7 @@ export default function IngredientSearchForm(props) {
             event.preventDefault();
             event.stopPropagation();
             setSearch(value);
+            // props.setOpen(!(props.open))
           }}
           onFocus={event => event.stopPropagation()}  
         >

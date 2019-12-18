@@ -6,21 +6,9 @@ import { connect } from 'react-redux'
 import { isLoggedFetchAC } from '../../redux/actions/actions';
 
 class HomeRoute extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      isLoggedIn: false,
-      loading: true,
-    }
-  }
-
   async componentDidMount() {
         //проверка авторизации
         this.props.isLoggedFetch()
-        this.setState({
-          isLoggedIn: this.props.isLoggedIn,
-          loading: false
-        })
       }
     
   
@@ -32,7 +20,7 @@ class HomeRoute extends React.Component {
       render={props => (
           this.props.isLoggedIn === true
           ? <Component {...props} />
-          : this.state.loading
+          : this.props.loadingFetch
           ? <span className={'statustext'}>loading</span>
           : <Redirect to='/' />
         )}
@@ -44,6 +32,7 @@ class HomeRoute extends React.Component {
 function mapStateToProps(store) {
   return {
     isLoggedIn: store.isLoggedIn,
+    loadingFetch: store.loadingFetch,
   }
 }
 
