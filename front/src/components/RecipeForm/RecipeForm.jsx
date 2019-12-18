@@ -9,8 +9,9 @@ import Search from './Search';
 import Slider from './Slider/Slider';
 import Instruction from './Instruction';
 import Submit from './Submit';
+import Uploader from '../Uploader/uploader'
 
-export default function RecipeForm() {
+export default function RecipeForm(props) {
   const hrs = [
     '0',
     '1',
@@ -53,8 +54,7 @@ export default function RecipeForm() {
     { id: uuidv1(), text: '' }
   ]);
   const [id, setId] = useState('');
-  const image = 'http://galleria.restaserver.ru/pub/12/items/2991/824-824.jpg';
-
+  const [image, setImage] = useState('');
   const err = {
     name: '',
     image: '',
@@ -240,6 +240,7 @@ export default function RecipeForm() {
         value={minutes}
         onChange={({ option }) => setMinutes(option)}
       />
+      <Uploader setImage={setImage} />
       <Submit clickSubmit={clickSubmit} />
       {errors.server && (
         <Text size="medium" color="red">

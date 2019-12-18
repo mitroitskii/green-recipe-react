@@ -1,7 +1,7 @@
 const request = require('request-promise');
 const parse = require('cheerio');
 const Ingredient = require('../models/ingredient');
-`const uuidv1 = require('uuid/v1');`
+const uuidv1 = require('uuid/v1');
 
 async function parseSearchPageVV(productName) {
   let link = encodeURI('https://vkusvill.ru/search/?q=' + productName);

@@ -55,6 +55,7 @@ class App extends React.Component {
                 <Route exact path="/recipes/:id" component={RecipePage} />
                 <PrivateRoute exact path="/users/:id" Component={UserAccount} />
                 <PrivateRoute exact path="/" Component={Home} />
+                <PrivateRoute exact path="/recipes/:id/edit" Component={RecipeForm} />
               </Switch>
             </Box>
           </Box>

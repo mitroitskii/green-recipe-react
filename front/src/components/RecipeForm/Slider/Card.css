@@ -2,11 +2,9 @@ html, body {
     display: flex;
     background: #e3e3d8;
     font-family: sans-serif;
-    padding: 25px;
+    /* padding: 25px; */
 }
 .wrapper {
-    width: 530px;
-    height: 450px;
     background: white;
     margin: 0;
     position: relative;
