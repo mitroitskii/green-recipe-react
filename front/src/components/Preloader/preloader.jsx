@@ -1,6 +1,6 @@
 import React from 'react';
-import { Image, Box } from 'grommet';
-import gif from './spinner.gif';
+import { Image, Box } from "grommet"
+import gif from "./spinner.gif"
 
 const preLoader = () => (
   // вернуть инструкции по желанию

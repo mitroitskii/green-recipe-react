@@ -145,7 +145,7 @@ export default function (state = initialState, action) {
       return {
         ...state,
         loadingFetch: true,
-        parseError: '',
+        parseError: false,
       };
     }
     case PARSE_GOT_RESPONSE: {
@@ -153,7 +153,7 @@ export default function (state = initialState, action) {
         ...state,
         loadingFetch: false,
         ingredientsParsed: action.ingredientsParsed,
-        parseError: '',
+        parseError: false,
       };
     }
     case PARSE_ERROR: {
