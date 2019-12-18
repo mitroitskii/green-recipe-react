@@ -23,7 +23,8 @@ export default class InstructionsList extends Component {
         <Box align="center" pad="small">
           <Heading margin="small">Инструкции: </Heading>
           <List
-            data={list} />
+            data={list}
+          />
         </Box>
       </Grommet>
     );

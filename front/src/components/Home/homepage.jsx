@@ -2,8 +2,7 @@ import React from 'react';
 import RecipeList from '../RecipeList';
 import MyUploader from '../Uploader/uploader';
 
-
-function Home() {
+export default function Home() {
   return (
     <div className="Home">
       <RecipeList />
@@ -12,4 +11,3 @@ function Home() {
   )
 }
 
-export default Home;

@@ -10,9 +10,8 @@ router
   .route('/')
   // получить все ингредиенты POST
   .post(async (req, res) => {
-    // console.log('Received Post one Parse request');
+    console.log('Received Post one Parse request');
     try {
-      //   console.log('req.body', req.body);
       const { productname } = req.body;
       const ingredients = await parseSearchPageVV(productname);
       //   console.log(`Парсинг продукта ${productname}`, ingredients);

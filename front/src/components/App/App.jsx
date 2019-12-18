@@ -17,6 +17,7 @@ import PrivateRoute from '../Routes/privateRoute';
 import HomeRoute from '../Routes/homeRoute';
 
 import Home from '../Home/homepage';
+import UserAccount from '../UserAccount';
 
 class App extends React.Component {
   async componentDidMount() {
@@ -38,8 +39,8 @@ class App extends React.Component {
     //   },
     // };
     return (
-      <Router>
-        <Grommet theme={hpe}>
+      <Router >
+        <Grommet theme={hpe} >
           <Box fill>
             <AppBar>
               <Navbar />
@@ -47,11 +48,12 @@ class App extends React.Component {
             <Box direction="row" flex overflow={{ horizontal: 'hidden' }} />
             <Box flex align="center" justify="center">
               <Switch>
-                <Route exact path="/recipes" Component={Home} />
+                <Route exact path="/recipes" component={Home} />
                 <Route exact path="/recipes/new" component={RecipeForm} />
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/registration" component={Registration} />
                 <Route exact path="/recipes/:id" component={RecipePage} />
+                <PrivateRoute exact path="/users/:id" Component={UserAccount} />
                 <PrivateRoute exact path="/" Component={Home} />
               </Switch>
             </Box>
@@ -78,6 +80,7 @@ const AppBar = props => (
 function mapStateToProps(store) {
   return {
     isLoggedIn: store.isLoggedIn,
+    userId: store.userId
   };
 }
 
