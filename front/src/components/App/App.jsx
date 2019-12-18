@@ -39,8 +39,8 @@ class App extends React.Component {
     //   },
     // };
     return (
-      <Router >
-        <Grommet theme={hpe} >
+      <Router>
+        <Grommet theme={hpe}>
           <Box fill>
             <AppBar>
               <Navbar />
@@ -55,7 +55,11 @@ class App extends React.Component {
                 <Route exact path="/recipes/:id" component={RecipePage} />
                 <PrivateRoute exact path="/users/:id" Component={UserAccount} />
                 <PrivateRoute exact path="/" Component={Home} />
-                <PrivateRoute exact path="/recipes/:id/edit" Component={RecipeForm} />
+                <PrivateRoute
+                  exact
+                  path="/recipes/:id/edit"
+                  Component={RecipeForm}
+                />
               </Switch>
             </Box>
           </Box>
@@ -87,7 +91,7 @@ function mapStateToProps(store) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    isLoggedFetch: () => dispatch(isLoggedFetchAC()),
+    isLoggedFetch: () => dispatch(isLoggedFetchAC())
   };
 }
 
