@@ -18,7 +18,7 @@ export default class LabelledMeter extends Component {
               size="xsmall"
               thickness="small"
             />
-            <Box direction="row" align="center" pad={{ bottom: 'small' }}>
+            <Box direction="column" align="center" pad={{ bottom: 'small' }}>
               <Text size="large" weight="bold">
                 {meterValue}
               </Text>

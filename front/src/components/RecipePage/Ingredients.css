@@ -11,3 +11,19 @@
 .ingredientsUL {
     list-style-type:none;
 }
+
+.infoTime {    
+    background-image: url("http://localhost:5000/api/uploads/time.jpg");
+}
+
+.infoPrice {  
+    /* padding-top: 20px;   */
+    background-image: url("http://localhost:5000/api/uploads/price.jpg");
+   text-align: left;
+   /* vertical-align: bottom; */
+}
+
+.infoKcal {    
+    background-image: url("http://localhost:5000/api/uploads/Kcal.jpg");
+}
+
