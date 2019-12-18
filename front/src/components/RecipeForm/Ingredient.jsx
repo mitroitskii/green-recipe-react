@@ -33,10 +33,10 @@ export default function Ingredient(props) {
             })
           );
           setCaloriesTotal(
-            ingredients.reduce((acc, ingr) => acc + ingr.caloriesTotal, 0),
+            ingredients.reduce((acc, ingr) => acc + ingr.caloriesTotal, 0)
           );
           setPriceTotal(
-            ingredients.reduce((acc, ingr) => acc + ingr.priceTotal, 0),
+            ingredients.reduce((acc, ingr) => acc + ingr.priceTotal, 0)
           );
         }}
       />

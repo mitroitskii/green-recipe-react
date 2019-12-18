@@ -85,6 +85,8 @@ export default class Slider extends React.Component {
               setIngredients={this.props.setIngredients}
               setCaloriesTotal={this.props.setCaloriesTotal}
               setPriceTotal={this.props.setPriceTotal}
+              errors={this.props.errors}
+              setError={this.props.setError}
             />
           ))}
         </ItemsCarousel>
