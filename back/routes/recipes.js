@@ -18,6 +18,7 @@ router
       return res.send(JSON.stringify({ message: 'ok', recipes }));
     } catch (error) {
       return res.send(JSON.stringify({ message: 'error', error }));
+
     }
   })
   // создать один новый рецепт POST
@@ -35,6 +36,8 @@ router
     }
   });
 
+
+//  возвращает отсортированные по стоимости рецепты 
 router.get('/price', async (req, res) => {
   let sortFlag = 1;
   if (req.query.direction !== 'up') {
@@ -48,6 +51,7 @@ router.get('/price', async (req, res) => {
   }
 });
 
+// возвращает отсортированные по каллориям рецепты
 router.get('/calorific', async (req, res) => {
   let sortFlag = 1;
   if (req.query.direction !== 'up') {
@@ -56,6 +60,17 @@ router.get('/calorific', async (req, res) => {
   try {
     const recipes = await Recipe.find().sort({ caloriesTotal: sortFlag });
     return res.send(JSON.stringify({ message: 'ok', recipes }));
+  } catch (error) {
+    return res.send(JSON.stringify({ message: 'error', error }));
+  }
+});
+
+// возвращает один случайный рецепт
+router.get('/random', async (req, res) => {
+  try {
+    const recipes = await Recipe.find();
+    const randIndex = Math.floor(Math.random() * (recipes.length))
+    return res.send(JSON.stringify({ message: 'ok', id: recipes[randIndex]._id }));
   } catch (error) {
     return res.send(JSON.stringify({ message: 'error', error }));
   }
@@ -77,8 +92,7 @@ router
   .delete(async (req, res) => {
     try {
       const deleteResult = await Recipe.deleteOne({ _id: req.params.id });
-      console.log('deleteResult', deleteResult);
-
+      console.log('Delete', deleteResult);
       return res.send(JSON.stringify({ message: 'ok' }));
     } catch (error) {
       return res.send(JSON.stringify({ message: 'error', error }));
