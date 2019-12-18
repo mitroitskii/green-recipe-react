@@ -1,6 +1,6 @@
 import React from 'react';
 import RecipeList from '../RecipeList';
-import IngredientSlider from '../IngredientSlider/ingredientSlider';
+import IngredientSlider from '../RecipeForm/Slider/Slider';
 
 export default function Home() {
   return (

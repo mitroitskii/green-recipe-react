@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { Box, TextInput, Select } from 'grommet';
 import { NumberInput } from 'grommet-controls';
-import CategorySelector from './CategorySelector';
-import IngredientList from './IngredientList';
-import IngredientSearchForm from './IngredientSearchForm';
-import IngredientSlider from '../IngredientSlider/ingredientSlider';
+import { Redirect } from 'react-router-dom';
+import Category from './Category';
+import Ingredient from './Ingredient';
+import Search from './Search';
+import Slider from './Slider/Slider';
 import Instructions from './Instructions';
+import Submit from './Submit';
 
 export default function RecipeForm() {
   const hrs = [
@@ -38,12 +40,48 @@ export default function RecipeForm() {
     '55'
   ];
   const [name, setName] = useState('');
-  const [hours, setHours] = useState('');
-  const [minutes, setMinutes] = useState('');
+  const [hours, setHours] = useState('0');
+  const [minutes, setMinutes] = useState('0');
   const [portions, setPortions] = useState(1);
+  const [category, setCategory] = useState('');
+  const [priceTotal, setPriceTotal] = useState('');
+  const [caloriesTotal, setCaloriesTotal] = useState('');
   const [search, setSearch] = useState('');
   const [ingredients, setIngredients] = useState([]);
   const [instructions, setInstructions] = useState([]);
+  const [id, setId] = useState('');
+  const image = 'http://galleria.restaserver.ru/pub/12/items/2991/824-824.jpg';
+  const clickSubmit = async () => {
+    try {
+      const response = await fetch('http://localhost:5000/api/recipes/', {
+        method: 'POST',
+        headers: { 'Content-type': 'application/json' },
+        body: JSON.stringify({
+          name,
+          hours,
+          minutes,
+          image,
+          portions,
+          ingredients,
+          instructions,
+          category,
+          priceTotal,
+          caloriesTotal
+        })
+      });
+      if (response.status === 200) {
+        const { recipeId } = await response.json();
+        setId(recipeId);
+      } else {
+        console.log(`ERROR: ${response.status}`);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  if (id) {
+    return <Redirect to={`/recipes/${id}`} />;
+  }
   return (
     <Box
       justify="between"
@@ -72,20 +110,24 @@ export default function RecipeForm() {
       <p>Ингредиенты</p>
       {ingredients &&
         ingredients.map(ingredient => (
-          <IngredientList
+          <Ingredient
             key={ingredient.id}
             ingredient={ingredient}
             ingredients={ingredients}
             setIngredients={setIngredients}
+            setPriceTotal={setPriceTotal}
+            setCaloriesTotal={setCaloriesTotal}
           />
         ))}
-      <IngredientSearchForm setSearch={setSearch} />
+      <Search setSearch={setSearch} />
       {search && (
-        <IngredientSlider
+        <Slider
           search={search}
           setSearch={setSearch}
           ingredients={ingredients}
           setIngredients={setIngredients}
+          setCaloriesTotal={setCaloriesTotal}
+          setPriceTotal={setPriceTotal}
         />
       )}
       <p>Инструкции</p>
@@ -94,12 +136,12 @@ export default function RecipeForm() {
         setInstructions={setInstructions}
       />
       <p>Категория</p>
-      <CategorySelector />
+      <Category category={category} setCategory={setCategory} />
       <p>Время приготовления</p>
       <Select
         id="hours"
         name="hours"
-        placeholder="Часов"
+        placeholder="часов"
         dropHeight="small"
         options={hrs}
         value={hours}
@@ -114,6 +156,7 @@ export default function RecipeForm() {
         value={minutes}
         onChange={({ option }) => setMinutes(option)}
       />
+      <Submit clickSubmit={clickSubmit} />
     </Box>
   );
 }

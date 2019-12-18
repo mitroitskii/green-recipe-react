@@ -24,7 +24,13 @@ router
   .post(async (req, res) => {
     console.log('Received Post one request');
     //   console.log('req.body', req.body);
-    const newRecipe = new Recipe(req.body);
+    const recipe = {
+      ...req.body,
+      author: req.session.userId,
+      authorName: req.session.username,
+    };
+    console.log(recipe);
+    const newRecipe = new Recipe(recipe);
     try {
       await newRecipe.save();
       return res.send(
