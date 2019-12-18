@@ -1,7 +1,7 @@
 import React from 'react';
 import ItemsCarousel from 'react-items-carousel';
 import IngredientCard from './Card';
-import { Button,Text } from 'grommet';
+import { Button, Text } from 'grommet';
 import { CaretNext, CaretPrevious } from 'grommet-icons';
 
 import { connect } from 'react-redux';
@@ -52,7 +52,7 @@ class Slider extends React.Component {
       if (
         this.props.search !== prevProps.search ||
         this.props.ingredientsParsed.length !==
-          prevProps.ingredientsParsed.length
+        prevProps.ingredientsParsed.length
       ) {
         const search = this.props.search;
         const data = { search, cardWidth, cardHeight };
@@ -115,24 +115,25 @@ class Slider extends React.Component {
             >
               {this.props.ingredientsParsed.map(ingredient => (
                 <IngredientCard
-                key={ingredient.id}
-                setSearch={this.props.setSearch}
-                ingredient={ingredient}
-                ingredients={this.props.ingredients}
-                setIngredients={this.props.setIngredients}
-                setCaloriesTotal={this.props.setCaloriesTotal}
-                setPriceTotal={this.props.setPriceTotal}
-                errors={this.props.errors}
-                setError={this.props.setError}
-                cardHeight={this.props.cardHeight}
-                cardWidth={this.props.cardWidth}
+                  key={ingredient.id}
+                  setSearch={this.props.setSearch}
+                  ingredient={ingredient}
+                  ingredients={this.props.ingredients}
+                  setIngredients={this.props.setIngredients}
+                  setCaloriesTotal={this.props.setCaloriesTotal}
+                  setPriceTotal={this.props.setPriceTotal}
+                  errors={this.props.errors}
+                  setError={this.props.setError}
+                  cardHeight={this.props.cardHeight}
+                  cardWidth={this.props.cardWidth}
                 // setOpen={this.props.setOpen}
                 // open={this.props.open}
                 />
               ))}
             </ItemsCarousel>
           </div>
-    );
+          )
+    )
   }
 }
 function mapStateToProps(store) {
