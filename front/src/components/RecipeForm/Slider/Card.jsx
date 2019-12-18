@@ -11,7 +11,9 @@ export default function Card(props) {
     setIngredients,
     setPriceTotal,
     setCaloriesTotal,
-    setSearch
+    setSearch,
+    errors,
+    setError,
   } = props;
   const handleClick = () => {
     const updatedIngredients = ingredients.concat([ingredient]);
@@ -25,6 +27,7 @@ export default function Card(props) {
     setPriceTotal(
       ingredients.reduce((acc, ingr) => acc + ingr.priceTotal, 0),
     );
+    setError({ ...errors, ingredients: '' });
     setSearch('');
   };
   return (
