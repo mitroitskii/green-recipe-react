@@ -6,11 +6,11 @@ import { Redirect } from 'react-router-dom';
 import Category from './Category';
 import Ingredient from './Ingredient';
 import Search from './Search';
-import Slider from './Slider/Slider';
+import Slider from './Slider/SliderOld';
 import Instruction from './Instruction';
 import Submit from './Submit';
 
-export default function RecipeForm() {
+export default function RecipeForm(props) {
   const hrs = [
     '0',
     '1',
@@ -137,6 +137,7 @@ export default function RecipeForm() {
       margin="medium"
       fill="vertical"
     >
+
       <p>Новый рецепт</p>
       <TextInput
         placeholder="Введите название рецепта"
