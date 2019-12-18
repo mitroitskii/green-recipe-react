@@ -5,10 +5,9 @@ import { Link } from 'react-router-dom';
 import { Box, Button } from 'grommet';
 
 class UserAccount extends Component {
-
   state = {
     recipes: []
-  }
+  };
 
   componentDidMount() {
     this.recipesFromApi();
@@ -18,45 +17,49 @@ class UserAccount extends Component {
     const recipes = await fetch(`/api/users/${this.props.userId}/recipes`);
     const respJson = await recipes.json();
     this.setState({ recipes: respJson.recipes });
-  }
+  };
 
-  deleteRecipe = async (id) => {
+  deleteRecipe = async id => {
     const responce = await fetch(`/api/recipes/${id}`, {
-      method: 'DELETE',
+      method: 'DELETE'
     });
     const respJson = await responce.json();
     await console.log(respJson);
     this.setState(({ recipes }) => {
-      const idx = recipes.findIndex((el) => el._id === id);
+      const idx = recipes.findIndex(el => el._id === id);
       console.log(idx);
-      const newRecipes = [...recipes]
+      const newRecipes = [...recipes];
       newRecipes.splice(idx, 1);
       return {
         recipes: newRecipes
-      }
+      };
     });
-  }
+  };
 
   render() {
     const { recipes } = this.state;
 
     return (
       <Box>
-        {recipes.map((item) => {
+        {recipes.map(item => {
           return (
-            <Box direction='column' justify='center' align='center'>
+            <Box direction="column" justify="center" align="center">
               <RecipeItem {...item} />
-              <Box direction='row'>
-                <Link to={'/recipes/' + item._id + '/edit'}><Button margin='xsmall'>Редактировать</Button></Link>
-                <Button margin='xsmall' onClick={() => this.deleteRecipe(item._id)}>Удалить</Button>
+              <Box direction="row">
+                <Link to={'/recipes/' + item._id + '/edit'}>
+                  <Button label="Редактировать" margin="xsmall" />
+                </Link>
+                <Button
+                  label="Удалить"
+                  margin="xsmall"
+                  onClick={() => this.deleteRecipe(item._id)}
+                />
               </Box>
             </Box>
-          )
-        })
-        }
-
+          );
+        })}
       </Box>
-    )
+    );
   }
 }
 
@@ -67,4 +70,4 @@ function mapStateToProps(store) {
   };
 }
 
-export default connect(mapStateToProps)(UserAccount)
+export default connect(mapStateToProps)(UserAccount);
