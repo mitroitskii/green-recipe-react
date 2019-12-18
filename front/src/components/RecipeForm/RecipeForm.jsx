@@ -6,7 +6,7 @@ import { Redirect } from 'react-router-dom';
 import Category from './Category';
 import Ingredient from './Ingredient';
 import Search from './Search';
-import Slider from './Slider/SliderOld';
+import Slider from './Slider/Slider';
 import Instruction from './Instruction';
 import Submit from './Submit';
 

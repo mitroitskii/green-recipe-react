@@ -14,7 +14,7 @@ router
     try {
       const { productname } = req.body;
       const ingredients = await parseSearchPageVV(productname);
-      //   console.log(`Парсинг продукта ${productname}`, ingredients);
+        console.log(`Парсинг продукта ${productname}`, ingredients);
       return res.send(JSON.stringify({ message: 'ok', ingredients }));
     } catch (error) {
       return res.send(JSON.stringify({ message: 'error', error }));
