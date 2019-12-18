@@ -19,14 +19,14 @@ export default class InstructionsList extends Component {
   render() {
     const { list } = this.props;
     return (
-      <Grommet theme={theme}>
+      // <Grommet theme={theme}>
         <Box align="center" pad="small">
           <Heading margin="small">Инструкции: </Heading>
           <List
             data={list}
           />
         </Box>
-      </Grommet>
+      // </Grommet>
     );
   }
 }
