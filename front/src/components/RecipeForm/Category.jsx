@@ -2,13 +2,14 @@ import React, { useState } from 'react';
 import { Box, Select } from 'grommet';
 
 const categories = [
+  'Холодная закуска',
+  'Горячая закуска',
   'Суп',
+  'Горячее блюдо',
   'Салат',
   'Каша',
   'Паста',
-  'Холодная закуска',
-  'Горячая закуска',
-  'Десерт'
+  'Десерт',
 ];
 
 export default function Category(props) {

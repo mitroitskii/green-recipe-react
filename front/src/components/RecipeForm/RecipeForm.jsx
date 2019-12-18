@@ -53,8 +53,7 @@ export default function RecipeForm(props) {
     { id: uuidv1(), text: '' }
   ]);
   const [id, setId] = useState('');
-  const image = 'http://galleria.restaserver.ru/pub/12/items/2991/824-824.jpg';
-
+  const [image, setImage] = useState('');
   const err = {
     name: '',
     image: '',
@@ -137,7 +136,6 @@ export default function RecipeForm(props) {
       margin="medium"
       fill="vertical"
     >
-
       <p>Новый рецепт</p>
       <TextInput
         placeholder="Введите название рецепта"
@@ -241,6 +239,7 @@ export default function RecipeForm(props) {
         value={minutes}
         onChange={({ option }) => setMinutes(option)}
       />
+      <Uploader setImage={setImage} />
       <Submit clickSubmit={clickSubmit} />
       {errors.server && (
         <Text size="medium" color="red">

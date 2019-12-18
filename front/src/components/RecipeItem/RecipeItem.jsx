@@ -16,7 +16,7 @@ const RecipeItem = (item) => {
       <p>Время приготовления: {hours}:{minutes} </p>
     </div>
   );
-}
+};
 
 
 export default RecipeItem;
