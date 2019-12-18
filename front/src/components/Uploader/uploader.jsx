@@ -5,13 +5,12 @@ import './uploader.css';
 
 export default class Uploader extends Component { 
 
-
   state = {
     imagelink:''    
   }
 
   send = async acceptedFile => {
-    console.log("clicked");
+    // console.log("clicked");
     
     // e.preventDefault();
     const link = "http://localhost:5000/api/uploads/";
@@ -27,23 +26,8 @@ export default class Uploader extends Component {
     const path = respJson.path;
     console.log("path:", path);
     alert('ваше фото добавлено к рецепту !')
-    this.props.setImage(path)
+    this.props.setImage("http://localhost:5000/api/uploads/"+path)
   };
-//   render() {
-//     return (
-//       <Dropzone onDrop={acceptedFile => this.send(acceptedFile)}>
-//   {() => (
-//     <section >
-//             <div className="drop-container">
-//         {/* <input  /> */}
-//         <p>Добавьте фото вашего рецепта</p>
-//       </div>
-//     </section>
-//   )}
-// </Dropzone>
-//     );
-//   }
-// }
 
  render() {
     return (

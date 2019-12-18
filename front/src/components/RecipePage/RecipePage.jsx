@@ -39,9 +39,9 @@ export default class RecipePage extends Component {
     priceTotal,
       caloriesTotal,
       name,
-      // image,
+      image,
       // image: 'http://localhost:5000/uploadssimple/e49d63ab434fb425c01e359bee93116e',
-      image: 'http://localhost:5000/api/uploads/1576595592679weatherpics.jpg',
+      // image: 'http://localhost:5000/api/uploads/1576595592679weatherpics.jpg',
       
     instructions
      }));
@@ -75,7 +75,6 @@ export default class RecipePage extends Component {
     this.setState(() => ({ caloriesTotal: this.countTotalCalories() }));
     this.setState(() => ({ priceTotal: this.countTotalPrice() }));
 
-
   }
 
   render() {
@@ -85,36 +84,38 @@ export default class RecipePage extends Component {
         <Grid
           rows={['xsmall', 'flex', 'xsmall', 'small']}
           // columns={["3/5", "2/5"]}
-          columns={['1/4', 'flex']}
+          columns={['flex', 'flex']}
           areas={[
             ['header', 'header'],
             ['photo', 'ingredients'],
             ['info', 'sizeChooser'],
             ['footer', 'footer'],
           ]}
-          gap="small"
+          gap="xsmall"
         >
-          <Box background="brand" gridArea="header">
+          <Box animation="fadeIn" background="brand" gridArea="header">
 
             <Heading margin="small">{this.state.name}</Heading>
           </Box>
 
-          <Box gridArea="photo">
+          <Box  animation="fadeIn" gridArea="photo">
             {/* <Grommet theme={grommet}> */}
             <Image src={this.state.image} />
             {/* </Grommet> */}
           </Box>
 
-          <Box background="light-2" gridArea="ingredients">
+          <Box elevation="medium"
+            animation="fadeIn" gridArea="ingredients">
             <IngredientsList defaultPortions={this.state.defaultPortions} portions={this.state.portions} ingredients={this.state.ingredients} />
           </Box>
 
-          <Box justify="around" animation="fadeIn" direction="row" gridArea="info" >
+          <Box  justify="around" animation="fadeIn" direction="row" gridArea="info" >
 
             <LabelledMeter meterValue={this.state.caloriesTotal} meterType={'Ккал'} />
             <LabelledMeter meterValue={this.state.priceTotal} meterType={'Руб'} />
+            <div>Время готовки</div>
           </Box>
-          <Box width = "250px" gridArea="sizeChooser" >
+          <Box  animation="fadeIn" width = "250px" gridArea="sizeChooser" >
              Выберите размер блюда
             {/* <SizeChooser value={6} /> */}
             <NumberInput
@@ -126,7 +127,9 @@ export default class RecipePage extends Component {
             />
           </Box>
 
-          <Box animation="slideDown" align="start" gridArea="footer">
+          <Box
+            
+            animation="fadeIn" align="start" gridArea="footer">
             <InstructionsList list={this.state.instructions} />
           </Box>
         </Grid>

@@ -1,4 +1,5 @@
 import React from 'react';
+import './Ingredients.css';
 // import { connect } from 'react-redux';
 
 // import { logoutFetchAC } from '../../redux/actions/actions';
@@ -11,9 +12,9 @@ export default class IngredientsList extends React.Component {
     const ratio = portions / defaultPortions;
     // иметь ввиду что тут не мняется quantity ингредиента, рендерим корректно но не меняя свойство каждого ингредиента
     return (
-      <ul>
+      <ul className="ingredientsUL" >
         {ingredients.map(ingredient => (
-          <li key={Math.random()}>
+          <li className="ingredinetsList" key={Math.random()}>
             {' '}
             {ingredient.name}{' '}
             <p>{`Вес: ${Math.round(ingredient.inputWeight * ratio)}

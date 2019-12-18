@@ -1,0 +1,13 @@
+.ingredinetsList {
+    color: black;
+}
+.ingredinetsList:nth-child(odd) {
+    background-color: #CCC;
+}
+/* .ingredinetsList:nth-child(even) {
+    /* background-color: #FFF; */
+/* } */ 
+
+.ingredientsUL {
+    list-style-type:none;
+}
