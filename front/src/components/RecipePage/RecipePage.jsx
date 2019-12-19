@@ -30,7 +30,7 @@ export default class RecipePage extends Component {
     instructions: [],
     hours: "",
     minutes: "",
-    portionCaption: "порций"
+    portionCaption: "порции"
   };
 
   async componentDidMount() {
@@ -130,9 +130,17 @@ export default class RecipePage extends Component {
             href="/recipes"
           />
 
-          <Heading alignSelf="center" level={1}>
+          <Heading
+            margin={{
+              bottom: "small",
+              top: "medium"
+            }}
+            alignSelf="center"
+            level={1}
+          >
             {this.state.name}
           </Heading>
+
           <Heading
             alignSelf="center"
             margin={{
@@ -176,15 +184,15 @@ export default class RecipePage extends Component {
             meterValue={parseFloat(this.state.caloriesTotal)}
             meterType={"Ккал"}
           />
+            <LabelledMeter
+              meterValue={
+                parseFloat(this.state.hours) * 60 + parseFloat(this.state.minutes)
+              }
+              meterType={"Минут"}
+            />
           <LabelledMeter
             meterValue={parseFloat(this.state.priceTotal)}
             meterType={"Рублей"}
-          />
-          <LabelledMeter
-            meterValue={
-              parseFloat(this.state.hours) * 60 + parseFloat(this.state.minutes)
-            }
-            meterType={"Минут"}
           />
         </Box>
         <Box
