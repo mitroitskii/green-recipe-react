@@ -4,8 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Box, Grommet } from 'grommet';
 import { hpe } from 'grommet-theme-hpe';
 import { isLoggedFetchAC } from '../../redux/actions/actions';
-
-// import './App.css';
+import './app.css';
 
 import Navbar from '../Navbar/navbar';
 import Login from '../Login/login';

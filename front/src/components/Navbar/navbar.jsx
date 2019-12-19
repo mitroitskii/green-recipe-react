@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+
+import './navbar.css'
 import { Box, Anchor, Header } from 'grommet';
 import { logoutFetchAC } from '../../redux/actions/actions';
 
