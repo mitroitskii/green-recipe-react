@@ -12,36 +12,37 @@ import Submit from './Submit';
 import Uploader from '../Uploader/uploader'
 import './recipeForm.css'
 
+const hrs = [
+  '0',
+  '1',
+  '2',
+  '3',
+  '4',
+  '5',
+  '6',
+  '7',
+  '8',
+  '9',
+  '10',
+  '11',
+  '12'
+];
+const mins = [
+  '0',
+  '5',
+  '10',
+  '15',
+  '20',
+  '25',
+  '30',
+  '35',
+  '40',
+  '45',
+  '50',
+  '55'
+];
+
 export default function RecipeForm(props) {
-  const hrs = [
-    '0',
-    '1',
-    '2',
-    '3',
-    '4',
-    '5',
-    '6',
-    '7',
-    '8',
-    '9',
-    '10',
-    '11',
-    '12'
-  ];
-  const mins = [
-    '0',
-    '5',
-    '10',
-    '15',
-    '20',
-    '25',
-    '30',
-    '35',
-    '40',
-    '45',
-    '50',
-    '55'
-  ];
   const [name, setName] = useState('');
   const [hours, setHours] = useState('0');
   const [minutes, setMinutes] = useState('0');
@@ -56,15 +57,14 @@ export default function RecipeForm(props) {
   ]);
   const [id, setId] = useState('');
   const [image, setImage] = useState('');
-  const err = {
+  const [errors, setError] = useState({
     name: '',
     image: '',
     ingredients: '',
     instructions: '',
     category: ''
-  };
-
-  const [errors, setError] = useState(err);
+  });
+  const [portionsSuffix, setSuffix] = useState(' порция');
 
   const clickSubmit = async () => {
     // debugger;
@@ -95,6 +95,10 @@ export default function RecipeForm(props) {
       setError(newErrors);
     } else {
       try {
+        let instructionsTrimmed = instructions;
+        if (instructions[instructions.length - 1].text === '') {
+          instructionsTrimmed = instructions.slice(0, instructions.length - 1);
+        }
         const response = await fetch('http://localhost:5000/api/recipes/', {
           method: 'POST',
           headers: { 'Content-type': 'application/json' },
@@ -105,10 +109,11 @@ export default function RecipeForm(props) {
             image,
             portions,
             ingredients,
-            instructions,
+            instructions: instructionsTrimmed,
             category,
             priceTotal,
-            caloriesTotal
+            caloriesTotal,
+            portionsSuffix
           }),
           credentials: 'include'
         });
@@ -116,7 +121,7 @@ export default function RecipeForm(props) {
           const { recipeId } = await response.json();
           setId(recipeId);
         } else {
-          setError({ ...errors, error: `ERROR: ${response.status}` });
+          setError({ ...errors, server: `ERROR: ${response.status}` });
         }
       } catch (error) {
         setError({ ...errors, server: error });
@@ -131,14 +136,16 @@ export default function RecipeForm(props) {
     <Box
       justify="between"
       gap="medium"
-      width="large"
+      direction="column"
+      elevation="medium"
+      width="80%"
       height="medium"
       alignContent="stretch"
       pad="medium"
       margin="medium"
       fill="vertical"
     >
-      <p>Новый рецепт</p>
+      <Text>Новый рецепт</Text>
       <TextInput
         placeholder="Введите название рецепта"
         value={name}
@@ -157,8 +164,17 @@ export default function RecipeForm(props) {
         min={1}
         max={12}
         value={portions}
-        suffix="  порций"
-        onChange={({ target: { value } }) => setPortions(value)}
+        suffix={portionsSuffix}
+        onChange={({ target: { value } }) => {
+          if (parseFloat(value) === 1) {
+            setSuffix(' порция');
+          } else if (parseFloat(value) > 4) {
+            setSuffix(' порций');
+          } else {
+            setSuffix(' порции');
+          }
+          setPortions(value);
+        }}
       />
       <p>Ингредиенты</p>
       {ingredients &&
@@ -242,7 +258,12 @@ export default function RecipeForm(props) {
         onChange={({ option }) => setMinutes(option)}
       />
       <Uploader setImage={setImage} />
-      <Submit clickSubmit={clickSubmit} />
+      {errors.image && (
+        <Text size="medium" color="red">
+          {errors.image}
+        </Text>
+      )}
+      <Submit name="Создать новый рецепт" clickSubmit={clickSubmit} />
       {errors.server && (
         <Text size="medium" color="red">
           {errors.server}

@@ -8,7 +8,11 @@ const Recipe = require('../models/recipe');
 const saltRounds = 10;
 
 router.route('/isLogged').get((req, res) => {
-  res.json({ isLoggedIn: !!req.session.username, userId: req.session.userId, userName: req.session.username});
+  res.json({
+    isLoggedIn: !!req.session.username,
+    userId: req.session.userId,
+    userName: req.session.username,
+  });
 });
 
 // отрисовка страниц регистрации и логина
@@ -40,7 +44,7 @@ router.route('/registration').post(async (req, res, next) => {
   }
 });
 
-router.route('/login').post(async (req, res, error) => {
+router.route('/login').post(async (req, res) => {
   try {
     const loginError = new Error(
       'Неправильный логин или пароль. Попробуйте еще раз',
@@ -49,8 +53,12 @@ router.route('/login').post(async (req, res, error) => {
     if (user && (await bcrypt.compare(req.body.password, user.password))) {
       req.session.username = user.username;
       req.session.userId = user.id;
-      res.send({ isLoggedIn: !!req.session.username, userId: req.session.userId, userName: req.session.username });
-    } else {
+      res.send({
+        isLoggedIn: !!req.session.username,
+        userId: req.session.userId,
+        userName: req.session.username,
+      });
+      } else {
       throw loginError;
     }
   } catch (error) {

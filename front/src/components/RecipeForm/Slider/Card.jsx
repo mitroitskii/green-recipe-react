@@ -16,27 +16,23 @@ export default class IngredientCard extends React.Component {
       errors,
       setError
     } = this.props;
-    const updatedIngredients = ingredients.concat([ingredient]);
     ingredient.priceTotal = ingredient.quantity * ingredient.price;
     ingredient.caloriesTotal = (ingredient.weight / 100) * ingredient.calories;
     ingredient.inputWeight = ingredient.weight;
+    const updatedIngredients = ingredients.concat([ingredient]);
     setIngredients(updatedIngredients);
     setCaloriesTotal(
-      ingredients.reduce((acc, ingr) => acc + ingr.caloriesTotal, 0),
+      updatedIngredients.reduce((acc, ingr) => acc + ingr.caloriesTotal, 0)
     );
     setPriceTotal(
-      ingredients.reduce((acc, ingr) => acc + ingr.priceTotal, 0),
+      updatedIngredients.reduce((acc, ingr) => acc + ingr.priceTotal, 0)
     );
     setError({ ...errors, ingredients: '' });
     setSearch('');
   };
   render() {
     return (
-      <Box
-        width={String(this.props.cardWidth) + 'px'}
-        height={String(this.props.cardHeight + 'px')}
-        className={'wrapper'}
-      >
+      <Box width={String(this.props.cardWidth)} height={String(this.props.cardHeight)} className={'wrapper'} border={{"color":"border"}}>
         <Box direction="column" height="100%" width="100%">
           <Box
             height="100%"

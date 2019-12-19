@@ -11,6 +11,7 @@ import Login from '../Login/login';
 import Registration from '../Registration/registration';
 import RecipeForm from '../RecipeForm/RecipeForm';
 import RecipePage from '../RecipePage/RecipePage';
+import RecipeEdit from '../RecipeForm/RecipeEdit';
 
 import PrivateRoute from '../Routes/privateRoute';
 import HomeRoute from '../Routes/homeRoute';
@@ -23,7 +24,6 @@ class App extends React.Component {
     // проверка авторизации
     this.props.isLoggedFetch();
   }
-
   render() {
     // const theme = {
     //   global: {
@@ -38,44 +38,35 @@ class App extends React.Component {
     //   },
     // };
     return (
-      <Router >
-        <Grommet theme={hpe} >
-          <Box fill>
-            <AppBar>
-              <Navbar />
-            </AppBar>
-            <Box direction="row" flex overflow={{ horizontal: 'hidden' }} />
-            <Box flex align="center" justify="center">
-              <Switch>
-                <Route exact path="/recipes" component={Home} />
-                <Route exact path="/recipes/new" component={RecipeForm} />
-                <Route exact path="/login" component={Login} />
-                <Route exact path="/registration" component={Registration} />
-                <Route exact path="/recipes/:id" component={RecipePage} />
-                <PrivateRoute exact path="/users/:id" Component={UserAccount} />
-                <PrivateRoute exact path="/" Component={Home} />
-                <PrivateRoute exact path="/recipes/:id/edit" Component={RecipeForm} />
-              </Switch>
-            </Box>
+      <Router>
+        <Grommet theme={hpe}>
+          <Box flex align="center" justify="center">
+            <Navbar />
+            <Switch>
+              <Route exact path="/" render={() => <Home />} />
+              <Route exact path="/recipes" component={Home} />
+              <PrivateRoute exact path="/recipes/new" component={RecipeForm} />
+              <Route exact path="/login" component={Login} />
+              <Route exact path="/registration" component={Registration} />
+              <Route exact path="/recipes/:id" component={RecipePage} />
+              <PrivateRoute
+                exact
+                path="/recipes/:id/edit"
+                component={RecipeEdit}
+              />
+              <PrivateRoute exact path="/users/:id" Component={UserAccount} />
+              <PrivateRoute
+                exact
+                path="/recipes/:id/edit"
+                component={RecipeEdit}
+              />
+            </Switch>
           </Box>
         </Grommet>
       </Router>
     );
   }
 }
-
-const AppBar = props => (
-  <Box
-    direction="column"
-    align="center"
-    justify="between"
-    background="brand"
-    pad={{ left: 'medium', right: 'small', vertical: 'small' }}
-    elevation="medium"
-    style={{ zIndex: '1' }}
-    {...props}
-  />
-);
 
 function mapStateToProps(store) {
   return {
@@ -86,7 +77,7 @@ function mapStateToProps(store) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    isLoggedFetch: () => dispatch(isLoggedFetchAC()),
+    isLoggedFetch: () => dispatch(isLoggedFetchAC())
   };
 }
 
