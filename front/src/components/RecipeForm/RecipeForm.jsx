@@ -9,7 +9,7 @@ import Search from './Search';
 import Slider from './Slider/Slider';
 import Instruction from './Instruction';
 import Submit from './Submit';
-import Uploader from '../Uploader/uploader'
+import Uploader from '../Uploader/uploader';
 
 const hrs = [
   '0',
@@ -63,11 +63,6 @@ export default function RecipeForm(props) {
     instructions: '',
     category: ''
   });
-  
-  if (props.recipe) {
-    const { name, hours, minutes, portions, portions, priceTotal, caloriesTotal } = props.recipe;
-
-  }
 
   const clickSubmit = async () => {
     // debugger;
@@ -245,6 +240,11 @@ export default function RecipeForm(props) {
         onChange={({ option }) => setMinutes(option)}
       />
       <Uploader setImage={setImage} />
+      {errors.image && (
+        <Text size="medium" color="red">
+          {errors.image}
+        </Text>
+      )}
       <Submit clickSubmit={clickSubmit} />
       {errors.server && (
         <Text size="medium" color="red">

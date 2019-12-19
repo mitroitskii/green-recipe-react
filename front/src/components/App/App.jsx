@@ -12,6 +12,7 @@ import Login from '../Login/login';
 import Registration from '../Registration/registration';
 import RecipeForm from '../RecipeForm/RecipeForm';
 import RecipePage from '../RecipePage/RecipePage';
+import RecipeEdit from '../RecipeForm/RecipeEdit';
 
 import PrivateRoute from '../Routes/privateRoute';
 import HomeRoute from '../Routes/homeRoute';
@@ -53,6 +54,7 @@ class App extends React.Component {
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/registration" component={Registration} />
                 <Route exact path="/recipes/:id" component={RecipePage} />
+                <Route exact path="/recipes/:id/edit" component={RecipeEdit} />
                 <PrivateRoute exact path="/users/:id" Component={UserAccount} />
                 <PrivateRoute exact path="/" Component={Home} />
                 <PrivateRoute
