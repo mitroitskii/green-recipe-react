@@ -46,20 +46,20 @@ class App extends React.Component {
             <Switch>
               <Route exact path="/" render={() => <Home />} />
               <Route exact path="/recipes" component={Home} />
-              <PrivateRoute exact path="/recipes/new" Component={RecipeForm} />
+              <PrivateRoute exact path="/recipes/new" component={RecipeForm} />
               <Route exact path="/login" component={Login} />
               <Route exact path="/registration" component={Registration} />
               <Route exact path="/recipes/:id" component={RecipePage} />
               <PrivateRoute
                 exact
                 path="/recipes/:id/edit"
-                Component={RecipeEdit}
+                component={RecipeEdit}
               />
               <PrivateRoute exact path="/users/:id" Component={UserAccount} />
               <PrivateRoute
                 exact
                 path="/recipes/:id/edit"
-                Component={RecipeEdit}
+                component={RecipeEdit}
               />
             </Switch>
           </Box>

@@ -3,6 +3,7 @@
   "private": true,
   "dependencies": {
     "grommet": "^2.9.0",
+    "grommet-cli": "^5.1.2",
     "grommet-controls": "^2.0.2",
     "grommet-icons": "^4.4.0",
     "grommet-theme-hpe": "^0.4.2",

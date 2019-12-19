@@ -1,14 +1,11 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import { BrowserRouter as Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { loginFetchAC, clearStatusAC } from '../../redux/actions/actions';
-
-// import { Box, Text, Button } from 'grommet';
-// import { TextInputField, Form, PasswordInputField, EmailInputField, CheckBoxField, validators } from 'grommet-controls';
-
-import FormFieldLabel from '../FormFieldwithRequiredLabel/formFieldWithRequiredLabel'
-
+import Preloader from "../Preloader/preloader"
+import { Box, Text, Button,Heading } from 'grommet';
+import { TextInputField, Form, PasswordInputField, validators } from 'grommet-controls';
 class Login extends React.Component {
   constructor(props) {
     super(props);
@@ -16,8 +13,7 @@ class Login extends React.Component {
       username: '',
       password: ''
     };
-    this.handleUsername = this.handleUsername.bind(this);
-    this.handlePassword = this.handlePassword.bind(this);
+  
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -25,70 +21,71 @@ class Login extends React.Component {
     this.props.clearStatus();
   }
 
-  handleUsername(event) {
-    this.setState({ username: event.target.value });
-  }
-
-  handlePassword(event) {
-    this.setState({ password: event.target.value });
-  }
-
-  async handleSubmit(event) {
-    event.preventDefault();
+  async handleSubmit(values) {
     this.props.loginFetch({
-      username: this.state.username,
-      password: this.state.password,
+      username: values.username,
+      password: values.password,
     });
   }
 
   render() {
     return (
-      <div className={'form-style-1'}>
-        <form id="userLogIn" onSubmit={this.handleSubmit}>
-          <div className={'container'}>
-            <h1>Login</h1>
-            <p>Please login</p>
-            <hr />
-            <p>
-              <label>
-                <b>Username</b>
-              </label>
-              <input
-                type="text"
-                placeholder="Username"
-                name="username"
-                required
-                onChange={this.handleUsername}
-              />
-            </p>
-            <p>
-              <label>
-                <b>Password</b>
-              </label>
-              <input
-                type="password"
-                placeholder="Enter Password"
-                name="password"
-                required
-                onChange={this.handlePassword}
-              />
-            </p>
-            <hr />
-            <button type="submit" className={'loginbtn'}>
-              Login
-            </button>
-          </div>
-        </form>
-        <div>
-          {
-          this.props.loadingFetch 
-          ? (<span className={'statustext'}>loading</span>) 
-          : this.props.isLoggedIn ? (
-            <Redirect to="/" />) 
-            : (<span className={'statustext'}>{this.props.logRegstatusError}</span>)
+      <Box 
+      width="30%" 
+      margin="large" 
+      pad="large" 
+      border={{ "color": "border" }} 
+      background="light-1" 
+      >
+      <Heading level="2" 
+      // margin={{
+      //   "top":"none",
+      //   "bottom":"small"
+      //   }} >Вход</Heading>
+        <Form
+          basis='medium'
+          focusFirstChild={false}
+          {...this.props}
+          onSubmit={this.handleSubmit}
+        >
+          <TextInputField label='Имя' name='username' />
+          <PasswordInputField
+            label={(
+              <Box direction='row' align='center' justify='between'>Пароль</Box>
+            )}
+            description='Password'
+            name='password'
+            validation={
+              [
+              validators.required(), 
+              validators.minLength(5),
+              validators.alphaNumeric()
+            ]
             }
-        </div>
-      </div>
+          />
+          <Box pad={{ vertical: 'medium' }} align='end'>
+            <Button hoverIndicator='background' 
+            primary={true} type='submit' 
+            // alignSelf="center" 
+            label='Войти' 
+            />
+          </Box>
+          <Box direction='row' 
+          alignSelf='center' 
+          gap='small' 
+          align='center'>
+          </Box>
+        </Form>
+        <Box>
+          {
+            this.props.loadingFetch
+              ? <Preloader/>
+              : this.props.isLoggedIn ? (
+                <Redirect to="/" />)
+                : <Text>{this.props.logRegstatusError}</Text>
+          }
+        </Box>
+      </Box>
     );
   }
 }
@@ -111,32 +108,51 @@ function mapDispatchToProps(dispatch) {
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
 
-
-///Форма по Grommet.Почему-то не вводится текст в username
-
-{/* <Form
-  basis='medium'
-  focusFirstChild={false}
-  {...this.props}
-  onSubmit={this.handleSubmit}
->
-  <TextInputField label='Username' name='username' onChange={this.handleUsername} />
-  <PasswordInputField
-    label={(
-      <Box direction='row' align='center' justify='between'>Password</Box>
-    )}
-    description='Password'
-    name='password'
-    validation={
-      [validators.required(), validators.minLength(5), validators.alphaNumeric()]
-    }
-    onChange={this.handlePassword}
-  />
-  <Box pad={{ vertical: 'medium' }} align='end'>
-    <Button hoverIndicator='background' primary={true} type='submit' label='Save profile' />
-  </Box>
-  <Box direction='row' alignSelf='center' gap='small' align='center'></Box>
-</Form> */}
-
+// <div className={'form-style-1'}>
+//   <form id="userLogIn" onSubmit={this.handleSubmit}>
+//     <div className={'container'}>
+//       <h1>Login</h1>
+//       <p>Please login</p>
+//       <hr />
+//       <p>
+//         <label>
+//           <b>Username</b>
+//         </label>
+//         <input
+//           type="text"
+//           placeholder="Username"
+//           name="username"
+//           required
+//           onChange={this.handleUsername}
+//         />
+//       </p>
+//       <p>
+//         <label>
+//           <b>Password</b>
+//         </label>
+//         <input
+//           type="password"
+//           placeholder="Enter Password"
+//           name="password"
+//           required
+//           onChange={this.handlePassword}
+//         />
+//       </p>
+//       <hr />
+//       <button type="submit" className={'loginbtn'}>
+//         Login
+//       </button>
+//     </div>
+//   </form>
+//   <div>
+//     {
+//     this.props.loadingFetch 
+//     ? (<span className={'statustext'}>loading</span>) 
+//     : this.props.isLoggedIn ? (
+//       <Redirect to="/" />) 
+//       : (<span className={'statustext'}>{this.props.logRegstatusError}</span>)
+//       }
+//   </div>
+// </div>
 
 

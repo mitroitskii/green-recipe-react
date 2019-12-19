@@ -47,36 +47,22 @@ class Slider extends React.Component {
   }
 
   async componentDidUpdate(prevProps) {
+    console.log("update");
     try {
       const cardWidth = '25vw';
       const cardHeight = '22vw';
-      if (
-        this.props.search !== prevProps.search ||
-        this.props.ingredientsParsed.length !==
-          prevProps.ingredientsParsed.length
-      ) {
-        const search = this.props.search;
+      if (this.props.search !== prevProps.search) {
+        const search = this.props.search
         const data = { search, cardWidth, cardHeight };
         this.props.parseFetch(data);
-        const ingredientQuantity = this.props.ingredientsParsed.length;
+      }
+      if(this.props.ingredientsParsed.length !== prevProps.ingredientsParsed.length) {
+        let ingredientQuantity = this.props.ingredientsParsed.length;
         if (ingredientQuantity >= 3) {
-          this.setState({ numberOfCards: 3 });
+          this.setState({ numberOfCards: 3 })
         } else {
-          this.setState({ numberOfCards: ingredientQuantity });
+          this.setState({ numberOfCards: ingredientQuantity })
         }
-        // const response = await fetch('http://localhost:5000/api/parses/', {
-        //   method: 'POST',
-        //   headers: { 'Content-type': 'application/json' },
-        //   body: JSON.stringify({ productname: search })
-        // });
-        // if (response.status === 200) {
-        //   const ingredients = await response.json();
-        //   console.log(ingredients);
-        //   this.setState({ children: ingredients.ingredients });
-        //   console.log(this.state.children);
-        // } else {
-        //   console.log(`ERROR: ${response.status}`);
-        // }
       }
     } catch (error) {
       console.log(error);
