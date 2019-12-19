@@ -6,6 +6,6 @@ export default function Home() {
     <div className="Home">
       <RecipeList />
     </div>
-  )
+  );
 }
 

@@ -38,12 +38,14 @@ class Navbar extends React.Component {
 function mapStateToProps(store) {
   return {
     isLoggedIn: store.isLoggedIn,
+    userId: store.userId,
+    userName: store.userName
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    logoutFetch: () => dispatch(logoutFetchAC()),
+    logoutFetch: () => dispatch(logoutFetchAC())
   };
 }
 

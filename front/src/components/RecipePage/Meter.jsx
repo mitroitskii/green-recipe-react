@@ -8,7 +8,7 @@ export default class LabelledMeter extends Component {
     const { meterValue, meterType } = this.props;
 
     return (
-      <Grommet theme={grommet}>
+      // <Grommet theme={grommet}>
         <Box align="start" >
           <Stack anchor="center">
             <Meter
@@ -18,7 +18,7 @@ export default class LabelledMeter extends Component {
               size="xsmall"
               thickness="small"
             />
-            <Box direction="row" align="center" pad={{ bottom: 'small' }}>
+            <Box direction="column" align="center" pad={{ bottom: 'small' }}>
               <Text size="large" weight="bold">
                 {meterValue}
               </Text>
@@ -26,7 +26,7 @@ export default class LabelledMeter extends Component {
             </Box>
           </Stack>
         </Box>
-      </Grommet>
+      // </Grommet>
     );
   }
 }

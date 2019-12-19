@@ -12,11 +12,13 @@ import Login from '../Login/login';
 import Registration from '../Registration/registration';
 import RecipeForm from '../RecipeForm/RecipeForm';
 import RecipePage from '../RecipePage/RecipePage';
+import RecipeEdit from '../RecipeForm/RecipeEdit';
 
 import PrivateRoute from '../Routes/privateRoute';
 import HomeRoute from '../Routes/homeRoute';
 
 import Home from '../Home/homepage';
+import UserAccount from '../UserAccount';
 
 class App extends React.Component {
   async componentDidMount() {
@@ -47,7 +49,14 @@ class App extends React.Component {
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/registration" component={Registration} />
                 <Route exact path="/recipes/:id" component={RecipePage} />
-                <Route exact path="/" сomponent={Home} />
+                <Route exact path="/recipes/:id/edit" component={RecipeEdit} />
+                <PrivateRoute exact path="/users/:id" Component={UserAccount} />
+                <PrivateRoute exact path="/" Component={Home} />
+                <PrivateRoute
+                  exact
+                  path="/recipes/:id/edit"
+                  Component={RecipeForm}
+                />
               </Switch>
             </Box>
         </Grommet>
@@ -72,12 +81,13 @@ const AppBar = props => (
 function mapStateToProps(store) {
   return {
     isLoggedIn: store.isLoggedIn,
+    userId: store.userId
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    isLoggedFetch: () => dispatch(isLoggedFetchAC()),
+    isLoggedFetch: () => dispatch(isLoggedFetchAC())
   };
 }
 
