@@ -217,8 +217,9 @@ export default class RecipeEdit extends Component {
           placeholder="Введите название рецепта"
           value={name}
           onChange={event => {
+            const { value } = event.target
             this.setState(prevState => ({
-              name: event.target.value,
+              name: value,
               errors: { ...prevState.errors, name: '' }
             }));
           }}

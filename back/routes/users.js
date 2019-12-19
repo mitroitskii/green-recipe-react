@@ -58,7 +58,7 @@ router.route('/login').post(async (req, res) => {
         userId: req.session.userId,
         userName: req.session.username,
       });
-    } else {
+      } else {
       throw loginError;
     }
   } catch (error) {

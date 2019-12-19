@@ -79,7 +79,6 @@ export function* loginFetchAsyncAC(action) {
     const response = yield call(() =>
       fetch('http://localhost:5000/api/users/login', {
         method: 'POST',
-        credentials: 'include',
         headers: {
           'Content-Type': 'application/json'
         },
@@ -211,7 +210,7 @@ export function* parseFetchAsyncAC(action) {
       yield put(parseErrorAC(err));
     }
   } catch (error) {
-    yield put(parseErrorAC(error));
+    console.log(error);
   }
 }
 
