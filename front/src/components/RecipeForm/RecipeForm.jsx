@@ -10,6 +10,7 @@ import Slider from './Slider/Slider';
 import Instruction from './Instruction';
 import Submit from './Submit';
 import Uploader from '../Uploader/uploader'
+import './recipeForm.css'
 
 export default function RecipeForm(props) {
   const hrs = [

@@ -5,6 +5,7 @@ module.exports = function (app) {
   const session = require('express-session');
   const FileStore = require('session-file-store')(session);
   const { cookiesCleaner } = require('./auth');
+  const oneWeek = 7 * 24 * 3600 * 1000
 
   // const upload = multer({ dest: 'uploads/' });
 
@@ -37,7 +38,7 @@ module.exports = function (app) {
       resave: false,
       saveUninitialized: false,
       cookie: {
-        expires: 600000,
+        expires: new Date(Date.now() + oneWeek),
       },
     }),
   );
