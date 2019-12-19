@@ -115,10 +115,8 @@ class Slider extends React.Component {
               setPriceTotal={this.props.setPriceTotal}
               errors={this.props.errors}
               setError={this.props.setError}
-              // cardHeight={this.props.cardHeight}
-              // cardWidth={this.props.cardWidth}
-              cardHeight={this.state.cardHeight}
-              cardWidth={this.state.cardWidth}
+              cardHeight={this.props.cardHeight}
+              cardWidth={this.props.cardWidth}
               // setOpen={this.props.setOpen}
               // open={this.props.open}
             />
