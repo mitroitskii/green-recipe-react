@@ -17,40 +17,49 @@ class Navbar extends React.Component {
         <Box align="center" justify="center">
           <Anchor as={Link} to="/" label="Главная" />
         </Box>
-        {
-          this.props.isLoggedIn
-            ? (<Box direction="row" align="center" justify="center" >
-              <Anchor label="Выйти" as={Link} to="/login" onClick={this.logout.bind(this)} />
-            </Box>
-            )
-            : (
-              <Box direction='row' justify="center" align="center" gap="medium">
-                <Anchor label="Войти" as={Link} to="/login" />
-                <Anchor label="Регистрация" as={Link} to="/registration" />
-              </Box>
-            )
-        }
-
+        {this.props.isLoggedIn ? (
+          <Box direction="row" align="center" justify="center" gap="medium">
+            <Anchor
+              label="Мои рецепты"
+              as={Link}
+              to={`/users/${this.props.userId}`}
+            />
+            <Anchor label="Создать рецепт" as={Link} to="/recipes/new" />
+            <Anchor
+              label="Выйти"
+              as={Link}
+              to="/login"
+              onClick={this.logout.bind(this)}
+            />
+          </Box>
+        ) : (
+          <Box direction="row" justify="center" align="center" gap="medium">
+            <Anchor label="Войти" as={Link} to="/login" />
+            <Anchor label="Регистрация" as={Link} to="/registration" />
+          </Box>
+        )}
       </Header>
-    )
+    );
   }
 }
 function mapStateToProps(store) {
   return {
     isLoggedIn: store.isLoggedIn,
+    userId: store.userId,
+    userName: store.userName
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    logoutFetch: () => dispatch(logoutFetchAC()),
+    logoutFetch: () => dispatch(logoutFetchAC())
   };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Navbar);
 
 // const response = await fetch("http://localhost:5000/api/logout", {method: 'DELETE',
-                          // credentials: "include"})
+// credentials: "include"})
 // if (response.status === 200) {
 //   let result = await response.json()
 //   let isLoggedIn = result.isLoggedIn

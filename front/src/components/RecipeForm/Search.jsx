@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Box, TextInput, Button, Text } from 'grommet';
 
-export default function IngredientSearchForm(props) {
+export default function Search (props) {
   const { setSearch } = props;
   const [value, setValue] = useState('');
   return (
@@ -18,7 +18,6 @@ export default function IngredientSearchForm(props) {
             event.preventDefault();
             event.stopPropagation();
             setSearch(value);
-            // props.setOpen(!(props.open))
           }}
           onFocus={event => event.stopPropagation()}  
         >

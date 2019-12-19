@@ -12,11 +12,13 @@ import Login from '../Login/login';
 import Registration from '../Registration/registration';
 import RecipeForm from '../RecipeForm/RecipeForm';
 import RecipePage from '../RecipePage/RecipePage';
+import RecipeEdit from '../RecipeForm/RecipeEdit';
 
 import PrivateRoute from '../Routes/privateRoute';
 import HomeRoute from '../Routes/homeRoute';
 
 import Home from '../Home/homepage';
+import UserAccount from '../UserAccount';
 
 class App extends React.Component {
   async componentDidMount() {
@@ -37,17 +39,28 @@ class App extends React.Component {
     //   },
     // };
     return (
-      <Router >
-        <Grommet theme={hpe} >
-          <Box align="center" justify="center" align="center" width="100%">
+      <Router>
+        <Grommet theme={hpe}>
+          <Box flex align="center" justify="center">
             <Navbar />
             <Switch>
+              <Route exact path="/" render={() => <Home />} />
               <Route exact path="/recipes" component={Home} />
-              <Route exact path="/recipes/new" component={RecipeForm} />
+              <PrivateRoute exact path="/recipes/new" component={RecipeForm} />
               <Route exact path="/login" component={Login} />
               <Route exact path="/registration" component={Registration} />
               <Route exact path="/recipes/:id" component={RecipePage} />
-              <Route exact path="/" component={Home} />
+              <PrivateRoute
+                exact
+                path="/recipes/:id/edit"
+                component={RecipeEdit}
+              />
+              <PrivateRoute exact path="/users/:id" Component={UserAccount} />
+              <PrivateRoute
+                exact
+                path="/recipes/:id/edit"
+                component={RecipeEdit}
+              />
             </Switch>
           </Box>
         </Grommet>
@@ -56,28 +69,16 @@ class App extends React.Component {
   }
 }
 
-const AppBar = props => (
-  <Box
-    direction="column"
-    align="center"
-    justify="between"
-    background="brand"
-    pad={{ left: 'medium', right: 'small', vertical: 'small' }}
-    elevation="medium"
-    style={{ zIndex: '1' }}
-    {...props}
-  />
-);
-
 function mapStateToProps(store) {
   return {
     isLoggedIn: store.isLoggedIn,
+    userId: store.userId
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    isLoggedFetch: () => dispatch(isLoggedFetchAC()),
+    isLoggedFetch: () => dispatch(isLoggedFetchAC())
   };
 }
 
