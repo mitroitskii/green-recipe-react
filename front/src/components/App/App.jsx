@@ -18,6 +18,7 @@ import HomeRoute from '../Routes/homeRoute';
 
 import Home from '../Home/homepage';
 import UserAccount from '../UserAccount';
+import { deepFreeze } from "grommet/utils"
 
 class App extends React.Component {
   async componentDidMount() {
@@ -25,22 +26,34 @@ class App extends React.Component {
     this.props.isLoggedFetch();
   }
   render() {
-    // const theme = {
-    //   global: {
-    //     colors: {
-    //       brand: 'lightgreen',
-    //     },
-    //     font: {
-    //       family: 'Roboto',
-    //       size: '18px',
-    //       height: '20px',
-    //     },
-    //   },
-    // };
+  const customTheme = deepFreeze(
+  {
+  "global": {
+    "colors": {
+      "brand": "#33BB65",
+      "focus": "#FFDF82",
+      "selected": "#33BB65",
+      "accent-1": "#33BB65",
+      "accent-2": "#9FAFA1",
+      "accent-3": "#3C4A3E",
+      "accent-4": "#C8A84E",
+      "neutral-1": "#CDD468",
+      "neutral-2": "#9999CC",
+      "neutral-3": "#709A79"
+    }
+  },
+  "anchor": {
+    "color": {
+      "dark": "accent-3",
+      "light": "accent-3"
+    }
+  }
+}
+)
     return (
       <Router>
         {/* <Grommet > */}
-        <Grommet theme={hpe}>
+        <Grommet theme={customTheme}>
           <Box flex align="center" justify="center">
             <Navbar />
             <Switch>

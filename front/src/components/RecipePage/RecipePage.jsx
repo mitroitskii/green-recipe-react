@@ -15,7 +15,7 @@ import InstructionsList from "./Instructions";
 import IngredientsList from "./IngredientsList";
 import IngredientsListTable from "./IngredientsListTable";
 import LabelledMeter from "./Meter";
-import "./Ingredients.css";
+// import "./Ingredients.css";
 
 // const { RecipeExample } = require('./RecipeExample');
 
@@ -33,6 +33,8 @@ export default class RecipePage extends Component {
     minutes: "",
     portionCaption: "порции"
   };
+
+
 
   async componentDidMount() {
     const { id } = this.props.match.params;
@@ -111,8 +113,10 @@ export default class RecipePage extends Component {
       this.setState(() => ({ portionCaption: "порции" }));
     }
   }
+  
 
   render() {
+
     return (
       <Box elevation="medium" direction="column" width="80%" gap="medium">
         <Box
@@ -157,6 +161,7 @@ export default class RecipePage extends Component {
 
         <Box
           width="100%"
+          height="500px"
           elevation="medium"
           alignSelf="center"
           animation="fadeIn"
@@ -167,12 +172,13 @@ export default class RecipePage extends Component {
           // border-radius="48px"
         >
           <Image
-            height="100%"
-            width="100%"
-            elevation="medium"
-            fill={true}
-            src={this.state.image}
-          />
+            fit="cover"
+              height="100%"
+              width="100%"
+              elevation="medium"
+              fill={true}
+              src={this.state.image}
+            />
         </Box>
 
         <Box
