@@ -15,7 +15,7 @@ class Navbar extends React.Component {
       <Header width="80%" align="center" justify="center" gap="medium">
         {/* <Link to='/'>HOME</Link> */}
         <Box align="center" justify="center">
-          <Anchor as={Link} to="/" label="Домашняя страница" />
+          <Anchor as={Link} to="/" label="Главная" />
         </Box>
         {
           this.props.isLoggedIn

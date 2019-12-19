@@ -40,16 +40,14 @@ class App extends React.Component {
       <Router >
         <Grommet theme={hpe} >
             <Box align="center" justify="center" align="center" width="100%">
-            {/* <AppBar justify="evenly"> */}
               <Navbar />
-            {/* </AppBar> */}
               <Switch>
                 <Route exact path="/recipes" component={Home} />
                 <Route exact path="/recipes/new" component={RecipeForm} />
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/registration" component={Registration} />
                 <Route exact path="/recipes/:id" component={RecipePage} />
-                <PrivateRoute exact path="/" Component={Home} />
+                <Route exact path="/" сomponent={Home} />
               </Switch>
             </Box>
         </Grommet>
