@@ -16,16 +16,16 @@ export default class IngredientCard extends React.Component {
       errors,
       setError
     } = this.props;
-    const updatedIngredients = ingredients.concat([ingredient]);
     ingredient.priceTotal = ingredient.quantity * ingredient.price;
     ingredient.caloriesTotal = (ingredient.weight / 100) * ingredient.calories;
     ingredient.inputWeight = ingredient.weight;
+    const updatedIngredients = ingredients.concat([ingredient]);
     setIngredients(updatedIngredients);
     setCaloriesTotal(
-      ingredients.reduce((acc, ingr) => acc + ingr.caloriesTotal, 0),
+      updatedIngredients.reduce((acc, ingr) => acc + ingr.caloriesTotal, 0)
     );
     setPriceTotal(
-      ingredients.reduce((acc, ingr) => acc + ingr.priceTotal, 0),
+      updatedIngredients.reduce((acc, ingr) => acc + ingr.priceTotal, 0)
     );
     setError({ ...errors, ingredients: '' });
     setSearch('');

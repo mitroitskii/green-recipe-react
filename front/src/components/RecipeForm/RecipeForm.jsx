@@ -93,9 +93,9 @@ export default function RecipeForm(props) {
       setError(newErrors);
     } else {
       try {
-        let instructionsTrimmed = [];
+        let instructionsTrimmed = instructions;
         if (instructions[instructions.length - 1].text === '') {
-          instructionsTrimmed = instructions.splice(instructions.length - 1, 1);
+          instructionsTrimmed = instructions.slice(0, instructions.length - 1);
         }
         const response = await fetch('http://localhost:5000/api/recipes/', {
           method: 'POST',

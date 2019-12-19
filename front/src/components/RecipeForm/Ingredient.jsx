@@ -21,23 +21,21 @@ export default function Ingredient(props) {
             ingredients.map(ingr => {
               if (ingr.id === ingredient.id) {
                 ingr.inputWeight = value;
-                console.log(ingr.inputWeight);
                 ingr.quantity = Math.ceil(value / ingr.weight);
-                console.log(ingr.quantity);
                 ingr.priceTotal = ingr.quantity * ingr.price;
-                console.log(ingr.priceTotal);
                 ingr.caloriesTotal = (value / 100) * ingr.calories;
-                console.log(ingr.caloriesTotal);
               }
               return ingr;
             })
           );
-          setCaloriesTotal(
+          const newCalories = Math.round(
             ingredients.reduce((acc, ingr) => acc + ingr.caloriesTotal, 0)
           );
-          setPriceTotal(
+          setCaloriesTotal(newCalories);
+          const newPrice = Math.round(
             ingredients.reduce((acc, ingr) => acc + ingr.priceTotal, 0)
           );
+          setPriceTotal(newPrice);
         }}
       />
       <Text>гр.</Text>

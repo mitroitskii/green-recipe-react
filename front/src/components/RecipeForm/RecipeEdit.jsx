@@ -1,3 +1,4 @@
+import uuidv1 from 'uuid/v1';
 import React, { Component } from 'react';
 import { Box, TextInput, Select, Text } from 'grommet';
 import { NumberInput } from 'grommet-controls';
@@ -49,7 +50,7 @@ export default class RecipeEdit extends Component {
       instructions,
       image
     } = result.recipe;
-
+    const newInstructions = instructions.concat([{ id: uuidv1(), text: '' }]);
     this.setState(() => ({
       id: _id,
       name,
@@ -60,7 +61,7 @@ export default class RecipeEdit extends Component {
       priceTotal,
       caloriesTotal,
       ingredients,
-      instructions,
+      instructions: newInstructions,
       image
     }));
   }
@@ -117,9 +118,9 @@ export default class RecipeEdit extends Component {
           priceTotal,
           caloriesTotal
         } = this.state;
-        let instructionsTrimmed = [];
+        let instructionsTrimmed = instructions;
         if (instructions[instructions.length - 1].text === '') {
-          instructionsTrimmed = instructions.splice(instructions.length - 1, 1);
+          instructionsTrimmed = instructions.slice(0, instructions.length - 1);
         }
         const response = await fetch(
           `http://localhost:5000/api/recipes/${id}`,
@@ -382,7 +383,9 @@ export default class RecipeEdit extends Component {
           dropHeight="small"
           options={hrs}
           value={hours}
-          onChange={({ option }) => {this.setState({ hours: option })}}
+          onChange={({ option }) => {
+            this.setState({ hours: option });
+          }}
         />
         <Select
           id="minutes"
