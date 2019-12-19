@@ -13,6 +13,7 @@ import { NumberInput } from "grommet-controls";
 import React, { Component } from "react";
 import InstructionsList from "./Instructions";
 import IngredientsList from "./IngredientsList";
+import IngredientsListTable from "./IngredientsListTable";
 import LabelledMeter from "./Meter";
 import "./Ingredients.css";
 
@@ -29,7 +30,8 @@ export default class RecipePage extends Component {
     image: "",
     instructions: [],
     hours: "",
-    minutes: ""
+    minutes: "",
+    portionCaption: "порции"
   };
 
   async componentDidMount() {
@@ -59,8 +61,8 @@ export default class RecipePage extends Component {
       defaultPortions: portions,
       portions,
       ingredients,
-      priceTotal,
-      caloriesTotal,
+      priceTotal: Math.round(priceTotal),
+      caloriesTotal: Math.round(caloriesTotal),
       name,
       image,
       hours,
@@ -68,8 +70,6 @@ export default class RecipePage extends Component {
       authorName,
       category,
       author,
-      // image: 'http://localhost:5000/uploadssimple/e49d63ab434fb425c01e359bee93116e',
-      // image: 'http://localhost:5000/api/uploads/1576595592679weatherpics.jpg',
       instructions // {id,  text} id text
     }));
   }
@@ -99,117 +99,214 @@ export default class RecipePage extends Component {
 
   async setPortions(value) {
     await this.setState(() => ({ portions: value }));
-    // const ratio = this.state.portions / this.state.defaultPortions;
 
     this.setState(() => ({ caloriesTotal: this.countTotalCalories() }));
     this.setState(() => ({ priceTotal: this.countTotalPrice() }));
+
+    if (parseFloat(value) === 1) {
+      this.setState(() => ({ portionCaption: "порция" }));
+    } else if (parseFloat(value) > 4) {
+      this.setState(() => ({ portionCaption: "порций" }));
+    } else {
+      this.setState(() => ({ portionCaption: "порции" }));
+    }
   }
 
   render() {
     return (
-      <Grid
-        rows={["small", "flex", "xsmall", "small"]}
-        // columns={["3/5", "2/5"]}
-        columns={["flex", "flex"]}
-        areas={[
-          ["header", "header"],
-          ["photo", "ingredients"],
-          ["info", "sizeChooser"],
-          ["footer", "footer"]
-        ]}
-        gap="small"
-      >
+      <Box elevation="medium" direction="column" width="80%" gap="medium">
         <Box
-          elevation="medium"
           direction="column"
           animation="fadeIn"
-          background="brand"
-          gridArea="header"
+          // justify="center"
+          width="100%"
         >
-          <Heading level={2}>{this.state.name}</Heading>
-          <Heading level={3}>Автор: {this.state.authorName}</Heading>
+          <Anchor
+            className="testText"
+            margin={{
+              top: "small"
+            }}
+            alignSelf="center"
+            label={this.state.category}
+            href="/recipes"
+          />
+
+          <Heading
+            className="headerStyle"
+            margin={{
+              bottom: "small",
+              top: "medium"
+            }}
+            alignSelf="center"
+            level={1}
+          >
+            {this.state.name}
+          </Heading>
+
+          <Heading
+            className="author"
+            alignSelf="center"
+            margin={{
+              bottom: "none"
+            }}
+            level={4}
+          >
+            Автор: {this.state.authorName}
+          </Heading>
         </Box>
 
-        <Box elevation="medium" animation="fadeIn" gridArea="photo">
+        <Box
+          width="100%"
+          elevation="medium"
+          alignSelf="center"
+          animation="fadeIn"
+          // background={{
+          //   "image" : this.state.image
+          // }}
+          // round="large"
+          // border-radius="48px"
+        >
           <Image
             height="100%"
             width="100%"
             elevation="medium"
+            fill={true}
             src={this.state.image}
           />
         </Box>
 
-        <Box elevation="medium" animation="fadeIn" gridArea="ingredients">
-          <IngredientsList
-            defaultPortions={this.state.defaultPortions}
-            portions={this.state.portions}
-            ingredients={this.state.ingredients}
-          />
-        </Box>
-
         <Box
-          justify="around"
+          className="testText"
+          width="80%"
+          justify="between"
           animation="fadeIn"
+          alignSelf="center"
           direction="row"
-          gridArea="info"
-          elevation="medium"
         >
           <LabelledMeter
             infoRecipe
-            meterValue={this.state.caloriesTotal}
+            meterValue={parseFloat(this.state.caloriesTotal)}
             meterType={"Ккал"}
           />
-          <LabelledMeter
-            meterValue={this.state.priceTotal}
-            meterType={"Рублей"}
-          />
-          {/* <LabelledMeter meterValue={`${this.state.hours}:${this.state.minutes}`} meterType={'Минут'} /> */}
           <LabelledMeter
             meterValue={
               parseFloat(this.state.hours) * 60 + parseFloat(this.state.minutes)
             }
             meterType={"Минут"}
           />
+          <LabelledMeter
+            meterValue={parseFloat(this.state.priceTotal)}
+            meterType={"Рублей"}
+          />
         </Box>
         <Box
-          elevation="medium"
+          // elevation="medium"
+          width="100%"
           direction="row"
           animation="fadeIn"
-          gridArea="sizeChooser"
+          align="center"
+          justify="between"
         >
-          <div>
-            Выберите размер блюда
-            {/* <SizeChooser value={6} /> */}
+          <Box
+            className="testText"
+            direction="row"
+            // width="100%"
+            // align="center"
+            justify="start"
+            // elevation="medium"
+            margin={{
+              left: "large"
+              // top:"none"
+              // right: "large"
+            }}
+          >
+            <Heading
+              margin={{
+                left: "small",
+                top: "small",
+                bottom: "small"
+                // right: "large"
+              }}
+              level={3}
+            >
+              Ингредиенты:
+            </Heading>
+            {/* Ингредиенты */}
+          </Box>
+          <Box
+            margin={{
+              // left: "large"
+              right: "large"
+            }}
+            align="center"
+            justify="between"
+            direction="row"
+            height="100%"
+            justify="end"
+            width="200px"
+          >
             <NumberInput
+              className="testText"
               min={1}
               max={12}
               value={this.state.portions}
-              suffix="  порций"
-              onChange={({ target: { value } }) => this.setPortions(value)}
+              suffix={`  ${this.state.portionCaption}`}
+              onChange={({ target: { value } }) => {
+                this.setPortions(value);
+              }}
             />
-          </div>
-
-          <Paragraph>
-            Посмотрите другие блюда в категории{" "}
-            <Anchor label={this.state.category} href="/recipes" />
-          </Paragraph>
+          </Box>
+        </Box>
+        <Box
+          className="testText"
+          elevation="xsmall"
+          width="100"
+          animation="fadeIn"
+          margin={{
+            left: "large",
+            right: "large"
+          }}
+        >
+          {/* <IngredientsList */}
+          <IngredientsListTable
+            defaultPortions={parseFloat(this.state.defaultPortions)}
+            portions={parseFloat(this.state.portions)}
+            ingredients={this.state.ingredients}
+          />
         </Box>
 
         <Box
-          elevation="medium"
+          className="testText"
+          width="100"
           animation="fadeIn"
-          align="start"
-          gridArea="footer"
+          margin={{
+            left: "large",
+            right: "large"
+          }}
         >
-          <Heading level={3}>Инструкции:</Heading>
+          <Heading
+            // className="testText"
+            margin={{
+              // left: "large"
+              top: "small"
+              // bottom: "small"
+              // right: "large"
+            }}
+            level={3}
+          >
+            Инструкции:
+          </Heading>
 
-          {this.state.instructions.map((el, index) => (
-            <Text key={el.id}>
-              {index + 1}. {el.text}
-            </Text>
+          {this.state.instructions.map((ingredient, index) => (
+            <>
+              <Text className="testText" key={ingredient.id}>
+                {index + 1}. {ingredient.text}
+              </Text>
+              <br />
+            </>
           ))}
         </Box>
-      </Grid>
+      </Box>
     );
   }
 }

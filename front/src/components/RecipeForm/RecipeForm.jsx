@@ -65,7 +65,6 @@ export default function RecipeForm(props) {
     category: ''
   });
   const [portionsSuffix, setSuffix] = useState(' порция');
-
   const clickSubmit = async () => {
     // debugger;
     if (

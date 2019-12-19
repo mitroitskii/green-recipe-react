@@ -18,12 +18,14 @@ class Slider extends React.Component {
     };
   }
   async componentDidMount() {
+    console.log("MOUNTED");
     try {
       const cardWidth = '25vw';
       const cardHeight = '22vw';
       const search = this.props.search;
-      const data = { search, cardWidth, cardHeight };
-      this.props.parseFetch(data);
+      // const data = { search, cardWidth, cardHeight };
+      const data = { search };
+      await this.props.parseFetch(data);
       const ingredientQuantity = this.props.ingredientsParsed.length;
       if (ingredientQuantity >= 3) {
         this.setState({ numberOfCards: 3 });
@@ -47,7 +49,6 @@ class Slider extends React.Component {
   }
 
   async componentDidUpdate(prevProps) {
-    console.log("update");
     try {
       const cardWidth = '25vw';
       const cardHeight = '22vw';
@@ -114,8 +115,10 @@ class Slider extends React.Component {
               setPriceTotal={this.props.setPriceTotal}
               errors={this.props.errors}
               setError={this.props.setError}
-              cardHeight={this.props.cardHeight}
-              cardWidth={this.props.cardWidth}
+              // cardHeight={this.props.cardHeight}
+              // cardWidth={this.props.cardWidth}
+              cardHeight={this.state.cardHeight}
+              cardWidth={this.state.cardWidth}
               // setOpen={this.props.setOpen}
               // open={this.props.open}
             />

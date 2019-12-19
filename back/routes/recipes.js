@@ -82,6 +82,19 @@ router.get('/random', async (req, res) => {
   }
 });
 
+router
+  .route('/category/:category')
+  // получить все рецепты GET
+  .get(async (req, res) => {
+    console.log('Received Get category request');
+    try {
+      const recipes = await Recipe.find({ category: req.params.id });
+      return res.send(JSON.stringify({ message: 'ok', recipes }));
+    } catch (error) {
+      return res.send(JSON.stringify({ message: 'error', error }));
+    }
+  });
+
 // api/recipes/:id
 router
   .route('/:id')

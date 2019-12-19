@@ -195,6 +195,8 @@ export const parseErrorAC = err => ({
 });
 
 export function* parseFetchAsyncAC(action) {
+  console.log('Parse Func Called');
+
   try {
      console.log('parse');
     yield put(parseRequestAC());

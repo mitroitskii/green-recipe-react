@@ -32,8 +32,16 @@ async function parseSearchPageVV(productName) {
     );
 
     // console.log('products', products);
-    return products;
+    // if (products.length !== 0) {
+      
+      return products;
+    // } else {
+    //   res.status(400).json(products);
+    // }
+
+
   } catch (err) {
+    // res.status(400).json(err.message);
     return err;
   }
 }
@@ -148,7 +156,7 @@ async function parseProductPageVV(link) {
 
     result['kcal'] = parseFloat(result['kcal']);
     // result['inputWeight'] = result['weight'];
-    console.log('result', result);
+    // console.log('result', result);
 
     const newIngredient = new Ingredient(result);
 

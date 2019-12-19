@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 
 import { Grommet, Box, Meter, Stack, Text } from 'grommet';
 import { grommet } from 'grommet/themes';
+import './Ingredients.css';
+
 
 export default class LabelledMeter extends Component {
   render() {
@@ -9,7 +11,9 @@ export default class LabelledMeter extends Component {
 
     return (
       // <Grommet theme={grommet}>
-        <Box align="start" >
+      <Box
+        
+        align="start" >
           <Stack anchor="center">
             <Meter
               type="circle"
@@ -18,11 +22,16 @@ export default class LabelledMeter extends Component {
               size="xsmall"
               thickness="small"
             />
-            <Box direction="column" align="center" pad={{ bottom: 'small' }}>
-              <Text size="large" weight="bold">
+          <Box
+            
+            direction="column" align="center" pad={{ bottom: 'small' }}>
+            <Text
+              size="large" weight="bold">
                 {meterValue}
               </Text>
-              <Text size="small">{meterType}</Text>
+            <Text
+              className="testText"
+              size="small">{meterType}</Text>
             </Box>
           </Stack>
         </Box>

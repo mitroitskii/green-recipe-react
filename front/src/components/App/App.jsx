@@ -39,6 +39,7 @@ class App extends React.Component {
     // };
     return (
       <Router>
+        {/* <Grommet > */}
         <Grommet theme={hpe}>
           <Box flex align="center" justify="center">
             <Navbar />
@@ -59,9 +60,11 @@ class App extends React.Component {
                 exact
                 path="/recipes/:id/edit"
                 component={RecipeEdit}
+
               />
             </Switch>
           </Box>
+          {/* </Box> */}
         </Grommet>
       </Router>
     );
@@ -71,13 +74,13 @@ class App extends React.Component {
 function mapStateToProps(store) {
   return {
     isLoggedIn: store.isLoggedIn,
-    userId: store.userId
+    userId: store.userId,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    isLoggedFetch: () => dispatch(isLoggedFetchAC())
+    isLoggedFetch: () => dispatch(isLoggedFetchAC()),
   };
 }
 

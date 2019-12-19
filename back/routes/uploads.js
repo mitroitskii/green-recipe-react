@@ -19,7 +19,7 @@ const upload = multer({ storage });
 // const upload = multer({ dest: 'uploadssimple/' });
 
 router.post('/', upload.single('file'), (req, res) => {
-  //   console.log('Received file to upload request');
+    console.log('Received file to upload request');
 
   //   const host = req.hostname;
   //   console.log('host', host);
@@ -28,7 +28,7 @@ router.post('/', upload.single('file'), (req, res) => {
   //   console.log('filePath', filePath);
   //   const file = req.file;
   //   res.send(file);
-  console.log('req.file', req.file),
+  // console.log('req.file', req.file),
   //   console.log(req.file.path);
 
   // res.send(JSON.stringify({ req }));
