@@ -61,7 +61,7 @@ class Slider extends React.Component {
         this.props.ingredientsParsed.length !==
         prevProps.ingredientsParsed.length
       ) {
-        let ingredientQuantity = this.props.ingredientsParsed.length;
+        const ingredientQuantity = this.props.ingredientsParsed.length;
         if (ingredientQuantity >= 3) {
           this.setState({ numberOfCards: 3 });
         } else {
