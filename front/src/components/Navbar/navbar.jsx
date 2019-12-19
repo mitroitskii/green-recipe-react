@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import './navbar.css'
+import './navbar.css';
 import { Box, Anchor, Header } from 'grommet';
 import { logoutFetchAC } from '../../redux/actions/actions';
 
@@ -14,33 +14,37 @@ class Navbar extends React.Component {
 
   render() {
     return (
-      <Header width="80%" align="center" justify="center" gap="medium">
-        {/* <Link to='/'>HOME</Link> */}
-        <Box align="center" justify="center">
-          <Anchor as={Link} to="/" label="Главная" />
-        </Box>
-        {this.props.isLoggedIn ? (
-          <Box direction="row" align="center" justify="center" gap="medium">
-            <Anchor
-              label="Мои рецепты"
-              as={Link}
-              to={`/users/${this.props.userId}`}
-            />
-            <Anchor label="Создать рецепт" as={Link} to="/recipes/new" />
-            <Anchor
-              label="Выйти"
-              as={Link}
-              to="/login"
-              onClick={this.logout.bind(this)}
-            />
+      <Box width="100%" justify="center" align="center" pad="medium" background={{"color":"brand"}}>
+        <Box align="center" justify="center" background={{"image":"url(//my.com/assets/img.png)"}}></Box>
+        <Header width="80%" align="center" justify="center" gap="medium">
+          {/* <Link to='/'>HOME</Link> */}
+          <Box align="center" justify="center">
+            <Anchor as={Link} to="/" label="Главная" />
           </Box>
-        ) : (
-          <Box direction="row" justify="center" align="center" gap="medium">
-            <Anchor label="Войти" as={Link} to="/login" />
-            <Anchor label="Регистрация" as={Link} to="/registration" />
-          </Box>
-        )}
+          {this.props.isLoggedIn ? (
+            <Box direction="row" align="center" justify="center" gap="medium">
+              <Anchor label="Создать рецепт" as={Link} to="/recipes/new" />
+              <Anchor
+                label="Мои рецепты"
+                as={Link}
+                to={`/users/${this.props.userId}`}
+              />
+              <Anchor
+                label="Выйти"
+                as={Link}
+                to="/login"
+                onClick={this.logout.bind(this)}
+                alignSelf="end"
+              />
+            </Box>
+          ) : (
+            <Box direction="row" justify="center" align="center" gap="medium">
+              <Anchor label="Войти" as={Link} to="/login" />
+              <Anchor label="Регистрация" as={Link} to="/registration" />
+            </Box>
+          )}
       </Header>
+      </Box>
     );
   }
 }
@@ -48,13 +52,13 @@ function mapStateToProps(store) {
   return {
     isLoggedIn: store.isLoggedIn,
     userId: store.userId,
-    userName: store.userName
+    userName: store.userName,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    logoutFetch: () => dispatch(logoutFetchAC())
+    logoutFetch: () => dispatch(logoutFetchAC()),
   };
 }
 

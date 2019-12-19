@@ -118,7 +118,13 @@ export default class RecipePage extends Component {
   render() {
 
     return (
-      <Box elevation="medium" direction="column" width="80%" gap="medium">
+      <Box
+        elevation="medium"
+        direction="column"
+        width="80%"
+        gap="medium"
+        background={{ color: "white" }}
+      >
         <Box
           direction="column"
           animation="fadeIn"
@@ -173,12 +179,12 @@ export default class RecipePage extends Component {
         >
           <Image
             fit="cover"
-              height="100%"
-              width="100%"
-              elevation="medium"
-              fill={true}
-              src={this.state.image}
-            />
+            height="100%"
+            width="100%"
+            elevation="medium"
+            fill={true}
+            src={this.state.image}
+          />
         </Box>
 
         <Box

@@ -32,18 +32,20 @@ class Login extends React.Component {
   render() {
     return (
       <Box
-        width="30%"
+        width="40%"
         margin="large"
         pad="large"
         border={{ color: 'border' }}
-        background="light-1"
+        elevation="medium"
+        background={{"color":"white"}}
       >
         <Heading
           level="2"
           margin={{
             top: 'none',
-            bottom: 'small',
+            bottom: 'medium',
           }}
+          alignSelf="center"
         >Вход</Heading>
 
         <Form

@@ -34,8 +34,22 @@ class Registration extends React.Component {
 
   render() {
     return (
-      <Box width="30%" margin="large" pad="large" border={{"color":"border"}} background="light-1" >
-        <Heading level="2">Регистрация</Heading>
+      <Box
+        width="40%"
+        margin="large"
+        pad="large"
+        border={{ "color": "border" }}
+        elevation="medium"
+        background={{ "color": "white" }}
+      >
+        <Heading level="2"
+          margin={{
+            top: 'none',
+            bottom: 'medium',
+          }}
+          alignSelf="center"
+        >
+          Регистрация</Heading>
         <Form
           basis='medium'
           focusFirstChild={false}
