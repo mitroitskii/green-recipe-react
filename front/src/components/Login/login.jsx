@@ -3,17 +3,18 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { loginFetchAC, clearStatusAC } from '../../redux/actions/actions';
-import Preloader from "../Preloader/preloader"
-import { Box, Text, Button,Heading } from 'grommet';
+import Preloader from '../Preloader/preloader';
+import { Box, Text, Button, Heading } from 'grommet';
 import { TextInputField, Form, PasswordInputField, validators } from 'grommet-controls';
+
 class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       username: '',
-      password: ''
+      password: '',
     };
-  
+
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -30,56 +31,61 @@ class Login extends React.Component {
 
   render() {
     return (
-      <Box 
-      width="30%" 
-      margin="large" 
-      pad="large" 
-      border={{ "color": "border" }} 
-      background="light-1" 
+      <Box
+        width="30%"
+        margin="large"
+        pad="large"
+        border={{ color: 'border' }}
+        background="light-1"
       >
-      <Heading level="2" 
-      // margin={{
-      //   "top":"none",
-      //   "bottom":"small"
-      //   }} >Вход</Heading>
+        <Heading
+          level="2"
+          margin={{
+            top: 'none',
+            bottom: 'small',
+          }}
+        >Вход</Heading>
+
         <Form
-          basis='medium'
+          basis="medium"
           focusFirstChild={false}
           {...this.props}
           onSubmit={this.handleSubmit}
         >
-          <TextInputField label='Имя' name='username' />
+          <TextInputField label="Имя" name="username" />
           <PasswordInputField
             label={(
-              <Box direction='row' align='center' justify='between'>Пароль</Box>
+              <Box direction="row" align="center" justify="between">Пароль</Box>
             )}
-            description='Password'
-            name='password'
+            description="Password"
+            name="password"
             validation={
               [
-              validators.required(), 
-              validators.minLength(5),
-              validators.alphaNumeric()
-            ]
+                validators.required(),
+              // validators.minLength(5),
+              // validators.alphaNumeric()
+              ]
             }
           />
-          <Box pad={{ vertical: 'medium' }} align='end'>
-            <Button hoverIndicator='background' 
-            primary={true} type='submit' 
-            // alignSelf="center" 
-            label='Войти' 
+          <Box pad={{ vertical: 'medium' }} align="end">
+            <Button
+              hoverIndicator="background"
+              primary type="submit"
+              // alignSelf="center"
+              label="Войти"
             />
           </Box>
-          <Box direction='row' 
-          alignSelf='center' 
-          gap='small' 
-          align='center'>
-          </Box>
+          <Box
+            direction="row"
+            alignSelf="center"
+            gap="small"
+            align="center"
+          />
         </Form>
         <Box>
           {
             this.props.loadingFetch
-              ? <Preloader/>
+              ? <Preloader />
               : this.props.isLoggedIn ? (
                 <Redirect to="/" />)
                 : <Text>{this.props.logRegstatusError}</Text>
@@ -94,7 +100,7 @@ function mapStateToProps(store) {
   return {
     isLoggedIn: store.isLoggedIn,
     loadingFetch: store.loadingFetch,
-    logRegstatusError: store.logRegstatusError
+    logRegstatusError: store.logRegstatusError,
   };
 }
 
@@ -102,7 +108,7 @@ function mapStateToProps(store) {
 function mapDispatchToProps(dispatch) {
   return {
     loginFetch: data => dispatch(loginFetchAC(data)),
-    clearStatus: () => dispatch(clearStatusAC())
+    clearStatus: () => dispatch(clearStatusAC()),
   };
 }
 
@@ -146,13 +152,12 @@ export default connect(mapStateToProps, mapDispatchToProps)(Login);
 //   </form>
 //   <div>
 //     {
-//     this.props.loadingFetch 
-//     ? (<span className={'statustext'}>loading</span>) 
+//     this.props.loadingFetch
+//     ? (<span className={'statustext'}>loading</span>)
 //     : this.props.isLoggedIn ? (
-//       <Redirect to="/" />) 
+//       <Redirect to="/" />)
 //       : (<span className={'statustext'}>{this.props.logRegstatusError}</span>)
 //       }
 //   </div>
 // </div>
-
 
