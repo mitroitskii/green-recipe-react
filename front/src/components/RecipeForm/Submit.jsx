@@ -23,7 +23,7 @@ export default function Submit(props) {
           round="large"
         >
           <Text size="small" color="white">
-            Создать новый рецепт
+            {props.name}
           </Text>
         </Box>
       </Button>

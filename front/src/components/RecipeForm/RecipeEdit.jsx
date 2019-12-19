@@ -117,6 +117,10 @@ export default class RecipeEdit extends Component {
           priceTotal,
           caloriesTotal
         } = this.state;
+        let instructionsTrimmed = [];
+        if (instructions[instructions.length - 1].text === '') {
+          instructionsTrimmed = instructions.splice(instructions.length - 1, 1);
+        }
         const response = await fetch(
           `http://localhost:5000/api/recipes/${id}`,
           {
@@ -129,7 +133,7 @@ export default class RecipeEdit extends Component {
               image,
               portions,
               ingredients,
-              instructions,
+              instructions: instructionsTrimmed,
               category,
               priceTotal,
               caloriesTotal
@@ -217,7 +221,7 @@ export default class RecipeEdit extends Component {
           placeholder="Введите название рецепта"
           value={name}
           onChange={event => {
-            const { value } = event.target
+            const { value } = event.target;
             this.setState(prevState => ({
               name: value,
               errors: { ...prevState.errors, name: '' }
@@ -378,7 +382,7 @@ export default class RecipeEdit extends Component {
           dropHeight="small"
           options={hrs}
           value={hours}
-          onChange={({ option }) => this.setState({ hours: option })}
+          onChange={({ option }) => {this.setState({ hours: option })}}
         />
         <Select
           id="minutes"
@@ -402,7 +406,7 @@ export default class RecipeEdit extends Component {
             {errors.image}
           </Text>
         )}
-        <Submit clickSubmit={this.clickSubmit} />
+        <Submit name="Изменить рецепт" clickSubmit={this.clickSubmit} />
         {errors.server && (
           <Text size="medium" color="red">
             {errors.server}

@@ -93,6 +93,10 @@ export default function RecipeForm(props) {
       setError(newErrors);
     } else {
       try {
+        let instructionsTrimmed = [];
+        if (instructions[instructions.length - 1].text === '') {
+          instructionsTrimmed = instructions.splice(instructions.length - 1, 1);
+        }
         const response = await fetch('http://localhost:5000/api/recipes/', {
           method: 'POST',
           headers: { 'Content-type': 'application/json' },
@@ -103,7 +107,7 @@ export default function RecipeForm(props) {
             image,
             portions,
             ingredients,
-            instructions,
+            instructions: instructionsTrimmed,
             category,
             priceTotal,
             caloriesTotal
@@ -245,7 +249,7 @@ export default function RecipeForm(props) {
           {errors.image}
         </Text>
       )}
-      <Submit clickSubmit={clickSubmit} />
+      <Submit name="Создать новый рецепт" clickSubmit={clickSubmit} />
       {errors.server && (
         <Text size="medium" color="red">
           {errors.server}

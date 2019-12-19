@@ -36,7 +36,7 @@ export const isLoggedGotResponseAC = result => ({
 
 export const isLoggedErrorAC = error => ({
   type: IS_LOGGED_ERROR,
-  logRegstatusError: error.message
+  logRegstatusError: error.message,
 });
 
 export function* isLoggedFetchAsyncAC(action) {
@@ -79,6 +79,7 @@ export function* loginFetchAsyncAC(action) {
     const response = yield call(() =>
       fetch('http://localhost:5000/api/users/login', {
         method: 'POST',
+        credentials: 'include',
         headers: {
           'Content-Type': 'application/json'
         },
@@ -188,9 +189,9 @@ export const parseGotResponseAC = result => ({
   ingredientsParsed: result.ingredients
 });
 
-export const parseErrorAC = error => ({
+export const parseErrorAC = err => ({
   type: PARSE_ERROR,
-  parseError: error.message
+  parseError: err,
 });
 
 export function* parseFetchAsyncAC(action) {
@@ -206,7 +207,7 @@ export function* parseFetchAsyncAC(action) {
       yield put(parseGotResponseAC(result));
       yield put(setCardDimensionsAC(action.data));
     } else if (response.status === 204) {
-      const err = true;
+      let err = true;
       yield put(parseErrorAC(err));
     }
   } catch (error) {
