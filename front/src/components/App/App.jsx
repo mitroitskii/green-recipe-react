@@ -40,29 +40,30 @@ class App extends React.Component {
     // };
     return (
       <Router>
+        {/* <Grommet > */}
         <Grommet theme={hpe}>
-          <Box fill>
-            <AppBar>
-              <Navbar />
-            </AppBar>
-            <Box direction="row" flex overflow={{ horizontal: 'hidden' }} />
-            <Box flex align="center" justify="center">
-              <Switch>
-                <Route exact path="/recipes" component={Home} />
-                <Route exact path="/recipes/new" component={RecipeForm} />
-                <Route exact path="/login" component={Login} />
-                <Route exact path="/registration" component={Registration} />
-                <Route exact path="/recipes/:id" component={RecipePage} />
-                <PrivateRoute exact path="/users/:id" Component={UserAccount} />
-                <PrivateRoute exact path="/" Component={Home} />
-                <PrivateRoute
-                  exact
-                  path="/recipes/:id/edit"
-                  Component={RecipeForm}
-                />
-              </Switch>
-            </Box>
+          {/* <Box fill> */}
+          <AppBar>
+            <Navbar />
+          </AppBar>
+          {/* <Box direction="row" flex overflow={{ horizontal: 'hidden' }} /> */}
+          <Box flex align="center" justify="center" >
+            <Switch>
+              <Route exact path="/recipes" component={Home} />
+              <Route exact path="/recipes/new" component={RecipeForm} />
+              <Route exact path="/login" component={Login} />
+              <Route exact path="/registration" component={Registration} />
+              <Route exact path="/recipes/:id" component={RecipePage} />
+              <PrivateRoute exact path="/users/:id" Component={UserAccount} />
+              <PrivateRoute exact path="/" Component={Home} />
+              <PrivateRoute
+                exact
+                path="/recipes/:id/edit"
+                Component={RecipeForm}
+              />
+            </Switch>
           </Box>
+          {/* </Box> */}
         </Grommet>
       </Router>
     );
@@ -91,7 +92,7 @@ function mapStateToProps(store) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    isLoggedFetch: () => dispatch(isLoggedFetchAC())
+    isLoggedFetch: () => dispatch(isLoggedFetchAC()),
   };
 }
 
