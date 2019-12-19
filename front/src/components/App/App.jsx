@@ -41,7 +41,7 @@ class App extends React.Component {
     return (
       <Router>
         <Grommet theme={hpe}>
-          <Box align="center" justify="center" align="center" width="100%">
+          <Box flex align="center" justify="center">
             <Navbar />
             <Switch>
               <Route exact path="/" render={() => <Home />} />
