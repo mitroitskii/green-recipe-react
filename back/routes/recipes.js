@@ -109,22 +109,30 @@ router
     try {
       const {
         name,
+        hours,
+        minutes,
         image,
+        portions,
+        ingredients,
         instructions,
+        category,
         priceTotal,
         caloriesTotal,
-        ingredients,
       } = req.body;
       await Recipe.updateOne(
         { _id: req.params.id },
         {
           $set: {
             name,
+            hours,
+            minutes,
             image,
+            portions,
+            ingredients,
             instructions,
+            category,
             priceTotal,
             caloriesTotal,
-            ingredients,
           },
         },
       );

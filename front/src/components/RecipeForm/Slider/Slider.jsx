@@ -14,7 +14,7 @@ class Slider extends React.Component {
     super(props);
     this.state = {
       numberOfCards: 1,
-      activeItemIndex: 0
+      activeItemIndex: 0,
     };
   }
   async componentDidMount() {
@@ -94,7 +94,7 @@ class Slider extends React.Component {
         style={{
           padding: '0 0',
           maxWidth: `${this.props.cardWidth * this.state.numberOfCards}px`,
-          margin: '0 auto'
+          margin: '0 auto',
         }}
       >
         <ItemsCarousel
@@ -116,7 +116,7 @@ class Slider extends React.Component {
           rightChevron={<Button icon={<CaretNext size="medium" />} />}
           leftChevron={<Button icon={<CaretPrevious size="medium" />} />}
         >
-          {this.props.ingredientsParsed.map(ingredient => (
+          {this.props.ingredientsParsed && this.props.ingredientsParsed.map(ingredient => (
             <IngredientCard
               key={ingredient.id}
               setSearch={this.props.setSearch}
@@ -145,13 +145,13 @@ function mapStateToProps(store) {
     ingredientsParsed: store.ingredientsParsed,
     cardWidth: store.cardWidth,
     cardHeight: store.cardHeight,
-    parseError: store.parseError
+    parseError: store.parseError,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    parseFetch: data => dispatch(parseFetchAC(data))
+    parseFetch: data => dispatch(parseFetchAC(data)),
   };
 }
 

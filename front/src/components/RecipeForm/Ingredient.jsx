@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, TextInput, Button } from 'grommet';
+import { Box, TextInput, Button, Text } from 'grommet';
 import { FormClose } from 'grommet-icons';
 
 export default function Ingredient(props) {
@@ -40,6 +40,7 @@ export default function Ingredient(props) {
           );
         }}
       />
+      <Text>гр.</Text>
       <span>
         - {ingredient.price} {ingredient.currency} x {ingredient.quantity} :{' '}
         {ingredient.priceTotal} рублей

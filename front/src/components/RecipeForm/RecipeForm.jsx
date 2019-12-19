@@ -9,7 +9,7 @@ import Search from './Search';
 import Slider from './Slider/Slider';
 import Instruction from './Instruction';
 import Submit from './Submit';
-import Uploader from '../Uploader/uploader'
+import Uploader from '../Uploader/uploader';
 
 const hrs = [
   '0',
@@ -63,11 +63,6 @@ export default function RecipeForm(props) {
     instructions: '',
     category: ''
   });
-  
-  if (props.recipe) {
-    const { name, hours, minutes, portions, portions, priceTotal, caloriesTotal } = props.recipe;
-
-  }
 
   const clickSubmit = async () => {
     // debugger;
@@ -98,6 +93,10 @@ export default function RecipeForm(props) {
       setError(newErrors);
     } else {
       try {
+        let instructionsTrimmed = [];
+        if (instructions[instructions.length - 1].text === '') {
+          instructionsTrimmed = instructions.splice(instructions.length - 1, 1);
+        }
         const response = await fetch('http://localhost:5000/api/recipes/', {
           method: 'POST',
           headers: { 'Content-type': 'application/json' },
@@ -108,7 +107,7 @@ export default function RecipeForm(props) {
             image,
             portions,
             ingredients,
-            instructions,
+            instructions: instructionsTrimmed,
             category,
             priceTotal,
             caloriesTotal
@@ -245,7 +244,12 @@ export default function RecipeForm(props) {
         onChange={({ option }) => setMinutes(option)}
       />
       <Uploader setImage={setImage} />
-      <Submit clickSubmit={clickSubmit} />
+      {errors.image && (
+        <Text size="medium" color="red">
+          {errors.image}
+        </Text>
+      )}
+      <Submit name="Создать новый рецепт" clickSubmit={clickSubmit} />
       {errors.server && (
         <Text size="medium" color="red">
           {errors.server}

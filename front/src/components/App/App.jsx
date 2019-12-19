@@ -12,6 +12,7 @@ import Login from '../Login/login';
 import Registration from '../Registration/registration';
 import RecipeForm from '../RecipeForm/RecipeForm';
 import RecipePage from '../RecipePage/RecipePage';
+import RecipeEdit from '../RecipeForm/RecipeEdit';
 
 import PrivateRoute from '../Routes/privateRoute';
 import HomeRoute from '../Routes/homeRoute';
@@ -24,7 +25,6 @@ class App extends React.Component {
     // проверка авторизации
     this.props.isLoggedFetch();
   }
-
   render() {
     // const theme = {
     //   global: {
@@ -41,46 +41,33 @@ class App extends React.Component {
     return (
       <Router>
         <Grommet theme={hpe}>
-          <Box fill>
-            <AppBar>
-              <Navbar />
-            </AppBar>
-            <Box direction="row" flex overflow={{ horizontal: 'hidden' }} />
-            <Box flex align="center" justify="center">
-              <Switch>
-                <Route exact path="/recipes" component={Home} />
-                <Route exact path="/recipes/new" component={RecipeForm} />
-                <Route exact path="/login" component={Login} />
-                <Route exact path="/registration" component={Registration} />
-                <Route exact path="/recipes/:id" component={RecipePage} />
-                <PrivateRoute exact path="/users/:id" Component={UserAccount} />
-                <PrivateRoute exact path="/" Component={Home} />
-                <PrivateRoute
-                  exact
-                  path="/recipes/:id/edit"
-                  Component={RecipeForm}
-                />
-              </Switch>
-            </Box>
+          <Box align="center" justify="center" align="center" width="100%">
+            <Navbar />
+            <Switch>
+              <Route exact path="/" render={() => <Home />} />
+              <Route exact path="/recipes" component={Home} />
+              <PrivateRoute exact path="/recipes/new" Component={RecipeForm} />
+              <Route exact path="/login" component={Login} />
+              <Route exact path="/registration" component={Registration} />
+              <Route exact path="/recipes/:id" component={RecipePage} />
+              <PrivateRoute
+                exact
+                path="/recipes/:id/edit"
+                Component={RecipeEdit}
+              />
+              <PrivateRoute exact path="/users/:id" Component={UserAccount} />
+              <PrivateRoute
+                exact
+                path="/recipes/:id/edit"
+                Component={RecipeEdit}
+              />
+            </Switch>
           </Box>
         </Grommet>
       </Router>
     );
   }
 }
-
-const AppBar = props => (
-  <Box
-    direction="column"
-    align="center"
-    justify="between"
-    background="brand"
-    pad={{ left: 'medium', right: 'small', vertical: 'small' }}
-    elevation="medium"
-    style={{ zIndex: '1' }}
-    {...props}
-  />
-);
 
 function mapStateToProps(store) {
   return {

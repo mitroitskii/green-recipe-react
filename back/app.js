@@ -16,6 +16,7 @@ const mongoose = require('mongoose');
 
 mongoose.connect(
   'mongodb+srv://test:test@cluster0-anezw.mongodb.net/green-recipe?retryWrites=true&w=majority',
+  // 'mongodb://localhost:27017/GreenRecipeProject',
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -39,7 +40,7 @@ app.use((err, req, res) => {
   res.locals.error = req.app.get('env') === 'development' ? err : {};
   // render the error page
   res.status(err.status || 500);
-  res.send('error');
+  res.send(err);
 });
 
 module.exports = app;
