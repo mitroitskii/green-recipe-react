@@ -7,6 +7,7 @@ import { loginFetchAC, clearStatusAC } from '../../redux/actions/actions';
 // import { Box, Text, Button } from 'grommet';
 // import { TextInputField, Form, PasswordInputField, EmailInputField, CheckBoxField, validators } from 'grommet-controls';
 
+import FormFieldLabel from '../FormFieldwithRequiredLabel/formFieldWithRequiredLabel'
 
 class Login extends React.Component {
   constructor(props) {

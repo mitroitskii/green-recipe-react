@@ -189,41 +189,44 @@ export const parseGotResponseAC = result => ({
   ingredientsParsed: result.ingredients
 });
 
-export const parseErrorAC = error => ({
-  type: PARSE_ERROR,
-  parseError: error.message
-});
+export const parseErrorAC = (err) => {
+  return { type: PARSE_ERROR, parseError: err, }
+};
 
 export function* parseFetchAsyncAC(action) {
   try {
     yield put(parseRequestAC());
     const response = yield fetch('http://localhost:5000/api/parses/', {
-      method: 'POST',
-      headers: { 'Content-type': 'application/json' },
-      body: JSON.stringify({ productname: action.data.search })
-    });
-    if (response.status === 200) {
-      const result = yield call(() => response.json());
-      yield put(parseGotResponseAC(result));
-      yield put(setCardDimensionsAC(action.data));
-    } else if (response.status === 204) {
-      const err = true;
-      yield put(parseErrorAC(err));
+        method: 'POST',
+        headers: { 'Content-type': 'application/json' },
+        body: JSON.stringify({ productname: action.data.search })
+      });
+      if (response.status === 200) {
+        const result = yield call(() => response.json());
+        yield put(parseGotResponseAC(result));
+        yield put(setCardDimensionsAC(action.data))
+      } else if (response.status === 204) {
+        let err = true
+        yield put(parseErrorAC(err))
+      }
+    } catch (error) {
+      console.log(error);
     }
-  } catch (error) {
-    console.log(error);
-  }
 }
 
-export const parseFetchAC = data => ({ type: FETCHED_PARSE, data });
+export const parseFetchAC = (data) => {
+  return { type: FETCHED_PARSE, data }
+};
 
-// //////////////////////setCardDimensions///////////////////
+////////////////////////setCardDimensions///////////////////
 
-export const setCardDimensionsAC = data => ({
-  type: SET_CARD_DIMENSIONS,
-  cardHeight: data.cardHeight,
-  cardWidth: data.cardWidth
-});
+export const setCardDimensionsAC = (data) => {
+  return {
+    type: SET_CARD_DIMENSIONS,
+    cardHeight: data.cardHeight,
+    cardWidth: data.cardWidth,
+  }
+};
 
 // ///////////////////WatchFetches//////////////////////////
 
