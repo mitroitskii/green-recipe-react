@@ -1,45 +1,37 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Box, Image, Text, Grid } from 'grommet';
+import { Box, Image, Text, DropButton, Menu } from 'grommet';
 
 const RecipeItem = (item) => {
-  const { name, image, _id, ingredients, priceTotal, caloriesTotal, category, authorName, hours = "00", minutes = "00" } = item;
-  // вернуть инструкции по желанию
+  const { name, image, _id, ingredients, priceTotal, caloriesTotal, category, authorName, hours, minutes } = item;
+  const ingredientsList = () => (<Box margin='xsmall'>{ingredients.map(item => (<a key={item.id} style={{ "textDecoration": "none" }} href={item.link} target='_blank'> <Text> {item.name}</Text> </a>))} </Box>)
   return (
-    <Link style={{ "textDecoration": "none" }} to={'/recipes/' + _id}>
-      <Grid
-        margin='medium'
-        rows={['fit', 'small']}
-        columns={['small', 'medium']}
-        gap="small"
-        areas={[
-          { name: 'header', start: [0, 0], end: [1, 0] },
-          { name: 'img', start: [0, 1], end: [0, 1] },
-          { name: 'text', start: [1, 1], end: [1, 1] },
-        ]}
-      >
-        <Box gridArea='header' background='neutral-1' round='xsmall'>
-          <Text margin='xsmall'>{name}</Text>
-        </Box>
-        <Box gridArea='img'>
+    <Box direction='column' margin='small' width='large'>
+      <Box background='status-ok'>
+        <Link style={{ "textDecoration": "none" }} to={'/recipes/' + _id}> <Text margin='xsmall'>  {name}  </Text> </Link>
+      </Box>
+      <Box direction="row">
+        <Box height='small' width='small' margin='xsmall' >
           <Image src={image}
             alt={name}
             fit='contain'
-            alignSelf='start'
           />
         </Box>
-        <Box gridArea='text' background='ligth-2'>
-          <Text>Количество ингредиентов: {ingredients.length}</Text>
+        <Box margin='xsmall' alignSelf='center'>
+          <DropButton
+            label={'Ингредиенты - ' + ingredients.length}
+            dropAlign={{ top: 'bottom', left: 'left' }}
+            dropContent={ingredientsList()}
+          />
           <Text>Стоимость рецепта: {priceTotal} руб. </Text>
           <Text>Калорийность: {caloriesTotal} ккал </Text>
           <Text>Категория: {category}</Text>
           <Text>Автор: {authorName}</Text>
-          <Text>Время приготовления: {hours}:{minutes} </Text>
+          <Text>Время приготовления: {(hours === '1') ? `${hours} час` : ((hours > 0) && (hours < 5)) ? `${hours} часа` : `${hours} часов`} {(minutes != '0') && `${minutes} минут`} </Text>
         </Box>
-      </Grid>
-    </Link>
+      </Box>
+    </Box>
   );
 };
-
 
 export default RecipeItem;

@@ -29,7 +29,7 @@ export default class Instruction extends React.Component {
           onChange={({ target: { value } }) => {
             setError({ ...errors, instructions: '' });
             if (
-              value.length > 5 &&
+              value.length > 3 &&
               instructions[instructions.length - 1].id != this.state.newID
             ) {
               const newInstructions = instructions.map(instr => {
@@ -38,7 +38,9 @@ export default class Instruction extends React.Component {
                 }
                 return instr;
               });
-              newInstructions.push({ id: this.state.newID, text: '' });
+              if (newInstructions[newInstructions.length - 1].text !== '') {
+                newInstructions.push({ id: this.state.newID, text: '' });
+              }
               setInstructions(newInstructions);
               console.log(this.state.newID);
             } else {

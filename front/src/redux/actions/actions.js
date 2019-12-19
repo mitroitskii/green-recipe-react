@@ -21,7 +21,7 @@ import {
   PARSE_GOT_RESPONSE,
   PARSE_ERROR,
   FETCHED_PARSE,
-  SET_CARD_DIMENSIONS,
+  SET_CARD_DIMENSIONS
 } from '../types/types';
 
 // ///////////////////isLoggedChecking//////////////////////
@@ -31,7 +31,7 @@ export const isLoggedGotResponseAC = result => ({
   type: IS_LOGGED_GOT_RESPONSE,
   isLoggedIn: result.isLoggedIn,
   userId: result.userId,
-  userName: result.userName,
+  userName: result.userName
 });
 
 export const isLoggedErrorAC = error => ({
@@ -43,7 +43,7 @@ export function* isLoggedFetchAsyncAC(action) {
   try {
     yield put(isLoggedRequestAC());
     const response = yield fetch('http://localhost:5000/api/users/isLogged', {
-      credentials: 'include',
+      credentials: 'include'
     });
     const result = yield call(() => response.json());
     if (response.status === 200) {
@@ -65,12 +65,12 @@ export const loginGotResponseAC = result => ({
   type: LOGIN_GOT_RESPONSE,
   isLoggedIn: result.isLoggedIn,
   userId: result.userId,
-  userName: result.userName,
+  userName: result.userName
 });
 
 export const loginErrorAC = err => ({
   type: LOGIN_ERROR,
-  logRegstatusError: err,
+  logRegstatusError: err
 });
 
 export function* loginFetchAsyncAC(action) {
@@ -81,13 +81,13 @@ export function* loginFetchAsyncAC(action) {
         method: 'POST',
         credentials: 'include',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify({
           username: action.data.username,
-          password: action.data.password,
-        }),
-      }),
+          password: action.data.password
+        })
+      })
     );
     if (response.status === 200) {
       const result = yield call(() => response.json());
@@ -109,12 +109,12 @@ export const registerRequestAC = () => ({ type: REGISTER_REQUEST });
 
 export const registerGotResponseAC = result => ({
   type: REGISTER_GOT_RESPONSE,
-  registrationStatus: result.registrationStatus,
+  registrationStatus: result.registrationStatus
 });
 
 export const registerErrorAC = err => ({
   type: REGISTER_ERROR,
-  logRegstatusError: err,
+  logRegstatusError: err
 });
 
 export function* registerFetchAsyncAC(action) {
@@ -124,14 +124,14 @@ export function* registerFetchAsyncAC(action) {
       fetch('http://localhost:5000/api/users/registration', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify({
           username: action.data.username,
           password: action.data.password,
-          email: action.data.email,
-        }),
-      }),
+          email: action.data.email
+        })
+      })
     );
     if (response.status === 200) {
       const result = yield call(() => response.json());
@@ -152,12 +152,12 @@ export const logoutRequestAC = () => ({ type: LOGOUT_REQUEST });
 
 export const logoutGotResponseAC = result => ({
   type: LOGOUT_GOT_RESPONSE,
-  isLoggedIn: result.isLoggedIn,
+  isLoggedIn: result.isLoggedIn
 });
 
 export const logoutErrorAC = error => ({
   type: LOGOUT_ERROR,
-  logRegstatusError: error.message,
+  logRegstatusError: error.message
 });
 
 export function* logoutFetchAsyncAC(action) {
@@ -165,7 +165,7 @@ export function* logoutFetchAsyncAC(action) {
     yield put(logoutRequestAC());
     const response = yield fetch('http://localhost:5000/api/users/logout', {
       credentials: 'include',
-      method: 'DELETE',
+      method: 'DELETE'
     });
     const result = yield call(() => response.json());
     if (response.status === 200) {
@@ -186,33 +186,31 @@ export const parseRequestAC = () => ({ type: PARSE_REQUEST });
 
 export const parseGotResponseAC = result => ({
   type: PARSE_GOT_RESPONSE,
-  ingredientsParsed: result.ingredients,
+  ingredientsParsed: result.ingredients
 });
 
-export const parseErrorAC = error => ({
+export const parseErrorAC = err => ({
   type: PARSE_ERROR,
-  parseError: error.message,
+  parseError: err,
 });
 
 export function* parseFetchAsyncAC(action) {
   console.log('Parse Func Called');
 
   try {
+     console.log('parse');
     yield put(parseRequestAC());
     const response = yield fetch('http://localhost:5000/api/parses/', {
       method: 'POST',
       headers: { 'Content-type': 'application/json' },
-      body: JSON.stringify({ productname: action.data.search }),
+      body: JSON.stringify({ productname: action.data.search })
     });
     if (response.status === 200) {
-      console.log('Received ok');
-
       const result = yield call(() => response.json());
       yield put(parseGotResponseAC(result));
-      // yield put(setCardDimensionsAC(action.data));
+      yield put(setCardDimensionsAC(action.data));
     } else if (response.status === 204) {
-      console.log('Received 204 error');
-      const err = true;
+      let err = true;
       yield put(parseErrorAC(err));
     }
   } catch (error) {
@@ -224,11 +222,11 @@ export const parseFetchAC = data => ({ type: FETCHED_PARSE, data });
 
 // //////////////////////setCardDimensions///////////////////
 
-// export const setCardDimensionsAC = data => ({
-//   type: SET_CARD_DIMENSIONS,
-//   cardHeight: data.cardHeight,
-//   cardWidth: data.cardWidth,
-// });
+export const setCardDimensionsAC = data => ({
+  type: SET_CARD_DIMENSIONS,
+  cardHeight: data.cardHeight,
+  cardWidth: data.cardWidth
+});
 
 // ///////////////////WatchFetches//////////////////////////
 

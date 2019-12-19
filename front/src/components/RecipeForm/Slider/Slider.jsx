@@ -15,18 +15,13 @@ class Slider extends React.Component {
     this.state = {
       numberOfCards: 1,
       activeItemIndex: 0,
-      cardWidth:"",
-      cardHeight:"",
-
     };
   }
   async componentDidMount() {
     console.log("MOUNTED");
     try {
-      this.setState({ cardWidth: 365 });
-      this.setState({ cardHeight: 325 });
-      // const cardWidth = 365;
-      // const cardHeight = 325;
+      const cardWidth = '25vw';
+      const cardHeight = '22vw';
       const search = this.props.search;
       // const data = { search, cardWidth, cardHeight };
       const data = { search };
@@ -54,41 +49,21 @@ class Slider extends React.Component {
   }
 
   async componentDidUpdate(prevProps) {
-    console.log("UPDATED");
-    
     try {
-      const cardWidth = 365;
-      const cardHeight = 325;
-      if (
-        this.props.search !== prevProps.search
-        ||
-        this.props.ingredientsParsed.length !==
-          prevProps.ingredientsParsed.length
-      ) {
-        const search = this.props.search;
+      const cardWidth = '25vw';
+      const cardHeight = '22vw';
+      if (this.props.search !== prevProps.search) {
+        const search = this.props.search
         const data = { search, cardWidth, cardHeight };
-        await this.props.parseFetch(data);
-        const ingredientQuantity = this.props.ingredientsParsed.length;
+        this.props.parseFetch(data);
+      }
+      if(this.props.ingredientsParsed.length !== prevProps.ingredientsParsed.length) {
+        let ingredientQuantity = this.props.ingredientsParsed.length;
         if (ingredientQuantity >= 3) {
-          // this.setState({ numberOfCards: 3 });
-          this.setState(() => ({ numberOfCards: 3 }));
+          this.setState({ numberOfCards: 3 })
         } else {
-          // this.setState({ numberOfCards: ingredientQuantity });
-          this.setState(() => ({ numberOfCards: ingredientQuantity }));
+          this.setState({ numberOfCards: ingredientQuantity })
         }
-        // const response = await fetch('http://localhost:5000/api/parses/', {
-        //   method: 'POST',
-        //   headers: { 'Content-type': 'application/json' },
-        //   body: JSON.stringify({ productname: search })
-        // });
-        // if (response.status === 200) {
-        //   const ingredients = await response.json();
-        //   console.log(ingredients);
-        //   this.setState({ children: ingredients.ingredients });
-        //   console.log(this.state.children);
-        // } else {
-        //   console.log(`ERROR: ${response.status}`);
-        // }
       }
     } catch (error) {
       console.log(error);
@@ -102,11 +77,12 @@ class Slider extends React.Component {
     ) : this.props.parseError ? (
       <Text>К сожалению ничего не найдено, попробуйте другой запрос.</Text>
     ) : (
+      // `${this.props.cardWidth * this.state.numberOfCards}vw`,
       <div
         style={{
           padding: '0 0',
-          maxWidth: `${this.props.cardWidth * this.state.numberOfCards}px`,
-          margin: '0 auto'
+          maxWidth: '70vw',
+          margin: '0 auto',
         }}
       >
         <ItemsCarousel
@@ -128,7 +104,7 @@ class Slider extends React.Component {
           rightChevron={<Button icon={<CaretNext size="medium" />} />}
           leftChevron={<Button icon={<CaretPrevious size="medium" />} />}
         >
-          {this.props.ingredientsParsed.map(ingredient => (
+          {this.props.ingredientsParsed && this.props.ingredientsParsed.map(ingredient => (
             <IngredientCard
               key={ingredient.id}
               setSearch={this.props.setSearch}
@@ -157,15 +133,15 @@ function mapStateToProps(store) {
   return {
     loadingFetch: store.loadingFetch,
     ingredientsParsed: store.ingredientsParsed,
-    // cardWidth: store.cardWidth,
-    // cardHeight: store.cardHeight,
-    parseError: store.parseError
+    cardWidth: store.cardWidth,
+    cardHeight: store.cardHeight,
+    parseError: store.parseError,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    parseFetch: data => dispatch(parseFetchAC(data))
+    parseFetch: data => dispatch(parseFetchAC(data)),
   };
 }
 

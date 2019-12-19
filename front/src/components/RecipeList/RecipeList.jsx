@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import RecipeItem from '../RecipeItem';
 import SortPanel from '../SortPanel';
+import { Box } from 'grommet';
 import './recipe-list.css'
 
 export default class RecipeList extends Component {
@@ -35,22 +36,20 @@ export default class RecipeList extends Component {
     const { recipes } = this.state;
 
     return (
-      <>
+      <Box width='large'>
         <SortPanel
           recipesFromApiSortingByPrice={this.recipesFromApiSortingByPrice}
           recipesFromApiSortingByCalories={this.recipesFromApiSortingByCalories}
         />
-        <ul>
           {recipes.map((item) => {
             return (
-              <li key={item._id}>
+              <Box key={item._id}>
                 <RecipeItem {...item} />
-              </li>
+              </Box>
             )
           })
           }
-        </ul>
-      </>
+      </Box>
     )
   }
 }

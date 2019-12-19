@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import RecipeItem from '../RecipeItem';
 import { Link } from 'react-router-dom';
-import { Box, Button } from 'grommet';
+import { Box, Button, Text } from 'grommet';
 
 class UserAccount extends Component {
   state = {
@@ -41,11 +41,16 @@ class UserAccount extends Component {
 
     return (
       <Box>
+        {recipes.length === 0 &&
+          <Box margin="small" justify="center" align="center">
+            <Text> У вас нет рецептов </Text>
+            <Text> Добавьте свой рецепт по этой <Link to={'/recipes/new'}>  ссылке </Link></Text>
+          </Box>}
         {recipes.map(item => {
           return (
-            <Box direction="column" justify="center" align="center">
+            <Box key={item._id} direction="column" justify="center" align="center">
               <RecipeItem {...item} />
-              <Box direction="row">
+              <Box direction="row" align='start'>
                 <Link to={'/recipes/' + item._id + '/edit'}>
                   <Button label="Редактировать" margin="xsmall" />
                 </Link>

@@ -1,10 +1,11 @@
-module.exports = function (app) {
+module.exports = function(app) {
   const express = require('express');
   const morgan = require('morgan');
   const cookieParser = require('cookie-parser');
   const session = require('express-session');
   const FileStore = require('session-file-store')(session);
   const { cookiesCleaner } = require('./auth');
+  const oneWeek = 7 * 24 * 3600 * 1000
 
   // const upload = multer({ dest: 'uploads/' });
 
@@ -29,6 +30,7 @@ module.exports = function (app) {
   app.use(cookieParser());
 
   // initialize express-session to allow us track the logged-in user across sessions.
+  const oneWeek = 7 * 24 * 3600 * 1000;
   app.use(
     session({
       store: new FileStore(),
@@ -37,7 +39,7 @@ module.exports = function (app) {
       resave: false,
       saveUninitialized: false,
       cookie: {
-        expires: 600000,
+        expires: new Date(Date.now() + oneWeek),
       },
     }),
   );

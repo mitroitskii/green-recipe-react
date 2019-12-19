@@ -14,6 +14,7 @@ const recipeSchema = new mongoose.Schema({
   author: String,
   authorName: { type: String, default: 'Аноним' },
   likes: Number,
+  portionsSuffix: String,
 });
 
 // recipeSchema.statics.mostRecent = async function () {
