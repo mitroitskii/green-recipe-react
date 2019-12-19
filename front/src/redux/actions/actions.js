@@ -79,14 +79,15 @@ export function* loginFetchAsyncAC(action) {
     const response = yield call(() =>
       fetch('http://localhost:5000/api/users/login', {
         method: 'POST',
+        credentials: 'include',
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
           username: action.data.username,
-          password: action.data.password
-        })
-      })
+          password: action.data.password,
+        }),
+      }),
     );
     if (response.status === 200) {
       const result = yield call(() => response.json());

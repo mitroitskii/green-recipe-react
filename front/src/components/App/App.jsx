@@ -39,28 +39,28 @@ class App extends React.Component {
     //   },
     // };
     return (
-      <Router >
-        <Grommet theme={hpe} >
-            <Box align="center" justify="center" align="center" width="100%">
+      <Router>
+        <Grommet theme={hpe}>
+          <Box align="center" justify="center" align="center" width="100%">
             {/* <AppBar justify="evenly"> */}
-              <Navbar />
+            <Navbar />
             {/* </AppBar> */}
-              <Switch>
-                <Route exact path="/recipes" component={Home} />
-                <Route exact path="/recipes/new" component={RecipeForm} />
-                <Route exact path="/login" component={Login} />
-                <Route exact path="/registration" component={Registration} />
-                <Route exact path="/recipes/:id" component={RecipePage} />
-                <Route exact path="/recipes/:id/edit" component={RecipeEdit} />
-                <PrivateRoute exact path="/users/:id" Component={UserAccount} />
-                <PrivateRoute exact path="/" Component={Home} />
-                <PrivateRoute
-                  exact
-                  path="/recipes/:id/edit"
-                  Component={RecipeForm}
-                />
-              </Switch>
-            </Box>
+            <Switch>
+              <Route exact path="/recipes" component={Home} />
+              <Route exact path="/recipes/new" component={RecipeForm} />
+              <Route exact path="/login" component={Login} />
+              <Route exact path="/registration" component={Registration} />
+              <Route exact path="/recipes/:id" component={RecipePage} />
+              <Route exact path="/recipes/:id/edit" component={RecipeEdit} />
+              <PrivateRoute exact path="/users/:id" Component={UserAccount} />
+              <Route exact path="/" component={Home} />
+              <PrivateRoute
+                exact
+                path="/recipes/:id/edit"
+                Component={RecipeForm}
+              />
+            </Switch>
+          </Box>
         </Grommet>
       </Router>
     );
