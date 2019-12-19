@@ -1,3 +1,4 @@
+import uuidv1 from 'uuid/v1';
 import React, { Component } from 'react';
 import { Box, TextInput, Select, Text } from 'grommet';
 import { NumberInput } from 'grommet-controls';
@@ -20,6 +21,7 @@ export default class RecipeEdit extends Component {
       minutes: '0',
       image: '',
       portions: '',
+      portionsSuffix: ' порция',
       category: '',
       priceTotal: '',
       caloriesTotal: '',
@@ -42,6 +44,7 @@ export default class RecipeEdit extends Component {
       hours,
       minutes,
       portions,
+      portionsSuffix,
       category,
       priceTotal,
       caloriesTotal,
@@ -49,18 +52,19 @@ export default class RecipeEdit extends Component {
       instructions,
       image
     } = result.recipe;
-
+    const newInstructions = instructions.concat([{ id: uuidv1(), text: '' }]);
     this.setState(() => ({
       id: _id,
       name,
       hours,
       minutes,
       portions,
+      portionsSuffix,
       category,
       priceTotal,
       caloriesTotal,
       ingredients,
-      instructions,
+      instructions: newInstructions,
       image
     }));
   }
@@ -115,11 +119,12 @@ export default class RecipeEdit extends Component {
           instructions,
           category,
           priceTotal,
-          caloriesTotal
+          caloriesTotal,
+          portionsSuffix
         } = this.state;
-        let instructionsTrimmed = [];
+        let instructionsTrimmed = instructions;
         if (instructions[instructions.length - 1].text === '') {
-          instructionsTrimmed = instructions.splice(instructions.length - 1, 1);
+          instructionsTrimmed = instructions.slice(0, instructions.length - 1);
         }
         const response = await fetch(
           `http://localhost:5000/api/recipes/${id}`,
@@ -136,7 +141,8 @@ export default class RecipeEdit extends Component {
               instructions: instructionsTrimmed,
               category,
               priceTotal,
-              caloriesTotal
+              caloriesTotal,
+              portionsSuffix
             }),
             credentials: 'include'
           }
@@ -194,6 +200,7 @@ export default class RecipeEdit extends Component {
       name,
       errors,
       portions,
+      portionsSuffix,
       ingredients,
       instructions,
       search,
@@ -238,8 +245,24 @@ export default class RecipeEdit extends Component {
           min={1}
           max={12}
           value={portions}
-          suffix="  порций"
+          suffix={portionsSuffix}
           onChange={({ target: { value } }) => {
+            if (parseFloat(value) === 1) {
+              this.setState(prevState => ({
+                ...prevState,
+                portionsSuffix: ' порция'
+              }));
+            } else if (parseFloat(value) > 4) {
+              this.setState(prevState => ({
+                ...prevState,
+                portionsSuffix: ' порций'
+              }));
+            } else {
+              this.setState(prevState => ({
+                ...prevState,
+                portionsSuffix: ' порции'
+              }));
+            }
             this.setState(() => ({
               portions: value
             }));
@@ -382,7 +405,9 @@ export default class RecipeEdit extends Component {
           dropHeight="small"
           options={hrs}
           value={hours}
-          onChange={({ option }) => {this.setState({ hours: option })}}
+          onChange={({ option }) => {
+            this.setState({ hours: option });
+          }}
         />
         <Select
           id="minutes"

@@ -29,6 +29,7 @@ module.exports = function(app) {
   app.use(cookieParser());
 
   // initialize express-session to allow us track the logged-in user across sessions.
+  const oneWeek = 7 * 24 * 3600 * 1000;
   app.use(
     session({
       store: new FileStore(),
@@ -37,7 +38,7 @@ module.exports = function(app) {
       resave: false,
       saveUninitialized: false,
       cookie: {
-        expires: 600000,
+        expires: new Date(Date.now() + oneWeek),
       },
     }),
   );
