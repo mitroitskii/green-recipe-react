@@ -39,17 +39,17 @@ class App extends React.Component {
     return (
       <Router >
         <Grommet theme={hpe} >
-            <Box align="center" justify="center" align="center" width="100%">
-              <Navbar />
-              <Switch>
-                <Route exact path="/recipes" component={Home} />
-                <Route exact path="/recipes/new" component={RecipeForm} />
-                <Route exact path="/login" component={Login} />
-                <Route exact path="/registration" component={Registration} />
-                <Route exact path="/recipes/:id" component={RecipePage} />
-                <Route exact path="/" сomponent={Home} />
-              </Switch>
-            </Box>
+          <Box align="center" justify="center" align="center" width="100%">
+            <Navbar />
+            <Switch>
+              <Route exact path="/recipes" component={Home} />
+              <Route exact path="/recipes/new" component={RecipeForm} />
+              <Route exact path="/login" component={Login} />
+              <Route exact path="/registration" component={Registration} />
+              <Route exact path="/recipes/:id" component={RecipePage} />
+              <Route exact path="/" component={Home} />
+            </Switch>
+          </Box>
         </Grommet>
       </Router>
     );

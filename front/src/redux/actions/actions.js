@@ -178,6 +178,7 @@ export const parseErrorAC = (err) => {
 
 export function* parseFetchAsyncAC(action) {
   try {
+     console.log('parse');
     yield put(parseRequestAC());
     const response = yield fetch('http://localhost:5000/api/parses/', {
         method: 'POST',

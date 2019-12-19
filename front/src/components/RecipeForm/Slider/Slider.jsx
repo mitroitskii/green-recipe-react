@@ -18,6 +18,8 @@ class Slider extends React.Component {
   }
   async componentDidMount() {
     try {
+      console.log("mount");
+      
       const cardWidth = 365;
       const cardHeight = 325;
       const search = this.props.search
@@ -46,19 +48,15 @@ class Slider extends React.Component {
   }
 
   async componentDidUpdate(prevProps) {
+    console.log("update");
     try {
       const cardWidth = 365;
       const cardHeight = 325;
-      if (this.props.search !== prevProps.search || this.props.ingredientsParsed.length !== prevProps.ingredientsParsed.length) {
+      if (this.props.search !== prevProps.search) {
         const search = this.props.search
         const data = { search, cardWidth, cardHeight };
         this.props.parseFetch(data);
-        let ingredientQuantity = this.props.ingredientsParsed.length;
-        if (ingredientQuantity >= 3) {
-          this.setState({ numberOfCards: 3 })
-        } else {
-          this.setState({ numberOfCards: ingredientQuantity })
-        }
+
         // const response = await fetch('http://localhost:5000/api/parses/', {
         //   method: 'POST',
         //   headers: { 'Content-type': 'application/json' },
@@ -72,6 +70,14 @@ class Slider extends React.Component {
         // } else {
         //   console.log(`ERROR: ${response.status}`);
         // }
+      }
+      if(this.props.ingredientsParsed.length !== prevProps.ingredientsParsed.length) {
+        let ingredientQuantity = this.props.ingredientsParsed.length;
+        if (ingredientQuantity >= 3) {
+          this.setState({ numberOfCards: 3 })
+        } else {
+          this.setState({ numberOfCards: ingredientQuantity })
+        }
       }
     } catch (error) {
       console.log(error);

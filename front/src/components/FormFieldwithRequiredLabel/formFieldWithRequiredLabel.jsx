@@ -1,10 +1,13 @@
-export default FormFieldLabel = props => {
+import React from 'react';
+import { Box, Text, FormField } from 'grommet';
+
+const FormFieldLabel = props => {
   const { required, label, ...rest } = props;
   return (
-    <FormField
+    <FormField 
       label={
         required ? (
-          <Box direction="row">
+          <Box direction="row" width="265px">
             <Text>{label}</Text>
             <Text color="status-critical">*</Text>
           </Box>
@@ -17,3 +20,4 @@ export default FormFieldLabel = props => {
     />
   );
 };
+export default FormFieldLabel
