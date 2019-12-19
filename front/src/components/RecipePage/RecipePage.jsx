@@ -113,9 +113,8 @@ export default class RecipePage extends Component {
 
   render() {
     return (
-      <Box direction="column" width="80%" gap="medium">
+      <Box elevation="medium" direction="column" width="80%" gap="medium">
         <Box
-          // elevation="medium"
           direction="column"
           animation="fadeIn"
           // justify="center"
@@ -153,7 +152,7 @@ export default class RecipePage extends Component {
         </Box>
 
         <Box
-          width="70%"
+          width="100%"
           elevation="medium"
           alignSelf="center"
           animation="fadeIn"
@@ -173,7 +172,7 @@ export default class RecipePage extends Component {
         </Box>
 
         <Box
-          width="70%"
+          width="80%"
           justify="between"
           animation="fadeIn"
           alignSelf="center"
@@ -184,12 +183,12 @@ export default class RecipePage extends Component {
             meterValue={parseFloat(this.state.caloriesTotal)}
             meterType={"Ккал"}
           />
-            <LabelledMeter
-              meterValue={
-                parseFloat(this.state.hours) * 60 + parseFloat(this.state.minutes)
-              }
-              meterType={"Минут"}
-            />
+          <LabelledMeter
+            meterValue={
+              parseFloat(this.state.hours) * 60 + parseFloat(this.state.minutes)
+            }
+            meterType={"Минут"}
+          />
           <LabelledMeter
             meterValue={parseFloat(this.state.priceTotal)}
             meterType={"Рублей"}
@@ -200,7 +199,7 @@ export default class RecipePage extends Component {
           width="100%"
           direction="row"
           animation="fadeIn"
-          align="center"
+          // align="center"
           // justify="center"
         >
           <Box
@@ -209,11 +208,23 @@ export default class RecipePage extends Component {
             // align="start"
             justify="start"
             // elevation="medium"
+            margin={{
+              left: "large"
+              // right: "large"
+            }}
           >
             <Heading level={3}>Ингредиенты:</Heading>
             {/* Ингредиенты */}
           </Box>
-          <Box direction="row" height="100%" justify="end">
+          <Box
+            margin={{
+              // left: "large"
+              right: "large"
+            }}
+            direction="row"
+            height="100%"
+            justify="end"
+          >
             <NumberInput
               min={1}
               max={12}
@@ -225,7 +236,15 @@ export default class RecipePage extends Component {
             />
           </Box>
         </Box>
-        <Box elevation="medium" width="100%" animation="fadeIn">
+        <Box
+          elevation="medium"
+          width="100"
+          animation="fadeIn"
+          margin={{
+            left: "large",
+            right: "large"
+          }}
+        >
           <IngredientsList
             defaultPortions={parseFloat(this.state.defaultPortions)}
             portions={parseFloat(this.state.portions)}
@@ -234,10 +253,12 @@ export default class RecipePage extends Component {
         </Box>
 
         <Box
-          width="100%"
-          // elevation="medium"
+          width="100"
           animation="fadeIn"
-          align="start"
+          margin={{
+            left: "large",
+            right: "large"
+          }}
         >
           <Heading level={3}>Инструкции:</Heading>
 
