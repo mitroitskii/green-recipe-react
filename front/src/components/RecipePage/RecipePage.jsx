@@ -60,8 +60,8 @@ export default class RecipePage extends Component {
       defaultPortions: portions,
       portions,
       ingredients,
-      priceTotal,
-      caloriesTotal,
+      priceTotal: Math.round(priceTotal),
+      caloriesTotal: Math.round(caloriesTotal),
       name,
       image,
       hours,
@@ -121,6 +121,7 @@ export default class RecipePage extends Component {
           width="100%"
         >
           <Anchor
+            className="testText"
             margin={{
               top: "small"
             }}
@@ -130,6 +131,7 @@ export default class RecipePage extends Component {
           />
 
           <Heading
+            className="headerStyle"
             margin={{
               bottom: "small",
               top: "medium"
@@ -141,6 +143,7 @@ export default class RecipePage extends Component {
           </Heading>
 
           <Heading
+            className="author"
             alignSelf="center"
             margin={{
               bottom: "none"
@@ -172,6 +175,7 @@ export default class RecipePage extends Component {
         </Box>
 
         <Box
+          className="testText"
           width="80%"
           justify="between"
           animation="fadeIn"
@@ -203,6 +207,7 @@ export default class RecipePage extends Component {
           justify="between"
         >
           <Box
+            className="testText"
             direction="row"
             // width="100%"
             // align="center"
@@ -232,12 +237,15 @@ export default class RecipePage extends Component {
               // left: "large"
               right: "large"
             }}
+            align="center"
+            justify="between"
             direction="row"
             height="100%"
             justify="end"
-            width="205px"
+            width="200px"
           >
             <NumberInput
+              className="testText"
               min={1}
               max={12}
               value={this.state.portions}
@@ -275,7 +283,7 @@ export default class RecipePage extends Component {
           <Heading
             margin={{
               // left: "large"
-              top: "small",
+              top: "small"
               // bottom: "small"
               // right: "large"
             }}
@@ -286,7 +294,7 @@ export default class RecipePage extends Component {
 
           {this.state.instructions.map((ingredient, index) => (
             <>
-              <Text key={ingredient.id}>
+              <Text className="testText" key={ingredient.id}>
                 {index + 1}. {ingredient.text}
               </Text>
               <br />

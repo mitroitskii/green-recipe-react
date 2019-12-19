@@ -17,7 +17,7 @@ export default class IngredientsList extends React.Component {
     return (
       <ul className="ingredientsUL">
         {ingredients.map(ingredient => (
-          <li key={ingredient.id} className="ingredinetsList" >
+          <li key={ingredient.id} className="ingredinetsList testText" >
             {' '}
             <div className="singleLineContent">
               {/* <p>{ingredient.name}{' '}</p> */}
