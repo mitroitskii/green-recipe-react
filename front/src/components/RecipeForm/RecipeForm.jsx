@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, TextInput, Select, Collapsible } from 'grommet';
+import { Box, TextInput, Select, } from 'grommet';
 import { NumberInput } from 'grommet-controls';
 import CategorySelector from './CategorySelector';
 import IngredientList from './IngredientList';

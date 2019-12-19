@@ -23,7 +23,6 @@ class App extends React.Component {
     // проверка авторизации
     this.props.isLoggedFetch();
   }
-
   render() {
     // const theme = {
     //   global: {
@@ -40,12 +39,10 @@ class App extends React.Component {
     return (
       <Router >
         <Grommet theme={hpe} >
-          <Box fill>
-            <AppBar>
+            <Box align="center" justify="center" align="center" width="100%">
+            {/* <AppBar justify="evenly"> */}
               <Navbar />
-            </AppBar>
-            <Box direction="row" flex overflow={{ horizontal: 'hidden' }} />
-            <Box flex align="center" justify="center">
+            {/* </AppBar> */}
               <Switch>
                 <Route exact path="/recipes" component={Home} />
                 <Route exact path="/recipes/new" component={RecipeForm} />
@@ -55,7 +52,6 @@ class App extends React.Component {
                 <PrivateRoute exact path="/" Component={Home} />
               </Switch>
             </Box>
-          </Box>
         </Grommet>
       </Router>
     );

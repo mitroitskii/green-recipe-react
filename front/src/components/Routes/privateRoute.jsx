@@ -24,13 +24,12 @@ class PrivateRoute extends React.Component {
       <Route
         {...this.props}
         render={props =>
-          (this.props.isLoggedIn === true ? (
-            <Component {...props} />
-          ) : this.props.loadingFetch ? (
-            <span className={'statustext'}>loading</span>
-          ) : (
-            <Redirect to="/login" />
-          ))
+          (this.props.isLoggedIn
+            ? (<Component {...props} />)
+            : this.props.loadingFetch
+              ? (<span className={'statustext'}>loading</span>)
+              : (<Redirect to="/login" />)
+          )
         }
       />
     );

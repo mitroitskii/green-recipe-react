@@ -4,8 +4,6 @@ import { AddCircle } from 'grommet-icons';
 
 import './Card.css';
 
-import { connect } from 'react-redux'
-import { setCardDimensionsAC } from '../../../redux/actions/actions';
 
 export default class IngredientCard extends React.Component {
   handleClick = () => {
@@ -16,7 +14,7 @@ export default class IngredientCard extends React.Component {
   };
   render() {
     return (
-      <Box width={String(this.props.cardWidth) + "px"} height={String(this.props.cardHeight + "px")} className={'wrapper'}>
+      <Box width={String(this.props.cardWidth) + "px"} height={String(this.props.cardHeight + "px")} className={'wrapper'} border={{"color":"border"}}>
         <Box direction="column" height="100%" width="100%">
           <Box
             height="100%"
