@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { loginFetchAC, clearStatusAC } from '../../redux/actions/actions';
 import Preloader from '../Preloader/preloader';
 import { Box, Text, Button, Heading } from 'grommet';
+
 import {
   TextInputField,
   Form,
@@ -12,12 +13,13 @@ import {
   validators
 } from 'grommet-controls';
 
+
 class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       username: '',
-      password: ''
+      password: '',
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -98,14 +100,14 @@ function mapStateToProps(store) {
   return {
     isLoggedIn: store.isLoggedIn,
     loadingFetch: store.loadingFetch,
-    logRegstatusError: store.logRegstatusError
+    logRegstatusError: store.logRegstatusError,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     loginFetch: data => dispatch(loginFetchAC(data)),
-    clearStatus: () => dispatch(clearStatusAC())
+    clearStatus: () => dispatch(clearStatusAC()),
   };
 }
 

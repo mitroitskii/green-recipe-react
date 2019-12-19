@@ -151,10 +151,11 @@ async function ingredientParse(productname) {
 // ingredientParse('egfgdgdfgdgdgfd');
 
 async function getAllByCategory(category) {
-  // urlencoded needed !
-  const response = await fetch(`${link}/api/recipes/category/${category}`);
+  const response = await fetch(
+    encodeURI(`${link}/api/recipes/category/${category}`),
+  );
   const respJson = await response.json();
   console.log('respJsonReceived', respJson);
 }
 
-// getAllByCategory('Каша');
+// getAllByCategory('Десерт');
