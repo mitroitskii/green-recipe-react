@@ -13,6 +13,7 @@ import { NumberInput } from "grommet-controls";
 import React, { Component } from "react";
 import InstructionsList from "./Instructions";
 import IngredientsList from "./IngredientsList";
+import IngredientsListTable from "./IngredientsListTable";
 import LabelledMeter from "./Meter";
 import "./Ingredients.css";
 
@@ -221,9 +222,9 @@ export default class RecipePage extends Component {
           >
             <Heading
               margin={{
-                // left: "large"
+                left: "small",
                 top: "small",
-                bottom: "medium"
+                bottom: "small"
                 // right: "large"
               }}
               level={3}
@@ -257,7 +258,8 @@ export default class RecipePage extends Component {
           </Box>
         </Box>
         <Box
-          elevation="medium"
+          className="testText"
+          elevation="xsmall"
           width="100"
           animation="fadeIn"
           margin={{
@@ -265,7 +267,8 @@ export default class RecipePage extends Component {
             right: "large"
           }}
         >
-          <IngredientsList
+          {/* <IngredientsList */}
+          <IngredientsListTable
             defaultPortions={parseFloat(this.state.defaultPortions)}
             portions={parseFloat(this.state.portions)}
             ingredients={this.state.ingredients}
@@ -273,6 +276,7 @@ export default class RecipePage extends Component {
         </Box>
 
         <Box
+          className="testText"
           width="100"
           animation="fadeIn"
           margin={{
@@ -281,6 +285,7 @@ export default class RecipePage extends Component {
           }}
         >
           <Heading
+            // className="testText"
             margin={{
               // left: "large"
               top: "small"

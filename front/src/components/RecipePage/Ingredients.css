@@ -2,11 +2,10 @@
     color: black;
     /* margin-bottom: 20px; */
     /* margin: 20px; */
-    padding: 10px;
+    padding: 5px;
 }
 .ingredinetsList:nth-child(odd) {
-    background-color: #CCC;
-    
+    background-color: #CCC;    
 }
 /* .ingredinetsList:nth-child(even) {
     /* background-color: #FFF; */
@@ -18,27 +17,9 @@
     padding: 0px;
     
 }
-
-.infoTime {    
-    background-image: url("http://localhost:5000/api/uploads/time.jpg");
-}
-
-.infoPrice {  
-    /* padding-top: 20px;   */
-    background-image: url("http://localhost:5000/api/uploads/price.jpg");
-   text-align: left;
-   /* vertical-align: bottom; */
-}
-
-.infoKcal {    
-    background-image: url("http://localhost:5000/api/uploads/Kcal.jpg");
-}
-
-
 .nomargin {
     margin: 0px;
 }
-
 .singleLineContent{
     display: flex;
     align-content: center;
@@ -48,19 +29,31 @@
 }
 
 .testText {
-    font-family: "PT Serif", Georgia, serif;
+    font-family: "PT Serif", serif;
     font-style: normal;
     font-weight: normal;
-    font: 14px/2 PT Serif,Georgia,serif;
+    font: 14px/2 PT Serif,serif;
     font-stretch: normal;
     font-size: 16px;
 }
 
 .headerStyle {
-    font: 50px/50px Roboto,sans-serif;
-    font-weight: 900;
+    font-family: 'Roboto', sans-serif;
+    /* font: 50px/50px Roboto,sans-serif; */
+    font-weight: 700;
 }
 
 .author {
-        font: 14px/2 PT Serif,Georgia,serif;
+    /* font-family: 'PT Serif', serif; */
+        font: 14px/2 "PT Serif",serif;
+        /* font-size: 14px; */
+}
+
+.centered {
+    align-content: center;
+    text-align: center 
+}
+
+.paddingTd {
+   padding: 10px
 }
