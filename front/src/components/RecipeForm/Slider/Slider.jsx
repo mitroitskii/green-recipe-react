@@ -14,16 +14,23 @@ class Slider extends React.Component {
     super(props);
     this.state = {
       numberOfCards: 1,
-      activeItemIndex: 0
+      activeItemIndex: 0,
+      cardWidth:"",
+      cardHeight:"",
+
     };
   }
   async componentDidMount() {
+    console.log("MOUNTED");
     try {
-      const cardWidth = 365;
-      const cardHeight = 325;
+      this.setState({ cardWidth: 365 });
+      this.setState({ cardHeight: 325 });
+      // const cardWidth = 365;
+      // const cardHeight = 325;
       const search = this.props.search;
-      const data = { search, cardWidth, cardHeight };
-      this.props.parseFetch(data);
+      // const data = { search, cardWidth, cardHeight };
+      const data = { search };
+      await this.props.parseFetch(data);
       const ingredientQuantity = this.props.ingredientsParsed.length;
       if (ingredientQuantity >= 3) {
         this.setState({ numberOfCards: 3 });
@@ -47,22 +54,27 @@ class Slider extends React.Component {
   }
 
   async componentDidUpdate(prevProps) {
+    console.log("UPDATED");
+    
     try {
       const cardWidth = 365;
       const cardHeight = 325;
       if (
-        this.props.search !== prevProps.search ||
+        this.props.search !== prevProps.search
+        ||
         this.props.ingredientsParsed.length !==
           prevProps.ingredientsParsed.length
       ) {
         const search = this.props.search;
         const data = { search, cardWidth, cardHeight };
-        this.props.parseFetch(data);
+        await this.props.parseFetch(data);
         const ingredientQuantity = this.props.ingredientsParsed.length;
         if (ingredientQuantity >= 3) {
-          this.setState({ numberOfCards: 3 });
+          // this.setState({ numberOfCards: 3 });
+          this.setState(() => ({ numberOfCards: 3 }));
         } else {
-          this.setState({ numberOfCards: ingredientQuantity });
+          // this.setState({ numberOfCards: ingredientQuantity });
+          this.setState(() => ({ numberOfCards: ingredientQuantity }));
         }
         // const response = await fetch('http://localhost:5000/api/parses/', {
         //   method: 'POST',
@@ -127,8 +139,10 @@ class Slider extends React.Component {
               setPriceTotal={this.props.setPriceTotal}
               errors={this.props.errors}
               setError={this.props.setError}
-              cardHeight={this.props.cardHeight}
-              cardWidth={this.props.cardWidth}
+              // cardHeight={this.props.cardHeight}
+              // cardWidth={this.props.cardWidth}
+              cardHeight={this.state.cardHeight}
+              cardWidth={this.state.cardWidth}
               // setOpen={this.props.setOpen}
               // open={this.props.open}
             />
@@ -143,8 +157,8 @@ function mapStateToProps(store) {
   return {
     loadingFetch: store.loadingFetch,
     ingredientsParsed: store.ingredientsParsed,
-    cardWidth: store.cardWidth,
-    cardHeight: store.cardHeight,
+    // cardWidth: store.cardWidth,
+    // cardHeight: store.cardHeight,
     parseError: store.parseError
   };
 }

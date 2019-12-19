@@ -199,21 +199,32 @@ export default class RecipePage extends Component {
           width="100%"
           direction="row"
           animation="fadeIn"
-          // align="center"
-          // justify="center"
+          align="center"
+          justify="between"
         >
           <Box
             direction="row"
-            width="100%"
-            // align="start"
+            // width="100%"
+            // align="center"
             justify="start"
             // elevation="medium"
             margin={{
               left: "large"
+              // top:"none"
               // right: "large"
             }}
           >
-            <Heading level={3}>Ингредиенты:</Heading>
+            <Heading
+              margin={{
+                // left: "large"
+                top: "small",
+                bottom: "medium"
+                // right: "large"
+              }}
+              level={3}
+            >
+              Ингредиенты:
+            </Heading>
             {/* Ингредиенты */}
           </Box>
           <Box
@@ -224,6 +235,7 @@ export default class RecipePage extends Component {
             direction="row"
             height="100%"
             justify="end"
+            width="205px"
           >
             <NumberInput
               min={1}
@@ -260,7 +272,17 @@ export default class RecipePage extends Component {
             right: "large"
           }}
         >
-          <Heading level={3}>Инструкции:</Heading>
+          <Heading
+            margin={{
+              // left: "large"
+              top: "small",
+              // bottom: "small"
+              // right: "large"
+            }}
+            level={3}
+          >
+            Инструкции:
+          </Heading>
 
           {this.state.instructions.map((ingredient, index) => (
             <>

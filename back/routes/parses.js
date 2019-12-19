@@ -5,7 +5,6 @@ const { parseSearchPageVV } = require('../parsers/vkysvill');
 
 module.exports = router;
 
-// api/recipes
 router
   .route('/')
   // получить все ингредиенты POST
