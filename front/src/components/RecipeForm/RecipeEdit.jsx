@@ -21,6 +21,7 @@ export default class RecipeEdit extends Component {
       minutes: '0',
       image: '',
       portions: '',
+      portionsSuffix: ' порция',
       category: '',
       priceTotal: '',
       caloriesTotal: '',
@@ -43,6 +44,7 @@ export default class RecipeEdit extends Component {
       hours,
       minutes,
       portions,
+      portionsSuffix,
       category,
       priceTotal,
       caloriesTotal,
@@ -57,6 +59,7 @@ export default class RecipeEdit extends Component {
       hours,
       minutes,
       portions,
+      portionsSuffix,
       category,
       priceTotal,
       caloriesTotal,
@@ -116,7 +119,8 @@ export default class RecipeEdit extends Component {
           instructions,
           category,
           priceTotal,
-          caloriesTotal
+          caloriesTotal,
+          portionsSuffix
         } = this.state;
         let instructionsTrimmed = instructions;
         if (instructions[instructions.length - 1].text === '') {
@@ -137,7 +141,8 @@ export default class RecipeEdit extends Component {
               instructions: instructionsTrimmed,
               category,
               priceTotal,
-              caloriesTotal
+              caloriesTotal,
+              portionsSuffix
             }),
             credentials: 'include'
           }
@@ -195,6 +200,7 @@ export default class RecipeEdit extends Component {
       name,
       errors,
       portions,
+      portionsSuffix,
       ingredients,
       instructions,
       search,
@@ -239,8 +245,24 @@ export default class RecipeEdit extends Component {
           min={1}
           max={12}
           value={portions}
-          suffix="  порций"
+          suffix={portionsSuffix}
           onChange={({ target: { value } }) => {
+            if (parseFloat(value) === 1) {
+              this.setState(prevState => ({
+                ...prevState,
+                portionsSuffix: ' порция'
+              }));
+            } else if (parseFloat(value) > 4) {
+              this.setState(prevState => ({
+                ...prevState,
+                portionsSuffix: ' порций'
+              }));
+            } else {
+              this.setState(prevState => ({
+                ...prevState,
+                portionsSuffix: ' порции'
+              }));
+            }
             this.setState(() => ({
               portions: value
             }));

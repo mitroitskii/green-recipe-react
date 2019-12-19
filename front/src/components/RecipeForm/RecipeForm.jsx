@@ -63,6 +63,7 @@ export default function RecipeForm(props) {
     instructions: '',
     category: ''
   });
+  const [portionsSuffix, setSuffix] = useState(' порция');
 
   const clickSubmit = async () => {
     // debugger;
@@ -110,7 +111,8 @@ export default function RecipeForm(props) {
             instructions: instructionsTrimmed,
             category,
             priceTotal,
-            caloriesTotal
+            caloriesTotal,
+            portionsSuffix
           }),
           credentials: 'include'
         });
@@ -159,8 +161,17 @@ export default function RecipeForm(props) {
         min={1}
         max={12}
         value={portions}
-        suffix="  порций"
-        onChange={({ target: { value } }) => setPortions(value)}
+        suffix={portionsSuffix}
+        onChange={({ target: { value } }) => {
+          if (parseFloat(value) === 1) {
+            setSuffix(' порция');
+          } else if (parseFloat(value) > 4) {
+            setSuffix(' порций');
+          } else {
+            setSuffix(' порции');
+          }
+          setPortions(value);
+        }}
       />
       <p>Ингредиенты</p>
       {ingredients &&

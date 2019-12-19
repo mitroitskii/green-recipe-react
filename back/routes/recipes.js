@@ -118,6 +118,7 @@ router
         category,
         priceTotal,
         caloriesTotal,
+        portionsSuffix,
       } = req.body;
       await Recipe.updateOne(
         { _id: req.params.id },
@@ -133,6 +134,7 @@ router
             category,
             priceTotal,
             caloriesTotal,
+            portionsSuffix,
           },
         },
       );
