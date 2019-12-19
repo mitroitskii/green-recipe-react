@@ -5,7 +5,14 @@ import { connect } from 'react-redux';
 import { loginFetchAC, clearStatusAC } from '../../redux/actions/actions';
 import Preloader from '../Preloader/preloader';
 import { Box, Text, Button, Heading } from 'grommet';
-import { TextInputField, Form, PasswordInputField, validators } from 'grommet-controls';
+
+import {
+  TextInputField,
+  Form,
+  PasswordInputField,
+  validators
+} from 'grommet-controls';
+
 
 class Login extends React.Component {
   constructor(props) {
@@ -25,7 +32,7 @@ class Login extends React.Component {
   async handleSubmit(values) {
     this.props.loginFetch({
       username: values.username,
-      password: values.password,
+      password: values.password
     });
   }
 
@@ -42,10 +49,11 @@ class Login extends React.Component {
           level="2"
           margin={{
             top: 'none',
-            bottom: 'small',
+            bottom: 'small'
           }}
-        >Вход</Heading>
-
+        >
+          Вход
+        </Heading>
         <Form
           basis="medium"
           focusFirstChild={false}
@@ -54,42 +62,34 @@ class Login extends React.Component {
         >
           <TextInputField label="Имя" name="username" />
           <PasswordInputField
-            label={(
-              <Box direction="row" align="center" justify="between">Пароль</Box>
-            )}
+            label={
+              <Box direction="row" align="center" justify="between">
+                Пароль
+              </Box>
+            }
             description="Password"
             name="password"
-            validation={
-              [
-                validators.required(),
-              // validators.minLength(5),
-              // validators.alphaNumeric()
-              ]
-            }
+            validation={[validators.required()]}
           />
           <Box pad={{ vertical: 'medium' }} align="end">
             <Button
               hoverIndicator="background"
-              primary type="submit"
+              primary
+              type="submit"
               // alignSelf="center"
               label="Войти"
             />
           </Box>
-          <Box
-            direction="row"
-            alignSelf="center"
-            gap="small"
-            align="center"
-          />
+          <Box direction="row" alignSelf="center" gap="small" align="center" />
         </Form>
         <Box>
-          {
-            this.props.loadingFetch
-              ? <Preloader />
-              : this.props.isLoggedIn ? (
-                <Redirect to="/" />)
-                : <Text>{this.props.logRegstatusError}</Text>
-          }
+          {this.props.loadingFetch ? (
+            <Preloader />
+          ) : this.props.isLoggedIn ? (
+            <Redirect to="/" />
+          ) : (
+            <Text>{this.props.logRegstatusError}</Text>
+          )}
         </Box>
       </Box>
     );
@@ -103,7 +103,6 @@ function mapStateToProps(store) {
     logRegstatusError: store.logRegstatusError,
   };
 }
-
 
 function mapDispatchToProps(dispatch) {
   return {
@@ -160,4 +159,3 @@ export default connect(mapStateToProps, mapDispatchToProps)(Login);
 //       }
 //   </div>
 // </div>
-
