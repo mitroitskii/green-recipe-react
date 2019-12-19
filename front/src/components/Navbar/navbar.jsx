@@ -24,7 +24,7 @@ class Navbar extends React.Component {
             <Anchor
               label="Мои рецепты"
               as={Link}
-              to={`/users/${this.props.userId}`}
+              to={`/users/${this.props.userName}`}
             />
             <Anchor label="Создать рецепт" as={Link} to="/recipes/new" />
             <Anchor

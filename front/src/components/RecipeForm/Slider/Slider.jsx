@@ -14,11 +14,11 @@ class Slider extends React.Component {
     super(props);
     this.state = {
       numberOfCards: 1,
-      activeItemIndex: 0,
+      activeItemIndex: 0
     };
   }
   async componentDidMount() {
-    console.log("MOUNTED");
+    console.log('MOUNTED');
     try {
       const cardWidth = '25vw';
       const cardHeight = '22vw';
@@ -53,16 +53,19 @@ class Slider extends React.Component {
       const cardWidth = '25vw';
       const cardHeight = '22vw';
       if (this.props.search !== prevProps.search) {
-        const search = this.props.search
+        const search = this.props.search;
         const data = { search, cardWidth, cardHeight };
         this.props.parseFetch(data);
       }
-      if(this.props.ingredientsParsed.length !== prevProps.ingredientsParsed.length) {
+      if (
+        this.props.ingredientsParsed.length !==
+        prevProps.ingredientsParsed.length
+      ) {
         let ingredientQuantity = this.props.ingredientsParsed.length;
         if (ingredientQuantity >= 3) {
-          this.setState({ numberOfCards: 3 })
+          this.setState({ numberOfCards: 3 });
         } else {
-          this.setState({ numberOfCards: ingredientQuantity })
+          this.setState({ numberOfCards: ingredientQuantity });
         }
       }
     } catch (error) {
@@ -82,7 +85,7 @@ class Slider extends React.Component {
         style={{
           padding: '0 0',
           maxWidth: '70vw',
-          margin: '0 auto',
+          margin: '0 auto'
         }}
       >
         <ItemsCarousel
@@ -104,25 +107,24 @@ class Slider extends React.Component {
           rightChevron={<Button icon={<CaretNext size="medium" />} />}
           leftChevron={<Button icon={<CaretPrevious size="medium" />} />}
         >
-          {this.props.ingredientsParsed && this.props.ingredientsParsed.map(ingredient => (
-            <IngredientCard
-              key={ingredient.id}
-              setSearch={this.props.setSearch}
-              ingredient={ingredient}
-              ingredients={this.props.ingredients}
-              setIngredients={this.props.setIngredients}
-              setCaloriesTotal={this.props.setCaloriesTotal}
-              setPriceTotal={this.props.setPriceTotal}
-              errors={this.props.errors}
-              setError={this.props.setError}
-              // cardHeight={this.props.cardHeight}
-              // cardWidth={this.props.cardWidth}
-              cardHeight={this.state.cardHeight}
-              cardWidth={this.state.cardWidth}
-              // setOpen={this.props.setOpen}
-              // open={this.props.open}
-            />
-          ))}
+          {this.props.ingredientsParsed &&
+            this.props.ingredientsParsed.map(ingredient => (
+              <IngredientCard
+                key={ingredient.id}
+                setSearch={this.props.setSearch}
+                ingredient={ingredient}
+                ingredients={this.props.ingredients}
+                setIngredients={this.props.setIngredients}
+                setCaloriesTotal={this.props.setCaloriesTotal}
+                setPriceTotal={this.props.setPriceTotal}
+                errors={this.props.errors}
+                setError={this.props.setError}
+                cardHeight={this.props.cardHeight}
+                cardWidth={this.props.cardWidth}
+                // setOpen={this.props.setOpen}
+                // open={this.props.open}
+              />
+            ))}
         </ItemsCarousel>
       </div>
     );
@@ -135,13 +137,13 @@ function mapStateToProps(store) {
     ingredientsParsed: store.ingredientsParsed,
     cardWidth: store.cardWidth,
     cardHeight: store.cardHeight,
-    parseError: store.parseError,
+    parseError: store.parseError
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    parseFetch: data => dispatch(parseFetchAC(data)),
+    parseFetch: data => dispatch(parseFetchAC(data))
   };
 }
 

@@ -88,7 +88,7 @@ router
   .get(async (req, res) => {
     console.log('Received Get category request');
     try {
-      const recipes = await Recipe.find({ category: req.params.id });
+      const recipes = await Recipe.find({ category: req.params.category });
       return res.send(JSON.stringify({ message: 'ok', recipes }));
     } catch (error) {
       return res.send(JSON.stringify({ message: 'error', error }));
