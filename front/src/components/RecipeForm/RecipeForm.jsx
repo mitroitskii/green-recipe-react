@@ -135,14 +135,16 @@ export default function RecipeForm(props) {
     <Box
       justify="between"
       gap="medium"
-      width="large"
+      direction="column"
+      elevation="medium"
+      width="80%"
       height="medium"
       alignContent="stretch"
       pad="medium"
       margin="medium"
       fill="vertical"
     >
-      <p>Новый рецепт</p>
+      <Text>Новый рецепт</Text>
       <TextInput
         placeholder="Введите название рецепта"
         value={name}

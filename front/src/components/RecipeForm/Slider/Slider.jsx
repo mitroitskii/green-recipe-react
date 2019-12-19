@@ -19,8 +19,8 @@ class Slider extends React.Component {
   }
   async componentDidMount() {
     try {
-      const cardWidth = 365;
-      const cardHeight = 325;
+      const cardWidth = '25vw';
+      const cardHeight = '22vw';
       const search = this.props.search;
       const data = { search, cardWidth, cardHeight };
       this.props.parseFetch(data);
@@ -48,8 +48,8 @@ class Slider extends React.Component {
 
   async componentDidUpdate(prevProps) {
     try {
-      const cardWidth = 365;
-      const cardHeight = 325;
+      const cardWidth = '25vw';
+      const cardHeight = '22vw';
       if (
         this.props.search !== prevProps.search ||
         this.props.ingredientsParsed.length !==
@@ -90,10 +90,11 @@ class Slider extends React.Component {
     ) : this.props.parseError ? (
       <Text>К сожалению ничего не найдено, попробуйте другой запрос.</Text>
     ) : (
+      // `${this.props.cardWidth * this.state.numberOfCards}vw`,
       <div
         style={{
           padding: '0 0',
-          maxWidth: `${this.props.cardWidth * this.state.numberOfCards}px`,
+          maxWidth: '70vw',
           margin: '0 auto',
         }}
       >
