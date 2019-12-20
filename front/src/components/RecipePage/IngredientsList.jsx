@@ -17,7 +17,7 @@ export default class IngredientsList extends React.Component {
     return (
       <ul className="ingredientsUL">
         {ingredients.map(ingredient => (
-          <li key={ingredient.id} className="ingredinetsList testText" >
+          <li key={ingredient.id} className="ingredinetsList testText">
             {' '}
             <div className="singleLineContent">
               {/* <p>{ingredient.name}{' '}</p> */}
@@ -31,25 +31,25 @@ export default class IngredientsList extends React.Component {
                 href={ingredient.link}
               />
 
-              <p >
+              <p>
                 {'Вес:'}{' '}
                 <strong>
                   {`${Math.round(ingredient.inputWeight * ratio)}`}
                 </strong>
                 {` гр Ккал: ${Math.round(
-                  (ingredient.calories * ingredient.inputWeight * ratio) / 100,
+                  (ingredient.calories * ingredient.inputWeight * ratio) / 100
                 )} 
               Цена:`}
                 <strong>
                   {` ${Math.ceil(
-                    (ingredient.inputWeight * ratio) / ingredient.weight,
+                    (ingredient.inputWeight * ratio) / ingredient.weight
                   ) * ingredient.price} `}{' '}
                 </strong>{' '}
                 {`
               руб Шт:`}
                 <strong>
                   {`  ${Math.ceil(
-                    (ingredient.inputWeight * ratio) / ingredient.weight,
+                    (ingredient.inputWeight * ratio) / ingredient.weight
                   )}`}{' '}
                 </strong>
               </p>

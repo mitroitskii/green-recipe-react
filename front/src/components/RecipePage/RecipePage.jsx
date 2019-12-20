@@ -7,15 +7,15 @@ import {
   Text,
   Anchor,
   Paragraph
-} from "grommet";
-import { grommet } from "grommet/themes";
-import { NumberInput } from "grommet-controls";
-import React, { Component } from "react";
-import InstructionsList from "./Instructions";
-import IngredientsList from "./IngredientsList";
-import IngredientsListTable from "./IngredientsListTable";
-import LabelledMeter from "./Meter";
-import "./Ingredients.css";
+} from 'grommet';
+import { grommet } from 'grommet/themes';
+import { NumberInput } from 'grommet-controls';
+import React, { Component } from 'react';
+import InstructionsList from './Instructions';
+import IngredientsList from './IngredientsList';
+import IngredientsListTable from './IngredientsListTable';
+import LabelledMeter from './Meter';
+import './Ingredients.css';
 
 // const { RecipeExample } = require('./RecipeExample');
 
@@ -26,12 +26,12 @@ export default class RecipePage extends Component {
     ingredients: [],
     priceTotal: 0,
     caloriesTotal: 0,
-    name: "",
-    image: "",
+    name: '',
+    image: '',
     instructions: [],
-    hours: "",
-    minutes: "",
-    portionCaption: "порции"
+    hours: '',
+    minutes: '',
+    portionCaption: 'порции'
   };
 
   async componentDidMount() {
@@ -105,11 +105,11 @@ export default class RecipePage extends Component {
     this.setState(() => ({ priceTotal: this.countTotalPrice() }));
 
     if (parseFloat(value) === 1) {
-      this.setState(() => ({ portionCaption: "порция" }));
+      this.setState(() => ({ portionCaption: 'порция' }));
     } else if (parseFloat(value) > 4) {
-      this.setState(() => ({ portionCaption: "порций" }));
+      this.setState(() => ({ portionCaption: 'порций' }));
     } else {
-      this.setState(() => ({ portionCaption: "порции" }));
+      this.setState(() => ({ portionCaption: 'порции' }));
     }
   }
 
@@ -127,7 +127,7 @@ export default class RecipePage extends Component {
           <Anchor
             className="testText"
             margin={{
-              top: "small"
+              top: 'small'
             }}
             alignSelf="center"
             label={this.state.category}
@@ -138,8 +138,8 @@ export default class RecipePage extends Component {
           <Heading
             className="headerStyle"
             margin={{
-              bottom: "small",
-              top: "medium"
+              bottom: 'small',
+              top: 'medium'
             }}
             alignSelf="center"
             level={1}
@@ -153,7 +153,7 @@ export default class RecipePage extends Component {
             textAlign="center"
             alignSelf="center"
             margin={{
-              bottom: "none"
+              bottom: 'none'
             }}
             level={4}
           >
@@ -194,17 +194,17 @@ export default class RecipePage extends Component {
           <LabelledMeter
             infoRecipe
             meterValue={parseFloat(this.state.caloriesTotal)}
-            meterType={"Ккал"}
+            meterType={'Ккал'}
           />
           <LabelledMeter
             meterValue={
               parseFloat(this.state.hours) * 60 + parseFloat(this.state.minutes)
             }
-            meterType={"Минут"}
+            meterType={'Минут'}
           />
           <LabelledMeter
             meterValue={parseFloat(this.state.priceTotal)}
-            meterType={"Рублей"}
+            meterType={'Рублей'}
           />
         </Box>
         <Box
@@ -223,16 +223,16 @@ export default class RecipePage extends Component {
             justify="start"
             // elevation="medium"
             margin={{
-              left: "large"
+              left: 'large'
               // top:"none"
               // right: "large"
             }}
           >
             <Heading
               margin={{
-                left: "small",
-                top: "small",
-                bottom: "small"
+                left: 'small',
+                top: 'small',
+                bottom: 'small'
                 // right: "large"
               }}
               level={3}
@@ -245,7 +245,7 @@ export default class RecipePage extends Component {
           <Box
             margin={{
               // left: "large"
-              right: "large"
+              right: 'large'
             }}
             align="center"
             justify="between"
@@ -272,8 +272,8 @@ export default class RecipePage extends Component {
           width="100"
           animation="fadeIn"
           margin={{
-            left: "large",
-            right: "large"
+            left: 'large',
+            right: 'large'
           }}
         >
           {/* <IngredientsList */}
@@ -289,15 +289,15 @@ export default class RecipePage extends Component {
           width="100"
           animation="fadeIn"
           margin={{
-            left: "large",
-            right: "large"
+            left: 'large',
+            right: 'large'
           }}
         >
           <Heading
             // className="testText"
             margin={{
               // left: "large"
-              top: "small"
+              top: 'small'
               // bottom: "small"
               // right: "large"
             }}

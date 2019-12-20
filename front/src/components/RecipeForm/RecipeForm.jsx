@@ -4,7 +4,7 @@ import { Box, TextInput, Select, Text, Paragraph } from 'grommet';
 import { NumberInput } from 'grommet-controls';
 import { Redirect } from 'react-router-dom';
 import Category from './Category';
-import Ingredient from './Ingredient';
+import Ingredients from './Ingredients';
 import Search from './Search';
 import Slider from './Slider/Slider';
 import Instruction from './Instruction';
@@ -264,7 +264,7 @@ export default function RecipeForm(props) {
       >
         ИНГРЕДИЕНТЫ
       </Paragraph>
-      {ingredients &&
+      {/* {ingredients &&
         ingredients.map(ingredient => (
           <Ingredient
             key={ingredient.id}
@@ -274,7 +274,7 @@ export default function RecipeForm(props) {
             setPriceTotal={setPriceTotal}
             setCaloriesTotal={setCaloriesTotal}
           />
-        ))}
+        ))} */}
       <Search setSearch={setSearch} />
       {search && (
         <Slider

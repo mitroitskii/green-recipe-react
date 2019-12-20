@@ -4,7 +4,7 @@ import { Box, TextInput, Select, Text, Paragraph } from 'grommet';
 import { NumberInput } from 'grommet-controls';
 import { Redirect } from 'react-router-dom';
 import Category from './Category';
-import Ingredient from './Ingredient';
+import Ingredients from './Ingredients';
 import Search from './Search';
 import Slider from './Slider/Slider';
 import Instruction from './Instruction';
@@ -360,32 +360,29 @@ export default class RecipeEdit extends Component {
         >
           ИНГРЕДИЕНТЫ
         </Paragraph>
-        {ingredients &&
-          ingredients.map(ingredient => (
-            <Ingredient
-              key={ingredient.id}
-              ingredient={ingredient}
-              ingredients={ingredients}
-              setIngredients={args => {
-                this.setState(prevState => ({
-                  ...prevState,
-                  ingredients: args
-                }));
-              }}
-              setPriceTotal={args => {
-                this.setState(prevState => ({
-                  ...prevState,
-                  priceTotal: args
-                }));
-              }}
-              setCaloriesTotal={args => {
-                this.setState(prevState => ({
-                  ...prevState,
-                  caloriesTotal: args
-                }));
-              }}
-            />
-          ))}
+        {ingredients && (
+          <Ingredients
+            ingredients={ingredients}
+            setIngredients={args => {
+              this.setState(prevState => ({
+                ...prevState,
+                ingredients: args
+              }));
+            }}
+            setPriceTotal={args => {
+              this.setState(prevState => ({
+                ...prevState,
+                priceTotal: args
+              }));
+            }}
+            setCaloriesTotal={args => {
+              this.setState(prevState => ({
+                ...prevState,
+                caloriesTotal: args
+              }));
+            }}
+          />
+        )}
         <Search
           setSearch={args => {
             this.setState(prevState => ({
@@ -456,29 +453,12 @@ export default class RecipeEdit extends Component {
         {instructions &&
           instructions.map((instruction, index) => (
             <Box
-              align="center"
-              alignContent="center"
+              // align="center"
+              // alignContent="center"
               alignSelf="center"
               direction="row-responsive"
               key={instruction.id}
             >
-              <Paragraph
-                margin={{
-                  vertical: 'medium',
-                  horizontal: '...',
-                  top: 'large',
-                  bottom: '...',
-                  left: '...',
-                  right: '...'
-                }}
-                className="bold"
-                alignSelf="center"
-                size="small"
-                responsive={true}
-                textAlign="center"
-              >
-                {index + 1}
-              </Paragraph>
               <Instruction
                 instruction={instruction}
                 instructions={instructions}
@@ -504,65 +484,92 @@ export default class RecipeEdit extends Component {
             {errors.instructions}
           </Text>
         )}
-        <Paragraph
-          margin={{
-            vertical: 'medium',
-            horizontal: '...',
-            top: 'large',
-            bottom: '...',
-            left: '...',
-            right: '...'
-          }}
-          className="bold"
+        <Box
           alignSelf="center"
-          size="small"
-          responsive={true}
-          textAlign="center"
+          direction="row"
+          round="small"
+          // elevation="small"
+          fill={false}
+          flex="grow"
+          margin={{ vertical: '0px' }}
+          width={{ min: '800px', max: '800px' }}
         >
-          КАТЕГОРИЯ
-        </Paragraph>
-        <Category
-          category={category}
-          setCategory={args => {
-            this.setState(prevState => ({
-              ...prevState,
-              category: args
-            }));
-          }}
-          errors={errors}
-          setError={args => {
-            this.setState(prevState => ({
-              ...prevState,
-              errors: args
-            }));
-          }}
-        />
-        {errors.category && (
-          <Text size="medium" color="red">
-            {errors.category}
-          </Text>
-        )}
-        <p>Время приготовления</p>
-        <Select
-          id="hours"
-          name="hours"
-          placeholder="часов"
-          dropHeight="small"
-          options={hrs}
-          value={hours}
-          onChange={({ option }) => {
-            this.setState({ hours: option });
-          }}
-        />
-        <Select
-          id="minutes"
-          name="minutes"
-          placeholder="минут"
-          dropHeight="small"
-          options={mins}
-          value={minutes}
-          onChange={({ option }) => this.setState({ minutes: option })}
-        />
+          <Paragraph
+            margin={{
+              vertical: 'medium',
+              horizontal: '...',
+              top: 'large',
+              bottom: '...',
+              left: '...',
+              right: '...'
+            }}
+            className="bold"
+            alignSelf="center"
+            size="small"
+            responsive={true}
+            textAlign="center"
+          >
+            КАТЕГОРИЯ
+          </Paragraph>
+          <Category
+            category={category}
+            setCategory={args => {
+              this.setState(prevState => ({
+                ...prevState,
+                category: args
+              }));
+            }}
+            errors={errors}
+            setError={args => {
+              this.setState(prevState => ({
+                ...prevState,
+                errors: args
+              }));
+            }}
+          />
+          {errors.category && (
+            <Text size="medium" color="red">
+              {errors.category}
+            </Text>
+          )}
+          <Paragraph
+            margin={{
+              vertical: 'medium',
+              horizontal: '...',
+              top: 'large',
+              bottom: '...',
+              left: '...',
+              right: '...'
+            }}
+            className="bold"
+            alignSelf="center"
+            size="small"
+            responsive={true}
+            textAlign="center"
+          >
+            ВРЕМЯ ПРИГОТОВЛЕНИЯ
+          </Paragraph>
+          <Select
+            id="hours"
+            name="hours"
+            placeholder="часов"
+            dropHeight="small"
+            options={hrs}
+            value={hours}
+            onChange={({ option }) => {
+              this.setState({ hours: option });
+            }}
+          />
+          <Select
+            id="minutes"
+            name="minutes"
+            placeholder="минут"
+            dropHeight="small"
+            options={mins}
+            value={minutes}
+            onChange={({ option }) => this.setState({ minutes: option })}
+          />
+        </Box>
         <Uploader
           setImage={args => {
             this.setState(prevState => ({
