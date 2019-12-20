@@ -447,12 +447,27 @@ export default function RecipeForm(props) {
           </Paragraph>
         </Box>
       </Box>
+      <Box
+        alignSelf="center"
+        alignContent="center"
+        direction="row"
+        round="small"
+        // elevation="small"
+        fill={false}
+        flex="grow"
+        width="400px"
+        margin={{
+          "left": "55px"
+        }}
+
+      >
       <Uploader setImage={setImage} />
       {errors.image && (
         <Text size="medium" color="red">
           {errors.image}
         </Text>
       )}
+      </Box>
       <Box
         alignSelf="center"
         alignContent="center"
