@@ -1,13 +1,4 @@
-html, body {
-    display: flex;
-    background: #e3e3d8;
-    font-family: sans-serif;
-    padding: 25px;
-}
 .wrapper {
-    width: 530px;
-    height: 450px;
-    background: white;
     margin: 0;
     position: relative;
     overflow: hidden;
@@ -35,16 +26,13 @@ html, body {
     padding-top: 5px;
     padding-bottom: 5px;
 }
-/* .wrapper .bottom .left {
-    position: relative;
-    float: left;
-} */
-.wrapper .bottom .details {
+
+/* .wrapper .bottom .details {
     padding: 3%;
     float: left;
-}
+} */
 
-.wrapper .inside {
+/* .wrapper .inside {
     z-index: 9;
     background: #92879b;
     width: 30%;
@@ -96,7 +84,7 @@ html, body {
 }
 .wrapper .inside .contents p {
     font-size: 13px;
-}
+} */
 
 /* background: #f1f1f1;
 transition: background 0.5s;

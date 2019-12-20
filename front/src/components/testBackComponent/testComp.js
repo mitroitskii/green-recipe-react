@@ -148,4 +148,14 @@ async function ingredientParse(productname) {
   const respJson = await response.json();
   console.log('respJsonReceived', respJson);
 }
-ingredientParse('рис');
+// ingredientParse('egfgdgdfgdgdgfd');
+
+async function getAllByCategory(category) {
+  const response = await fetch(
+    encodeURI(`${link}/api/recipes/category/${category}`),
+  );
+  const respJson = await response.json();
+  console.log('respJsonReceived', respJson);
+}
+
+// getAllByCategory('Десерт');

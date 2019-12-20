@@ -1,13 +1,12 @@
 import React from 'react';
 import RecipeList from '../RecipeList';
-import IngredientSlider from '../IngredientSlider/ingredientSlider';
+import { Box } from 'grommet';
 
 export default function Home() {
   return (
-    <div className="Home">
-      {/* <RecipeList /> */}
-      <IngredientSlider/>
-    </div>
-  )
+    <Box width='80%' elevation='medium' justify='center' align='center'>
+      <RecipeList />
+    </Box>
+  );
 }
 

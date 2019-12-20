@@ -5,7 +5,6 @@ const { parseSearchPageVV } = require('../parsers/vkysvill');
 
 module.exports = router;
 
-// api/recipes
 router
   .route('/')
   // получить все ингредиенты POST
@@ -14,9 +13,15 @@ router
     try {
       const { productname } = req.body;
       const ingredients = await parseSearchPageVV(productname);
-      //   console.log(`Парсинг продукта ${productname}`, ingredients);
-      return res.send(JSON.stringify({ message: 'ok', ingredients }));
+        console.log(`Парсинг продукта ${productname}`, ingredients);
+      if (ingredients.length !== 0) {
+        res.send(JSON.stringify({ message: 'ok', ingredients }));
+      } else {
+        res.status(204).json([]);
+      }
+      //  res.send(JSON.stringify({ message: 'ok', ingredients }));
     } catch (error) {
-      return res.send(JSON.stringify({ message: 'error', error }));
+      // res.send(JSON.stringify({ message: 'error', error }));
+      res.status(400).json(error);
     }
   });

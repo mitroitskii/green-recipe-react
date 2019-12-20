@@ -16,25 +16,20 @@ class PrivateRoute extends React.Component {
   async componentDidMount() {
     // проверка авторизации
     this.props.isLoggedFetch();
-    this.setState({
-      isLoggedIn: this.props.isLoggedIn,
-      loading: false,
-    });
   }
 
   render() {
-    const Component = this.props.Component;
+    const component = this.props.component;
     return (
       <Route
         {...this.props}
         render={props =>
-          (this.props.isLoggedIn === true ? (
-            <Component {...props} />
-          ) : this.state.loading ? (
-            <span className={'statustext'}>loading</span>
-          ) : (
-            <Redirect to="/login" />
-          ))
+          (this.props.isLoggedIn
+            ? (<component {...props} />)
+            : this.props.loadingFetch
+              ? (<span className={'statustext'}>loading</span>)
+              : (<Redirect to="/login" />)
+          )
         }
       />
     );
@@ -43,6 +38,7 @@ class PrivateRoute extends React.Component {
 function mapStateToProps(store) {
   return {
     isLoggedIn: store.isLoggedIn,
+    loadingFetch: store.loadingFetch,
   };
 }
 function mapDispatchToProps(dispatch) {

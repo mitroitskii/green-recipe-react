@@ -1,6 +1,7 @@
 const request = require('request-promise');
 const parse = require('cheerio');
 const Ingredient = require('../models/ingredient');
+const uuidv1 = require('uuid/v1');
 
 async function parseSearchPageVV(productName) {
   let link = encodeURI('https://vkusvill.ru/search/?q=' + productName);
@@ -31,8 +32,16 @@ async function parseSearchPageVV(productName) {
     );
 
     // console.log('products', products);
-    return products;
+    // if (products.length !== 0) {
+      
+      return products;
+    // } else {
+    //   res.status(400).json(products);
+    // }
+
+
   } catch (err) {
+    // res.status(400).json(err.message);
     return err;
   }
 }
@@ -43,6 +52,7 @@ async function parseProductPageVV(link) {
     const html = await request(encodeURI(fullLink));
 
     let result = {
+      id: uuidv1(),
       name: parse('.Product__title', html)
         .text()
         .trim(),
@@ -97,7 +107,7 @@ async function parseProductPageVV(link) {
       weightWithType = weight.split(/(?<=^\S+)\s/);
     }
 
-    result['weightAbsoulte'] = weightWithType[0];
+    result['weightAbsolute'] = weightWithType[0];
     result['measureType'] = weightWithType[1];
     if (weightWithType[1] === 'г') {
       result['weight'] = weightWithType[0];
@@ -146,7 +156,7 @@ async function parseProductPageVV(link) {
 
     result['kcal'] = parseFloat(result['kcal']);
     // result['inputWeight'] = result['weight'];
-    console.log('result', result);
+    // console.log('result', result);
 
     const newIngredient = new Ingredient(result);
 

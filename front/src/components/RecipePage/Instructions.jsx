@@ -10,22 +10,21 @@ const theme = deepMerge(grommet, {
     item: {
       pad: { horizontal: 'large', vertical: 'xsmall' },
       background: ['white', 'light-2'],
-      border: true,
-    },
-  },
+      border: true
+    }
+  }
 });
 
 export default class InstructionsList extends Component {
   render() {
     const { list } = this.props;
     return (
-      <Grommet theme={theme}>
-        <Box align="center" pad="small">
-          <Heading margin="small">Инструкции: </Heading>
-          <List
-            data={list} />
-        </Box>
-      </Grommet>
+      // <Grommet theme={theme}>
+      <Box align="center" pad="small">
+        <Heading margin="small">Инструкции: </Heading>
+        <List data={list} />
+      </Box>
+      // </Grommet>
     );
   }
 }

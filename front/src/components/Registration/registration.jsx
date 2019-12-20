@@ -1,12 +1,11 @@
 import React from 'react';
-import { BrowserRouter as Redirect } from "react-router-dom";
 import { connect } from 'react-redux'
 import { registerFetchAC, clearStatusAC } from '../../redux/actions/actions';
 
 
-import { Box, Text, Button } from 'grommet';
+import { Box, Text, Button, Heading } from 'grommet';
 import { Form, TextInputField, PasswordInputField, EmailInputField, validators } from 'grommet-controls';
-
+import Preloader from "../Preloader/preloader"
 
 
 class Registration extends React.Component {
@@ -18,24 +17,13 @@ class Registration extends React.Component {
       email: '',
     };
   }
-  handleUsername = (event) => {
-    this.setState({ username: event.target.value });
-  }
 
-  handlePassword = (event) => {
-    this.setState({ password: event.target.value });
-  }
-
-  handleEmail = (event) => {
-    this.setState({ email: event.target.value });
-  }
-
-  handleSubmit = async (event) => {
-    event.preventDefault();
+  handleSubmit = async (values) => {
+    // event.preventDefault();
     this.props.registerFetch({
-      username: this.state.username,
-      password: this.state.password,
-      email: this.state.email,
+      username: values.username,
+      password: values.password,
+      email: values.email,
     })
   }
 
@@ -45,37 +33,53 @@ class Registration extends React.Component {
 
   render() {
     return (
-      <div className={"form-style-1"} >
-        <form id='userRegister' onSubmit={this.handleSubmit}>
-          <div className={"container"}>
-            <h1>Registration</h1>
-            <p>Please register yourself</p>
-            <hr />
-            <label><b>Username</b></label>
-            <input type="text" placeholder="Username" name="username" required onChange={this.handleUsername} />
-            <label><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" name="password" required onChange={this.handlePassword} />
-            <label><b>Email</b></label>
-            <input type="email" placeholder="Enter Email" name="emailRegistration" required onChange={this.handleEmail} />
-            <hr />
-            <button type="submit" className={"registerbtn"}>Register</button>
-          </div>
-        </form>
-        <div>
-          {this.props.logRegloadingFetch
-            ? <span className={'statustext'}>loading</span>
+      <Box width="30%" margin="large" 
+      pad="large" border={{ "color": "border" }}  
+      justify="center" elevation="medium"
+      >
+        <Heading level="2"
+          margin={{
+            top: 'none',
+            bottom: 'small'
+          }}
+          align="center"
+        >
+          Регистрация
+        </Heading>
+        <Form
+          basis='medium'
+          focusFirstChild={false}
+          onSubmit={this.handleSubmit}
+        >
+          <TextInputField label='Имя' name='username' />
+          <PasswordInputField
+            label='Пароль'
+            name='password'
+            validation={
+              [validators.required()]
+            }
+          />
+          <EmailInputField label='Email' name='email' validation={[validators.required(), validators.email()]} />
+          <Box pad={{ vertical: 'medium' }} align='end' align="center">
+            <Button hoverIndicator='background' primary={true} type='submit' label='Зарегистрироваться' />
+          </Box>
+        </Form >
+        <Box>
+          {this.props.loadingFetch
+            ? <Preloader />
             : this.props.logRegstatusError
-              ? <span className={'statustext'}>{this.props.logRegstatusError}</span>
-              : <span className={'statustext'}>{this.props.registrationStatus}</span>}
-        </div>
-      </div>
+              ? <Text className={'statustext'} wordBreak="break-word">{this.props.logRegstatusError}</Text>
+              : <Text className={'statustext'}wordBreak="break-word">{this.props.registrationStatus}</Text>
+          }
+        </Box>
+      </Box>
     )
   }
 }
 
 function mapStateToProps(store) {
   return {
-    logRegloadingFetch: store.logRegloadingFetch,
+    loadingFetch: store.loadingFetch,
     logRegstatusError: store.logRegstatusError,
     registrationStatus: store.registrationStatus,
   }
@@ -89,26 +93,4 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Registration)
-
-///Форма по Grommet.Почему-то не вводится текст
-
-//< Form
-// basis = 'medium'
-// focusFirstChild = { false}
-// onSubmit = { this.handleSubmit }
-//>
-  //   <TextInputField label='Username' name='username' onChange={this.handleLogin} />
-  //   <EmailInputField label='Email' name='email' validation={[validators.required(), validators.email()]} onChange={this.handlePassword} />
-  //   <PasswordInputField
-  //     label='Password'
-  //     name='password'
-  //     validation={
-  //       [validators.required(), validators.minLength(5), validators.alphaNumeric()]
-  //     }
-  //     onChange={this.handleEmail}
-  //   />
-  //   <Box pad={{ vertical: 'medium' }} align='end'>
-  //     <Button hoverIndicator='background' primary={true} type='submit' label='Save profile' />
-  //   </Box>
-//</Form >
 

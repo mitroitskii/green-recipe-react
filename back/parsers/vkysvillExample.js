@@ -17,7 +17,7 @@ async function TestSinglePageParse() {
 //   currency: 'руб/шт',
 //   link: 'https://vkusvill.ru/goods/ris-shlifovannyy-dlinnozernyy-500-gr.html',
 //   kcal: '321',
-//   weightAbsoulte: '500',
+//   weightAbsolute: '500',
 //   measureType: 'г',
 //   pricePerKilo: 106
 // }
@@ -27,7 +27,7 @@ async function TestProductParse(productname) {
   const testParsqReq = await parseSearchPageVV(productname);
   console.log('Тест парсинга одного продукта', testParsqReq);
 }
-TestProductParse('перец');
+// TestProductParse('dsfsf');
 
 const ingredients = [
   'мёд',
