@@ -14,13 +14,13 @@ const categories = [
 ];
 
 export default function CategorySelector({ recipesCategory, recipesFromApi }) {
-  const [value, setValue] = React.useState('Любая категория');
+  const [value, setValue] = React.useState('');
   return (
-    <Box direction="row">
-      <Text margin='xsmall' alignSelf='center'> Выберите категорию </Text>
+    <Box direction="row" width='midle' margin="xsmall">
+      <Text margin='xsmall' alignSelf='center'> Выберите категорию: </Text>
       <Select
         value={value}
-        placeholder="Выберите категорию блюда"
+        placeholder="Выберите категорию"
         options={categories}
         onChange={({ option }) => {
           setValue(option);
