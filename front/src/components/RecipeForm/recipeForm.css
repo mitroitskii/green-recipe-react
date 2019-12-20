@@ -1,7 +1,21 @@
-input{
-  font-family: 'PT Sans', sans-serif;
+.bold {
+  font-weight: 700;
 }
 
-textarea{
+.ingredient-name {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 900;
+  font-size: 40px;
+}
+
+.input {
   font-family: 'PT Sans', sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+}
+
+.button {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
 }

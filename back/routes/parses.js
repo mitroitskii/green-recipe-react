@@ -13,7 +13,7 @@ router
     try {
       const { productname } = req.body;
       const ingredients = await parseSearchPageVV(productname);
-      //   console.log(`Парсинг продукта ${productname}`, ingredients);
+        console.log(`Парсинг продукта ${productname}`, ingredients);
       if (ingredients.length !== 0) {
         res.send(JSON.stringify({ message: 'ok', ingredients }));
       } else {

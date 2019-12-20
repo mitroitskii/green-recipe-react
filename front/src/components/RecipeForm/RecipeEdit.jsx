@@ -1,6 +1,6 @@
 import uuidv1 from 'uuid/v1';
 import React, { Component } from 'react';
-import { Box, TextInput, Select, Text } from 'grommet';
+import { Box, TextInput, Select, Text, Paragraph } from 'grommet';
 import { NumberInput } from 'grommet-controls';
 import { Redirect } from 'react-router-dom';
 import Category from './Category';
@@ -10,6 +10,7 @@ import Slider from './Slider/Slider';
 import Instruction from './Instruction';
 import Submit from './Submit';
 import Uploader from '../Uploader/uploader';
+import './recipeForm.css';
 
 export default class RecipeEdit extends Component {
   constructor(props) {
@@ -215,60 +216,150 @@ export default class RecipeEdit extends Component {
     return (
       <Box
         justify="between"
-        gap="medium"
-        width="large"
-        height="medium"
         alignContent="stretch"
-        pad="medium"
         margin="medium"
+        gap="medium"
+        pad="medium"
         fill="vertical"
+        direction="column"
+        elevation="medium"
+        width="80%"
+        height="medium"
       >
-        <p>Новый рецепт</p>
-        <TextInput
-          placeholder="Введите название рецепта"
-          value={name}
-          onChange={event => {
-            const { value } = event.target;
-            this.setState(prevState => ({
-              name: value,
-              errors: { ...prevState.errors, name: '' }
-            }));
+        <Paragraph
+          margin={{
+            vertical: 'medium',
+            horizontal: '...',
+            top: 'large',
+            bottom: '...',
+            left: '...',
+            right: '...'
           }}
-        />
-        {errors.name && (
-          <Text size="medium" color="red">
-            {errors.name}
-          </Text>
-        )}
-        <p>Количество порций</p>
-        <NumberInput
-          min={1}
-          max={12}
-          value={portions}
-          suffix={portionsSuffix}
-          onChange={({ target: { value } }) => {
-            if (parseFloat(value) === 1) {
+          className="bold"
+          alignSelf="center"
+          size="small"
+          responsive={true}
+          textAlign="center"
+        >
+          НОВЫЙ РЕЦЕПТ
+        </Paragraph>
+        <Box
+          align="center"
+          alignContent="center"
+          alignSelf="center"
+          // basis="large"
+          border="bottom"
+          direction="row-responsive"
+        >
+          <TextInput
+            plain={true}
+            placeholder="    Название рецепта"
+            value={name}
+            className="ingredient-name"
+            onChange={event => {
+              const { value } = event.target;
               this.setState(prevState => ({
-                ...prevState,
-                portionsSuffix: ' порция'
+                name: value,
+                errors: { ...prevState.errors, name: '' }
               }));
-            } else if (parseFloat(value) > 4) {
-              this.setState(prevState => ({
-                ...prevState,
-                portionsSuffix: ' порций'
-              }));
-            } else {
-              this.setState(prevState => ({
-                ...prevState,
-                portionsSuffix: ' порции'
-              }));
-            }
-            this.setState(() => ({
-              portions: value
-            }));
+            }}
+          />
+          {errors.name && (
+            <Paragraph
+              margin={{
+                vertical: 'medium',
+                horizontal: '...',
+                top: 'large',
+                bottom: '...',
+                left: '...',
+                right: '...'
+              }}
+              className="bold"
+              alignSelf="center"
+              size="small"
+              responsive={true}
+              textAlign="center"
+              color="red"
+            >
+              {errors.name}
+            </Paragraph>
+          )}
+        </Box>
+        <Paragraph
+          margin={{
+            vertical: 'medium',
+            horizontal: '...',
+            top: 'large',
+            bottom: '...',
+            left: '...',
+            right: '...'
           }}
-        />
-        <p>Ингредиенты</p>
+          className="bold"
+          alignSelf="center"
+          size="small"
+          responsive={true}
+          textAlign="center"
+        >
+          КОЛИЧЕСТВО ПОРЦИЙ
+        </Paragraph>
+        <Box
+          round="small"
+          align="center"
+          alignContent="center"
+          alignSelf="center"
+          // basis="large"
+          // border="bottom"
+          direction="row-responsive"
+          elevation="small"
+          fill={false}
+          flex={false}
+          width={{ min: '220px', max: '220px' }}
+        >
+          <NumberInput
+            min={1}
+            max={12}
+            value={portions}
+            suffix={portionsSuffix}
+            onChange={({ target: { value } }) => {
+              if (parseFloat(value) === 1) {
+                this.setState(prevState => ({
+                  ...prevState,
+                  portionsSuffix: ' порция'
+                }));
+              } else if (parseFloat(value) > 4) {
+                this.setState(prevState => ({
+                  ...prevState,
+                  portionsSuffix: ' порций'
+                }));
+              } else {
+                this.setState(prevState => ({
+                  ...prevState,
+                  portionsSuffix: ' порции'
+                }));
+              }
+              this.setState(() => ({
+                portions: value
+              }));
+            }}
+          />
+        </Box>
+        <Paragraph
+          margin={{
+            vertical: 'medium',
+            horizontal: '...',
+            top: 'large',
+            bottom: '...',
+            left: '...',
+            right: '...'
+          }}
+          className="bold"
+          alignSelf="center"
+          size="small"
+          responsive={true}
+          textAlign="center"
+        >
+          ИНГРЕДИЕНТЫ
+        </Paragraph>
         {ingredients &&
           ingredients.map(ingredient => (
             <Ingredient
@@ -345,11 +436,49 @@ export default class RecipeEdit extends Component {
             {errors.ingredients}
           </Text>
         )}
-        <p>Инструкции</p>
+        <Paragraph
+          margin={{
+            vertical: 'medium',
+            horizontal: '...',
+            top: 'large',
+            bottom: '...',
+            left: '...',
+            right: '...'
+          }}
+          className="bold"
+          alignSelf="center"
+          size="small"
+          responsive={true}
+          textAlign="center"
+        >
+          ИНСТРУКЦИИ
+        </Paragraph>
         {instructions &&
           instructions.map((instruction, index) => (
-            <Box key={instruction.id}>
-              <Text>{index + 1}</Text>
+            <Box
+              align="center"
+              alignContent="center"
+              alignSelf="center"
+              direction="row-responsive"
+              key={instruction.id}
+            >
+              <Paragraph
+                margin={{
+                  vertical: 'medium',
+                  horizontal: '...',
+                  top: 'large',
+                  bottom: '...',
+                  left: '...',
+                  right: '...'
+                }}
+                className="bold"
+                alignSelf="center"
+                size="small"
+                responsive={true}
+                textAlign="center"
+              >
+                {index + 1}
+              </Paragraph>
               <Instruction
                 instruction={instruction}
                 instructions={instructions}
@@ -375,7 +504,23 @@ export default class RecipeEdit extends Component {
             {errors.instructions}
           </Text>
         )}
-        <p>Категория</p>
+        <Paragraph
+          margin={{
+            vertical: 'medium',
+            horizontal: '...',
+            top: 'large',
+            bottom: '...',
+            left: '...',
+            right: '...'
+          }}
+          className="bold"
+          alignSelf="center"
+          size="small"
+          responsive={true}
+          textAlign="center"
+        >
+          КАТЕГОРИЯ
+        </Paragraph>
         <Category
           category={category}
           setCategory={args => {

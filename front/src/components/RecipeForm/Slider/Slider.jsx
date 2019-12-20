@@ -2,7 +2,7 @@
 import React from 'react';
 import ItemsCarousel from 'react-items-carousel';
 import IngredientCard from './Card';
-import { Button, Text } from 'grommet';
+import { Button, Text, Box } from 'grommet';
 import { CaretNext, CaretPrevious } from 'grommet-icons';
 
 import { connect } from 'react-redux';
@@ -20,8 +20,8 @@ class Slider extends React.Component {
   async componentDidMount() {
     console.log('MOUNTED');
     try {
-      const cardWidth = '25vw';
-      const cardHeight = '22vw';
+      // const cardWidth = '25vw';
+      // const cardHeight = '22vw';
       const search = this.props.search;
       // const data = { search, cardWidth, cardHeight };
       const data = { search };
@@ -50,11 +50,12 @@ class Slider extends React.Component {
 
   async componentDidUpdate(prevProps) {
     try {
-      const cardWidth = '25vw';
-      const cardHeight = '22vw';
+      // const cardWidth = '25vw';
+      // const cardHeight = '22vw';
       if (this.props.search !== prevProps.search) {
         const search = this.props.search;
-        const data = { search, cardWidth, cardHeight };
+        // const data = { search, cardWidth, cardHeight };
+        const data = { search };
         this.props.parseFetch(data);
       }
       if (
@@ -76,7 +77,15 @@ class Slider extends React.Component {
   render() {
     const gutter = 12;
     return this.props.loadingFetch ? (
-      <Preloader />
+      <Box
+        align="center"
+        alignContent="center"
+        alignSelf="center"
+        // basis="large"
+        direction="row-responsive"
+      >
+        <Preloader />
+      </Box>
     ) : this.props.parseError ? (
       <Text>К сожалению ничего не найдено, попробуйте другой запрос.</Text>
     ) : (
@@ -119,8 +128,8 @@ class Slider extends React.Component {
                 setPriceTotal={this.props.setPriceTotal}
                 errors={this.props.errors}
                 setError={this.props.setError}
-                cardHeight={this.props.cardHeight}
-                cardWidth={this.props.cardWidth}
+                // cardHeight={this.props.cardHeight}
+                // cardWidth={this.props.cardWidth}
                 // setOpen={this.props.setOpen}
                 // open={this.props.open}
               />
@@ -135,8 +144,8 @@ function mapStateToProps(store) {
   return {
     loadingFetch: store.loadingFetch,
     ingredientsParsed: store.ingredientsParsed,
-    cardWidth: store.cardWidth,
-    cardHeight: store.cardHeight,
+    // cardWidth: store.cardWidth,
+    // cardHeight: store.cardHeight,
     parseError: store.parseError
   };
 }

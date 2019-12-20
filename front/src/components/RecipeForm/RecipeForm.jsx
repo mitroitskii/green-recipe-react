@@ -1,6 +1,6 @@
 import uuidv1 from 'uuid/v1';
 import React, { useState } from 'react';
-import { Box, TextInput, Select, Text } from 'grommet';
+import { Box, TextInput, Select, Text, Paragraph } from 'grommet';
 import { NumberInput } from 'grommet-controls';
 import { Redirect } from 'react-router-dom';
 import Category from './Category';
@@ -9,8 +9,8 @@ import Search from './Search';
 import Slider from './Slider/Slider';
 import Instruction from './Instruction';
 import Submit from './Submit';
-import Uploader from '../Uploader/uploader'
-import './recipeForm.css'
+import Uploader from '../Uploader/uploader';
+import './recipeForm.css';
 
 const hrs = [
   '0',
@@ -134,48 +134,136 @@ export default function RecipeForm(props) {
   return (
     <Box
       justify="between"
+      alignContent="stretch"
+      margin="medium"
       gap="medium"
+      pad="medium"
+      fill="vertical"
       direction="column"
       elevation="medium"
       width="80%"
       height="medium"
-      alignContent="stretch"
-      pad="medium"
-      margin="medium"
-      fill="vertical"
     >
-      <Text>Новый рецепт</Text>
-      <TextInput
-        placeholder="Введите название рецепта"
-        value={name}
-        onChange={event => {
-          setError({ ...errors, name: '' });
-          setName(event.target.value);
+      <Paragraph
+        margin={{
+          vertical: 'medium',
+          horizontal: '...',
+          top: 'large',
+          bottom: '...',
+          left: '...',
+          right: '...'
         }}
-      />
-      {errors.name && (
-        <Text size="medium" color="red">
-          {errors.name}
-        </Text>
-      )}
-      <p>Количество порций</p>
-      <NumberInput
-        min={1}
-        max={12}
-        value={portions}
-        suffix={portionsSuffix}
-        onChange={({ target: { value } }) => {
-          if (parseFloat(value) === 1) {
-            setSuffix(' порция');
-          } else if (parseFloat(value) > 4) {
-            setSuffix(' порций');
-          } else {
-            setSuffix(' порции');
-          }
-          setPortions(value);
+        className="bold"
+        alignSelf="center"
+        size="small"
+        responsive={true}
+        textAlign="center"
+      >
+        НОВЫЙ РЕЦЕПТ
+      </Paragraph>
+      <Box
+        align="center"
+        alignContent="center"
+        alignSelf="center"
+        // basis="large"
+        border="bottom"
+        direction="row-responsive"
+      >
+        <TextInput
+          plain={true}
+          placeholder="    Название рецепта"
+          value={name}
+          className="ingredient-name"
+          onChange={event => {
+            setError({ ...errors, name: '' });
+            setName(event.target.value);
+          }}
+        />
+        {errors.name && (
+          <Paragraph
+            margin={{
+              vertical: 'medium',
+              horizontal: '...',
+              top: 'large',
+              bottom: '...',
+              left: '...',
+              right: '...'
+            }}
+            className="bold"
+            alignSelf="center"
+            size="small"
+            responsive={true}
+            textAlign="center"
+            color="red"
+          >
+            {errors.name}
+          </Paragraph>
+        )}
+      </Box>
+      <Paragraph
+        margin={{
+          vertical: 'medium',
+          horizontal: '...',
+          top: 'large',
+          bottom: '...',
+          left: '...',
+          right: '...'
         }}
-      />
-      <p>Ингредиенты</p>
+        className="bold"
+        alignSelf="center"
+        size="small"
+        responsive={true}
+        textAlign="center"
+      >
+        КОЛИЧЕСТВО ПОРЦИЙ
+      </Paragraph>
+      <Box
+        round="small"
+        align="center"
+        alignContent="center"
+        alignSelf="center"
+        // basis="large"
+        // border="bottom"
+        direction="row-responsive"
+        elevation="small"
+        fill={false}
+        flex={false}
+        width={{ min: '220px', max: '220px' }}
+      >
+        <NumberInput
+          min={1}
+          max={12}
+          value={portions}
+          suffix={portionsSuffix}
+          onChange={({ target: { value } }) => {
+            if (parseFloat(value) === 1) {
+              setSuffix(' порция');
+            } else if (parseFloat(value) > 4) {
+              setSuffix(' порций');
+            } else {
+              setSuffix(' порции');
+            }
+            setPortions(value);
+          }}
+        />
+      </Box>
+      <Paragraph
+        margin={{
+          vertical: 'medium',
+          horizontal: '...',
+          top: 'large',
+          bottom: '...',
+          left: '...',
+          right: '...'
+        }}
+        className="bold"
+        alignSelf="center"
+        size="small"
+        responsive={true}
+        textAlign="center"
+      >
+        ИНГРЕДИЕНТЫ
+      </Paragraph>
       {ingredients &&
         ingredients.map(ingredient => (
           <Ingredient
@@ -205,7 +293,7 @@ export default function RecipeForm(props) {
           {errors.ingredients}
         </Text>
       )}
-      <p>Инструкции</p>
+      <Text textAlign="center">Инструкции</Text>
       {instructions &&
         instructions.map((instruction, index) => (
           <Box key={instruction.id}>
@@ -225,7 +313,7 @@ export default function RecipeForm(props) {
           {errors.instructions}
         </Text>
       )}
-      <p>Категория</p>
+      <Text textAlign="center">Категория</Text>
       <Category
         category={category}
         setCategory={setCategory}
@@ -237,7 +325,7 @@ export default function RecipeForm(props) {
           {errors.category}
         </Text>
       )}
-      <p>Время приготовления</p>
+      <Text textAlign="center">Время приготовления</Text>
       <Select
         id="hours"
         name="hours"

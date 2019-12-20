@@ -33,8 +33,10 @@ export default class IngredientCard extends React.Component {
   render() {
     return (
       <Box
-        width={String(this.props.cardWidth)}
-        height={String(this.props.cardHeight)}
+        // width={String(this.props.cardWidth)}
+        // height={String(this.props.cardHeight)}
+        width="25vw"
+        height="22vw"
         className={'wrapper'}
         border={{ color: 'border' }}
       >
