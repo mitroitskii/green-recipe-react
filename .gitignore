@@ -120,3 +120,5 @@ build
 
 # security
 sessions
+
+package-lock.json

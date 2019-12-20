@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import RecipeItem from '../RecipeItem';
 import SortPanel from '../SortPanel';
+import CategorySelector from '../CategorySelector';
 import { Box } from 'grommet';
 import './recipe-list.css'
 
@@ -32,6 +33,12 @@ export default class RecipeList extends Component {
     this.setState({ recipes: respJson.recipes });
   }
 
+  recipesCategory = async (category) => {
+    const recipes = await fetch(`/api/recipes/category/${category}`);
+    const respJson = await recipes.json();
+    this.setState({ recipes: respJson.recipes });
+  }
+
   render() {
     const { recipes } = this.state;
 
@@ -41,14 +48,18 @@ export default class RecipeList extends Component {
           recipesFromApiSortingByPrice={this.recipesFromApiSortingByPrice}
           recipesFromApiSortingByCalories={this.recipesFromApiSortingByCalories}
         />
-          {recipes.map((item) => {
-            return (
-              <Box key={item._id}>
-                <RecipeItem {...item} />
-              </Box>
-            )
-          })
-          }
+        <CategorySelector
+          recipesCategory={this.recipesCategory}
+          recipesFromApi={this.recipesFromApi}
+        />
+        {recipes.map((item) => {
+          return (
+            <Box key={item._id}>
+              <RecipeItem {...item} />
+            </Box>
+          )
+        })
+        }
       </Box>
     )
   }

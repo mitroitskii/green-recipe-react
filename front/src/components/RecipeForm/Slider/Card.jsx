@@ -32,7 +32,12 @@ export default class IngredientCard extends React.Component {
   };
   render() {
     return (
-      <Box width={String(this.props.cardWidth)} height={String(this.props.cardHeight)} className={'wrapper'} border={{"color":"border"}}>
+      <Box
+        width={String(this.props.cardWidth)}
+        height={String(this.props.cardHeight)}
+        className={'wrapper'}
+        border={{ color: 'border' }}
+      >
         <Box direction="column" height="100%" width="100%">
           <Box
             height="100%"
@@ -89,9 +94,9 @@ export default class IngredientCard extends React.Component {
               onClick={this.handleClick}
             >
               <AddCircle size="medium" />
-                <Text size="small" textAlign="center" >
-                  Добавить в рецепт
-                </Text>
+              <Text size="small" textAlign="center">
+                Добавить в рецепт
+              </Text>
             </Box>
             {/* <Button icon={<AddCircle size="large" />} fit="content" align="center" justify="center" label="Добавить в рецепт" onClick={handleClick} /> */}
           </Box>
