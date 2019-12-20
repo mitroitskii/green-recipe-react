@@ -43,7 +43,9 @@ class Login extends React.Component {
         margin="large"
         pad="large"
         border={{ color: 'border' }}
-        background="light-1"
+        justify="center"
+        align="center"
+        elevation="medium"
       >
         <Heading
           level="2"
@@ -51,6 +53,7 @@ class Login extends React.Component {
             top: 'none',
             bottom: 'small'
           }}
+          
         >
           Вход
         </Heading>
@@ -76,7 +79,7 @@ class Login extends React.Component {
               hoverIndicator="background"
               primary
               type="submit"
-              // alignSelf="center"
+              alignSelf="center"
               label="Войти"
             />
           </Box>
@@ -112,50 +115,3 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
-
-// <div className={'form-style-1'}>
-//   <form id="userLogIn" onSubmit={this.handleSubmit}>
-//     <div className={'container'}>
-//       <h1>Login</h1>
-//       <p>Please login</p>
-//       <hr />
-//       <p>
-//         <label>
-//           <b>Username</b>
-//         </label>
-//         <input
-//           type="text"
-//           placeholder="Username"
-//           name="username"
-//           required
-//           onChange={this.handleUsername}
-//         />
-//       </p>
-//       <p>
-//         <label>
-//           <b>Password</b>
-//         </label>
-//         <input
-//           type="password"
-//           placeholder="Enter Password"
-//           name="password"
-//           required
-//           onChange={this.handlePassword}
-//         />
-//       </p>
-//       <hr />
-//       <button type="submit" className={'loginbtn'}>
-//         Login
-//       </button>
-//     </div>
-//   </form>
-//   <div>
-//     {
-//     this.props.loadingFetch
-//     ? (<span className={'statustext'}>loading</span>)
-//     : this.props.isLoggedIn ? (
-//       <Redirect to="/" />)
-//       : (<span className={'statustext'}>{this.props.logRegstatusError}</span>)
-//       }
-//   </div>
-// </div>

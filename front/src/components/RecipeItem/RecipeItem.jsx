@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Box, Image, Text, DropButton, Menu } from 'grommet';
+import { Box, Image, Text, DropButton, Heading } from 'grommet';
 
 const RecipeItem = item => {
   const {
@@ -25,41 +25,51 @@ const RecipeItem = item => {
           target="_blank"
         >
           {' '}
-          <Text> {item.name}</Text>{' '}
+          <Text size="small" color="black" margin="xsmall">
+            {' '}
+            {item.name}
+          </Text>{' '}
         </a>
       ))}{' '}
     </Box>
   );
   return (
-    <Box direction="column" margin="small" width="large">
-      <Box background="status-ok">
-        <Link style={{ textDecoration: 'none' }} to={`/recipes/${_id}`}>
-          {' '}
-          <Text margin="xsmall"> {name} </Text>{' '}
-        </Link>
+    <Box direction="row">
+      <Box height="small" width="small" margin="xsmall">
+        <Image src={image} alt={name} fit="cover" />
       </Box>
-      <Box direction="row">
-        <Box height="small" width="small" margin="xsmall">
-          <Image src={image} alt={name} fit="contain" />
-        </Box>
-        <Box margin="xsmall" alignSelf="center">
+      <Box direction="column" width="medium" align="start">
+        <Link style={{ textDecoration: 'none' }} to={`/recipes/${_id}`}>
+          <Heading level="3" margin="none" color="#01a982">
+            {' '}
+            {category} / {name}
+          </Heading>
+        </Link>
+
+        <Box alignSelf="start">
           <DropButton
+            style={{ border: 'none' }}
+            alignSelf="start"
             label={`Ингредиенты - ${ingredients.length}`}
             dropAlign={{ top: 'bottom', left: 'left' }}
             dropContent={ingredientsList()}
           />
+        </Box>
+        <Box alignSelf="start">
           <Text>Стоимость рецепта: {priceTotal} руб. </Text>
           <Text>Калорийность: {caloriesTotal} ккал </Text>
-          <Text>Категория: {category}</Text>
+          {/* <Text>Категория: {category}</Text> */}
           <Text>Автор: {authorName}</Text>
           <Text>
             Время приготовления:{' '}
-            {hours === '1'
+            {hours === '0'
+              ? ''
+              : hours === '1'
               ? `${hours} час`
-              : hours > 0 && hours < 5
+              : hours > 1 && hours < 5
               ? `${hours} часа`
               : `${hours} часов`}{' '}
-            {minutes != '0' && `${minutes} минут`}{' '}
+            {minutes !== '0' && `${minutes} минут`}{' '}
           </Text>
         </Box>
       </Box>

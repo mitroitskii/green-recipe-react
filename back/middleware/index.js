@@ -5,7 +5,7 @@ module.exports = function(app) {
   const session = require('express-session');
   const FileStore = require('session-file-store')(session);
   const { cookiesCleaner } = require('./auth');
-
+  const oneWeek = 7 * 24 * 3600 * 1000;
   // const upload = multer({ dest: 'uploads/' });
 
   app.use(morgan('dev'));
@@ -29,7 +29,7 @@ module.exports = function(app) {
   app.use(cookieParser());
 
   // initialize express-session to allow us track the logged-in user across sessions.
-  const oneWeek = 7 * 24 * 3600 * 1000;
+
   app.use(
     session({
       store: new FileStore(),

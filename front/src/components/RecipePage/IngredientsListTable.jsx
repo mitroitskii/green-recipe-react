@@ -27,7 +27,7 @@ export default class IngredientsListTable extends React.Component {
         </thead>
         <tbody>
           {ingredients.map(ingredient => (
-            <tr key={ingredient.id} className="ingredinetsList testText ">
+            <tr key={ingredient.id} className="testText ">
               <td className="paddingTd">
                 <Anchor
                   // className="singleLineContent"

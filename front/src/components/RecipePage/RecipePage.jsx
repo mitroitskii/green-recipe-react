@@ -35,6 +35,7 @@ export default class RecipePage extends Component {
   };
 
   async componentDidMount() {
+    window.scrollTo(0, 0);
     const { id } = this.props.match.params;
     // console.log("id of page", id);
     // const testId = '5df87e189fb92116d2af03c4';
@@ -116,9 +117,11 @@ export default class RecipePage extends Component {
     return (
       <Box elevation="medium" direction="column" width="80%" gap="medium">
         <Box
+          align="center"
           direction="column"
           animation="fadeIn"
           // justify="center"
+          // alignSelf="center"
           width="100%"
         >
           <Anchor
@@ -129,6 +132,7 @@ export default class RecipePage extends Component {
             alignSelf="center"
             label={this.state.category}
             href="/recipes"
+            textAlign="center"
           />
 
           <Heading
@@ -139,12 +143,14 @@ export default class RecipePage extends Component {
             }}
             alignSelf="center"
             level={1}
+            textAlign="center"
           >
             {this.state.name}
           </Heading>
 
           <Heading
             className="author"
+            textAlign="center"
             alignSelf="center"
             margin={{
               bottom: "none"
@@ -157,6 +163,7 @@ export default class RecipePage extends Component {
 
         <Box
           width="100%"
+          height="500px"
           elevation="medium"
           alignSelf="center"
           animation="fadeIn"
@@ -167,6 +174,7 @@ export default class RecipePage extends Component {
           // border-radius="48px"
         >
           <Image
+            fit="cover"
             height="100%"
             width="100%"
             elevation="medium"
@@ -229,7 +237,8 @@ export default class RecipePage extends Component {
               }}
               level={3}
             >
-              Ингредиенты:
+              {/* Ингредиенты: */}
+              ИНГРЕДИЕНТЫ:
             </Heading>
             {/* Ингредиенты */}
           </Box>
@@ -294,17 +303,23 @@ export default class RecipePage extends Component {
             }}
             level={3}
           >
-            Инструкции:
+            ИНСТРУКЦИИ:
           </Heading>
-
-          {this.state.instructions.map((ingredient, index) => (
-            <>
-              <Text className="testText" key={ingredient.id}>
+          <ul className="list4a">
+            {this.state.instructions.map((ingredient, index) => (
+              <>
+                {/* <Text className="testText" key={ingredient.id}>
                 {index + 1}. {ingredient.text}
-              </Text>
-              <br />
-            </>
-          ))}
+              </Text> */}
+
+                <li className="testText" key={ingredient.id}>
+                  {ingredient.text}
+                </li>
+
+                {/* <br /> */}
+              </>
+            ))}
+          </ul>
         </Box>
       </Box>
     );
