@@ -19,6 +19,7 @@ export default function Category(props) {
     <Box fill align="start" justify="center">
       <Select
         id="category"
+        className="input"
         name="category"
         size="medium"
         placeholder="Выберите категорию блюда"

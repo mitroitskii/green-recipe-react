@@ -77,6 +77,7 @@ export default class Instruction extends React.Component {
           // elevation="small"
         >
           <TextArea
+            className="input"
             plain={true}
             fill={true}
             resize={false}
