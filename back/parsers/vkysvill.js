@@ -156,7 +156,7 @@ async function parseProductPageVV(link) {
 
     result['kcal'] = parseFloat(result['kcal']);
     // result['inputWeight'] = result['weight'];
-    // console.log('result', result);
+    console.log('result', result);
 
     const newIngredient = new Ingredient(result);
 
