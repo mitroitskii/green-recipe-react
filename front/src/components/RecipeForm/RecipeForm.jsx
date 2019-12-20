@@ -264,17 +264,14 @@ export default function RecipeForm(props) {
       >
         ИНГРЕДИЕНТЫ
       </Paragraph>
-      {/* {ingredients &&
-        ingredients.map(ingredient => (
-          <Ingredient
-            key={ingredient.id}
-            ingredient={ingredient}
-            ingredients={ingredients}
-            setIngredients={setIngredients}
-            setPriceTotal={setPriceTotal}
-            setCaloriesTotal={setCaloriesTotal}
-          />
-        ))} */}
+      {ingredients.length > 0 && (
+        <Ingredients
+          ingredients={ingredients}
+          setIngredients={setIngredients}
+          setPriceTotal={setPriceTotal}
+          setCaloriesTotal={setCaloriesTotal}
+        />
+      )}
       <Search setSearch={setSearch} />
       {search && (
         <Slider
@@ -293,11 +290,32 @@ export default function RecipeForm(props) {
           {errors.ingredients}
         </Text>
       )}
-      <Text textAlign="center">Инструкции</Text>
+      <Paragraph
+        margin={{
+          vertical: 'medium',
+          horizontal: '...',
+          top: 'large',
+          bottom: '...',
+          left: '...',
+          right: '...'
+        }}
+        className="bold"
+        alignSelf="center"
+        size="small"
+        responsive={true}
+        textAlign="center"
+      >
+        ИНСТРУКЦИИ
+      </Paragraph>
       {instructions &&
         instructions.map((instruction, index) => (
-          <Box key={instruction.id}>
-            <Text>{index + 1}</Text>
+          <Box
+            // align="center"
+            // alignContent="center"
+            alignSelf="center"
+            direction="row-responsive"
+            key={instruction.id}
+          >
             <Instruction
               instruction={instruction}
               instructions={instructions}
@@ -313,49 +331,145 @@ export default function RecipeForm(props) {
           {errors.instructions}
         </Text>
       )}
-      <Text textAlign="center">Категория</Text>
-      <Category
-        category={category}
-        setCategory={setCategory}
-        errors={errors}
-        setError={setError}
-      />
-      {errors.category && (
-        <Text size="medium" color="red">
-          {errors.category}
-        </Text>
-      )}
-      <Text textAlign="center">Время приготовления</Text>
-      <Select
-        id="hours"
-        name="hours"
-        placeholder="часов"
-        dropHeight="small"
-        options={hrs}
-        value={hours}
-        onChange={({ option }) => setHours(option)}
-      />
-      <Select
-        id="minutes"
-        name="minutes"
-        placeholder="минут"
-        dropHeight="small"
-        options={mins}
-        value={minutes}
-        onChange={({ option }) => setMinutes(option)}
-      />
+      <Box
+        alignSelf="center"
+        alignContent="center"
+        direction="row"
+        round="small"
+        // elevation="small"
+        fill={false}
+        flex="grow"
+        margin={{ vertical: '0px' }}
+        width={{ min: '800px', max: '800px' }}
+      >
+        <Box
+          alignSelf="left"
+          alignContent="top"
+          direction="column"
+          round="small"
+          // elevation="small"
+          fill={false}
+          flex="grow"
+          margin={{ vertical: '0px' }}
+          // width={{ min: '800px', max: '800px' }}
+        >
+          <Paragraph
+            margin={{
+              vertical: 'medium',
+              horizontal: '...',
+              top: 'large',
+              bottom: '...',
+              left: '...',
+              right: '...'
+            }}
+            className="bold"
+            alignSelf="left"
+            size="small"
+            responsive={true}
+            textAlign="left"
+          >
+            КАТЕГОРИЯ
+          </Paragraph>
+          <Category
+            category={category}
+            setCategory={setCategory}
+            errors={errors}
+            setError={setError}
+          />
+          {errors.category && (
+            <Text size="medium" color="red">
+              {errors.category}
+            </Text>
+          )}
+        </Box>
+        <Box
+          alignSelf="right"
+          direction="column"
+          round="small"
+          // elevation="small"
+          fill={false}
+          flex="grow"
+          margin={{ vertical: '0px' }}
+          // width={{ min: '800px', max: '800px' }}
+        >
+          <Paragraph
+            margin={{
+              vertical: 'medium',
+              horizontal: '...',
+              top: 'large',
+              bottom: '...',
+              left: '...',
+              right: '...'
+            }}
+            className="bold"
+            alignSelf="left"
+            size="small"
+            responsive={true}
+            textAlign="left"
+          >
+            ВРЕМЯ ПРИГОТОВЛЕНИЯ
+          </Paragraph>
+          <Select
+            id="hours"
+            name="hours"
+            placeholder="часов"
+            dropHeight="small"
+            options={hrs}
+            value={hours}
+            onChange={({ option }) => setHours(option)}
+          />
+          <Paragraph
+            className="bold"
+            alignSelf="left"
+            size="small"
+            responsive={true}
+            textAlign="left"
+          >
+            ч.
+          </Paragraph>
+          <Select
+            id="minutes"
+            name="minutes"
+            placeholder="минут"
+            dropHeight="small"
+            options={mins}
+            value={minutes}
+            onChange={({ option }) => setMinutes(option)}
+          />
+          <Paragraph
+            className="bold"
+            alignSelf="left"
+            size="small"
+            responsive={true}
+            textAlign="left"
+          >
+            мин.
+          </Paragraph>
+        </Box>
+      </Box>
       <Uploader setImage={setImage} />
       {errors.image && (
         <Text size="medium" color="red">
           {errors.image}
         </Text>
       )}
-      <Submit name="Создать новый рецепт" clickSubmit={clickSubmit} />
-      {errors.server && (
-        <Text size="medium" color="red">
-          {errors.server}
-        </Text>
-      )}
+      <Box
+        alignSelf="center"
+        alignContent="center"
+        direction="row"
+        round="small"
+        // elevation="small"
+        fill={false}
+        flex="grow"
+        margin={{ vertical: '0px' }}
+      >
+        <Submit name="СОЗДАТЬ РЕЦЕПТ" clickSubmit={clickSubmit} />
+        {errors.server && (
+          <Text size="medium" color="red">
+            {errors.server}
+          </Text>
+        )}
+      </Box>
     </Box>
   );
 }

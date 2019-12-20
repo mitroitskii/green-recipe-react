@@ -25,7 +25,7 @@ export default class Uploader extends Component {
     const respJson = await response.json();
     const path = respJson.path;
     console.log("path:", path);
-    alert('ваше фото добавлено к рецепту !')
+    alert('Ваше фото добавлено к рецепту !')
     this.props.setImage("http://localhost:5000/api/uploads/"+path)
   };
 

@@ -486,6 +486,7 @@ export default class RecipeEdit extends Component {
         )}
         <Box
           alignSelf="center"
+          alignContent="center"
           direction="row"
           round="small"
           // elevation="small"
@@ -494,81 +495,122 @@ export default class RecipeEdit extends Component {
           margin={{ vertical: '0px' }}
           width={{ min: '800px', max: '800px' }}
         >
-          <Paragraph
-            margin={{
-              vertical: 'medium',
-              horizontal: '...',
-              top: 'large',
-              bottom: '...',
-              left: '...',
-              right: '...'
-            }}
-            className="bold"
-            alignSelf="center"
-            size="small"
-            responsive={true}
-            textAlign="center"
+          <Box
+            alignSelf="left"
+            alignContent="top"
+            direction="column"
+            round="small"
+            // elevation="small"
+            fill={false}
+            flex="grow"
+            margin={{ vertical: '0px' }}
+            // width={{ min: '800px', max: '800px' }}
           >
-            КАТЕГОРИЯ
-          </Paragraph>
-          <Category
-            category={category}
-            setCategory={args => {
-              this.setState(prevState => ({
-                ...prevState,
-                category: args
-              }));
-            }}
-            errors={errors}
-            setError={args => {
-              this.setState(prevState => ({
-                ...prevState,
-                errors: args
-              }));
-            }}
-          />
-          {errors.category && (
-            <Text size="medium" color="red">
-              {errors.category}
-            </Text>
-          )}
-          <Paragraph
-            margin={{
-              vertical: 'medium',
-              horizontal: '...',
-              top: 'large',
-              bottom: '...',
-              left: '...',
-              right: '...'
-            }}
-            className="bold"
-            alignSelf="center"
-            size="small"
-            responsive={true}
-            textAlign="center"
+            <Paragraph
+              margin={{
+                vertical: 'medium',
+                horizontal: '...',
+                top: 'large',
+                bottom: '...',
+                left: '...',
+                right: '...'
+              }}
+              className="bold"
+              alignSelf="left"
+              size="small"
+              responsive={true}
+              textAlign="left"
+            >
+              КАТЕГОРИЯ
+            </Paragraph>
+            <Category
+              category={category}
+              setCategory={args => {
+                this.setState(prevState => ({
+                  ...prevState,
+                  category: args
+                }));
+              }}
+              errors={errors}
+              setError={args => {
+                this.setState(prevState => ({
+                  ...prevState,
+                  errors: args
+                }));
+              }}
+            />
+            {errors.category && (
+              <Text size="medium" color="red">
+                {errors.category}
+              </Text>
+            )}
+          </Box>
+          <Box
+            alignSelf="right"
+            direction="column"
+            round="small"
+            // elevation="small"
+            fill={false}
+            flex="grow"
+            margin={{ vertical: '0px' }}
+            // width={{ min: '800px', max: '800px' }}
           >
-            ВРЕМЯ ПРИГОТОВЛЕНИЯ
-          </Paragraph>
-          <Select
-            id="hours"
-            name="hours"
-            placeholder="часов"
-            dropHeight="small"
-            options={hrs}
-            value={hours}
-            onChange={({ option }) => {
-              this.setState({ hours: option });
-            }}
-          />
-          <Select
-            id="minutes"
-            name="minutes"
-            placeholder="минут"
-            dropHeight="small"
-            options={mins}
-            value={minutes}
-            onChange={({ option }) => this.setState({ minutes: option })}
-          />
+            <Paragraph
+              margin={{
+                vertical: 'medium',
+                horizontal: '...',
+                top: 'large',
+                bottom: '...',
+                left: '...',
+                right: '...'
+              }}
+              className="bold"
+              alignSelf="left"
+              size="small"
+              responsive={true}
+              textAlign="left"
+            >
+              ВРЕМЯ ПРИГОТОВЛЕНИЯ
+            </Paragraph>
+            <Select
+              id="hours"
+              name="hours"
+              placeholder="часов"
+              dropHeight="small"
+              options={hrs}
+              value={hours}
+              onChange={({ option }) => {
+                this.setState({ hours: option });
+              }}
+            />
+            <Paragraph
+              className="bold"
+              alignSelf="left"
+              size="small"
+              responsive={true}
+              textAlign="left"
+            >
+              ч.
+            </Paragraph>
+            <Select
+              id="minutes"
+              name="minutes"
+              placeholder="минут"
+              dropHeight="small"
+              options={mins}
+              value={minutes}
+              onChange={({ option }) => this.setState({ minutes: option })}
+            />
+            <Paragraph
+              className="bold"
+              alignSelf="left"
+              size="small"
+              responsive={true}
+              textAlign="left"
+            >
+              мин.
+            </Paragraph>
+          </Box>
         </Box>
         <Uploader
           setImage={args => {
@@ -583,12 +625,23 @@ export default class RecipeEdit extends Component {
             {errors.image}
           </Text>
         )}
-        <Submit name="Изменить рецепт" clickSubmit={this.clickSubmit} />
-        {errors.server && (
-          <Text size="medium" color="red">
-            {errors.server}
-          </Text>
-        )}
+        <Box
+          alignSelf="center"
+          alignContent="center"
+          direction="row"
+          round="small"
+          // elevation="small"
+          fill={false}
+          flex="grow"
+          margin={{ vertical: '0px' }}
+        >
+          <Submit name="ИЗМЕНИТЬ РЕЦЕПТ" clickSubmit={this.clickSubmit} />
+          {errors.server && (
+            <Text size="medium" color="red">
+              {errors.server}
+            </Text>
+          )}
+        </Box>
       </Box>
     );
   }

@@ -1,12 +1,12 @@
 import React from 'react';
-import { Box, Button, Text } from 'grommet';
+import { Box, Button, Text, Paragraph } from 'grommet';
 
 export default function Submit(props) {
   return (
     <Box wrap direction="row" width="small">
       <Button
         href="#"
-        onClick={(event) => {
+        onClick={event => {
           event.preventDefault();
           event.stopPropagation();
           props.clickSubmit();
@@ -22,9 +22,14 @@ export default function Submit(props) {
           background="accent-1"
           round="large"
         >
-          <Text size="small" color="white">
+          <Paragraph
+            className="button"
+            alignSelf="center"
+            textAlign="center"
+            elevation="small"
+          >
             {props.name}
-          </Text>
+          </Paragraph>
         </Box>
       </Button>
     </Box>
