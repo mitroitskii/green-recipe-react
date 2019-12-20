@@ -47,7 +47,7 @@ class Navbar extends React.Component {
                 onClick={this.fakehandleClick}
                 hoverIndicator
               >
-                <Button as={Link} to="/recipes/:id"
+                <Button as={Link} to={`/users/${this.props.userName}`}
                   align="center" justify="center"
                   fill="true"
                   onClick={this.fakehandleClick}
