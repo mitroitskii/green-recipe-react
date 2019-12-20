@@ -39,7 +39,7 @@ export default class RecipePage extends Component {
     const { id } = this.props.match.params;
     // console.log("id of page", id);
     // const testId = '5df87e189fb92116d2af03c4';
-    const response = await fetch(`http://localhost:5000/api/recipes/${id}`);
+    const response = await fetch(`/api/recipes/${id}`);
     const respJson = await response.json();
     // console.log('respJsonReceived', respJson);
     // respJson.recipe

@@ -6,6 +6,7 @@ const usersRouter = require('./routes/users');
 const recipesRouter = require('./routes/recipes');
 const parcesRouter = require('./routes/parses');
 const uploaderRouter = require('./routes/uploads');
+  const path = require('path');
 
 const app = express();
 
@@ -22,6 +23,12 @@ mongoose.connect(
     useUnifiedTopology: true,
   },
 );
+
+app.use(express.static(path.join(__dirname, 'build')));
+
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
 
 app.use('/api/users/', usersRouter);
 app.use('/api/recipes/', recipesRouter);

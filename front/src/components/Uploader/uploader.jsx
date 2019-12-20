@@ -13,7 +13,7 @@ export default class Uploader extends Component {
     // console.log("clicked");
     
     // e.preventDefault();
-    const link = "http://localhost:5000/api/uploads/";
+    const link = "/api/uploads/";
     const img = new FormData();
     img.append("file", acceptedFile[0]);
 
@@ -26,7 +26,7 @@ export default class Uploader extends Component {
     const path = respJson.path;
     console.log("path:", path);
     alert('ваше фото добавлено к рецепту !')
-    this.props.setImage("http://localhost:5000/api/uploads/"+path)
+    this.props.setImage("/api/uploads/"+path)
   };
 
  render() {

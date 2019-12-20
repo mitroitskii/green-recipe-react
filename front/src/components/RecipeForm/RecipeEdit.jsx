@@ -36,7 +36,7 @@ export default class RecipeEdit extends Component {
 
   async componentDidMount() {
     const { id } = this.props.match.params;
-    const response = await fetch(`http://localhost:5000/api/recipes/${id}`);
+    const response = await fetch(`/api/recipes/${id}`);
     const result = await response.json();
     const {
       _id,
@@ -127,7 +127,7 @@ export default class RecipeEdit extends Component {
           instructionsTrimmed = instructions.slice(0, instructions.length - 1);
         }
         const response = await fetch(
-          `http://localhost:5000/api/recipes/${id}`,
+          `/api/recipes/${id}`,
           {
             method: 'PUT',
             headers: { 'Content-type': 'application/json' },

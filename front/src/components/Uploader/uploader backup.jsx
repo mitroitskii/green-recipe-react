@@ -14,7 +14,7 @@ export default class Uploader extends Component {
     console.log("clicked");
     
     // e.preventDefault();
-    const link = "http://localhost:5000/api/uploads/";
+    const link = "/api/uploads/";
     const img = new FormData();
     img.append("file", acceptedFile[0]);
 
