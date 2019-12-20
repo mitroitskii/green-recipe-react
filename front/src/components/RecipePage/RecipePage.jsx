@@ -237,7 +237,8 @@ export default class RecipePage extends Component {
               }}
               level={3}
             >
-              Ингредиенты:
+              {/* Ингредиенты: */}
+              ИНГРЕДИЕНТЫ:
             </Heading>
             {/* Ингредиенты */}
           </Box>
@@ -302,7 +303,7 @@ export default class RecipePage extends Component {
             }}
             level={3}
           >
-            Инструкции:
+            ИНСТРУКЦИИ:
           </Heading>
           <ul className="list4a">
             {this.state.instructions.map((ingredient, index) => (
@@ -311,7 +312,7 @@ export default class RecipePage extends Component {
                 {index + 1}. {ingredient.text}
               </Text> */}
 
-                <li className="" key={ingredient.id}>
+                <li className="testText" key={ingredient.id}>
                   {ingredient.text}
                 </li>
 
