@@ -32,17 +32,6 @@ class Slider extends React.Component {
       } else {
         this.setState({ numberOfCards: ingredientQuantity });
       }
-      // const response = await fetch('http://localhost:5000/api/parses/', {
-      //   method: 'POST',
-      //   headers: { 'Content-type': 'application/json' },
-      //   body: JSON.stringify({ productname: search })
-      // });
-      // if (response.status === 200) {
-      //   const ingredients = await response.json();
-      //   this.setState({ children: ingredients.ingredients });
-      // } else {
-      //   console.log(`ERROR: ${response.status}`);
-      // }
     } catch (error) {
       console.log(error);
     }
