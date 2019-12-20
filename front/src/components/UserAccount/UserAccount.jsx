@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import RecipeItem from '../RecipeItem';
 import { Link } from 'react-router-dom';
-import { Box, Button, Text } from 'grommet';
+import { Box, Button, Text, Heading } from 'grommet';
 
 class UserAccount extends Component {
   state = {
@@ -40,29 +40,35 @@ class UserAccount extends Component {
     const { recipes } = this.state;
 
     return (
-      <Box>
-        {recipes.length === 0 &&
-          <Box margin="small" justify="center" align="center">
-            <Text> У вас нет рецептов </Text>
-            <Text> Добавьте свой рецепт по этой <Link to={'/recipes/new'}>  ссылке </Link></Text>
-          </Box>}
-        {recipes.map(item => {
-          return (
-            <Box key={item._id} direction="column" justify="center" align="center">
-              <RecipeItem {...item} />
-              <Box direction="row" align='start'>
-                <Link to={'/recipes/' + item._id + '/edit'}>
-                  <Button label="Редактировать" margin="xsmall" />
-                </Link>
-                <Button
-                  label="Удалить"
-                  margin="xsmall"
-                  onClick={() => this.deleteRecipe(item._id)}
-                />
+      <Box width='80%' elevation='medium' justify='center' align='center' >
+        <Box margin='large'>
+          <Heading margin='large' textAlign='center'>Мои рецепты</Heading>
+          {recipes.length === 0 &&
+            <Box margin="small" justify="center" align="center">
+              <Text> У вас нет рецептов </Text>
+              <Text> Добавьте свой рецепт по этой <Link to={'/recipes/new'}>  ссылке </Link></Text>
+            </Box>}
+          {recipes.map(item => {
+            return (
+              <Box key={item._id} direction="column" justify="center" align="center">
+                <RecipeItem {...item} />
+                <Box direction="row" align='start'>
+                  <Link to={'/recipes/' + item._id + '/edit'}>
+                    <Button
+                      label="Редактировать"
+                      margin="xsmall"
+                    />
+                  </Link>
+                  <Button
+                    label="Удалить"
+                    margin="xsmall"
+                    onClick={() => this.deleteRecipe(item._id)}
+                  />
+                </Box>
               </Box>
-            </Box>
-          );
-        })}
+            );
+          })}
+        </Box>
       </Box>
     );
   }
