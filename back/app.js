@@ -15,8 +15,8 @@ useMiddleware(app);
 const mongoose = require('mongoose');
 
 mongoose.connect(
-  // 'mongodb+srv://test:test@cluster0-anezw.mongodb.net/green-recipe?retryWrites=true&w=majority',
-  'mongodb://localhost:27017/GreenRecipeProject',
+  'mongodb+srv://test:test@cluster0-anezw.mongodb.net/green-recipe?retryWrites=true&w=majority',
+  // 'mongodb://localhost:27017/GreenRecipeProject',
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
