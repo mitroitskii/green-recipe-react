@@ -52,7 +52,7 @@ class App extends React.Component {
     );
     return (
       <Router>
-        <Grommet theme={customTheme}>
+        <Grommet theme={hpe}>
           <Box flex align="center" justify="center">
             <Navbar />
             <Switch>
