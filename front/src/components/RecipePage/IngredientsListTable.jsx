@@ -1,3 +1,4 @@
+/* eslint-disable react/prefer-stateless-function */
 import { Anchor } from 'grommet';
 import React from 'react';
 import './Ingredients.css';
@@ -34,6 +35,7 @@ export default class IngredientsListTable extends React.Component {
                   // alignSelf="center"
                   label={ingredient.name}
                   href={ingredient.link}
+                  target="_blank"
                 />
               </td>
               <td className="centered ">
@@ -43,13 +45,13 @@ export default class IngredientsListTable extends React.Component {
               </td>
               <td className="centered">
                 {Math.round(
-                  (ingredient.calories * ingredient.inputWeight * ratio) / 100,
+                  (ingredient.calories * ingredient.inputWeight * ratio) / 100
                 )}
               </td>
               <td className="centered">
                 {/* <strong> */}
                 {Math.ceil(
-                  (ingredient.inputWeight * ratio) / ingredient.weight,
+                  (ingredient.inputWeight * ratio) / ingredient.weight
                 ) * ingredient.price}
                 {/* </strong> */}
               </td>
@@ -57,7 +59,7 @@ export default class IngredientsListTable extends React.Component {
               <td className="centered">
                 {/* <strong> */}
                 {Math.ceil(
-                  (ingredient.inputWeight * ratio) / ingredient.weight,
+                  (ingredient.inputWeight * ratio) / ingredient.weight
                 )}
                 {/* </strong> */}
               </td>
