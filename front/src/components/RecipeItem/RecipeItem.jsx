@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Box, Image, Text, DropButton, Menu } from 'grommet';
+import { Box, Image, Text, DropButton } from 'grommet';
 
 const RecipeItem = (item) => {
   const { name, image, _id, ingredients, priceTotal, caloriesTotal, category, authorName, hours, minutes } = item;
@@ -27,7 +27,7 @@ const RecipeItem = (item) => {
           <Text>Калорийность: {caloriesTotal} ккал </Text>
           <Text>Категория: {category}</Text>
           <Text>Автор: {authorName}</Text>
-          <Text>Время приготовления: {(hours === '1') ? `${hours} час` : ((hours > 0) && (hours < 5)) ? `${hours} часа` : `${hours} часов`} {(minutes != '0') && `${minutes} минут`} </Text>
+          <Text>Время приготовления: {(hours === 0) ? `${hours} час` : ((+hours > 0) && (hours < 5)) ? `${hours} часа` : `${hours} часов`} {(minutes != '0') && `${minutes} минут`} </Text>
         </Box>
       </Box>
     </Box>
