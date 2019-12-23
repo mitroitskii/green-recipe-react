@@ -17,6 +17,8 @@ npm start
 * Удаление рецепта
 * Авторизация
 
+![alt text](./readme_screenshot.gif)
+
 # Authors
 <ul>
 <li><a href="https://github.com/ArtVolchara">Артём Волков</a></li>
