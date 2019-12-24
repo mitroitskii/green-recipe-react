@@ -1,12 +1,6 @@
-/* eslint-disable react/prefer-stateless-function */
 import { Anchor } from 'grommet';
 import React from 'react';
 import './Ingredients.css';
-// import { connect } from 'react-redux';
-
-// import { logoutFetchAC } from '../../redux/actions/actions';
-
-// p margin 0 + margin bottom li
 
 export default class IngredientsListTable extends React.Component {
   render() {
@@ -31,37 +25,28 @@ export default class IngredientsListTable extends React.Component {
             <tr key={ingredient.id} className="testText ">
               <td className="paddingTd">
                 <Anchor
-                  // className="singleLineContent"
-                  // alignSelf="center"
                   label={ingredient.name}
                   href={ingredient.link}
                   target="_blank"
                 />
               </td>
               <td className="centered ">
-                {/* <strong> */}
                 {Math.round(ingredient.inputWeight * ratio)}
-                {/* </strong> */}
               </td>
               <td className="centered">
                 {Math.round(
-                  (ingredient.calories * ingredient.inputWeight * ratio) / 100
+                  (ingredient.calories * ingredient.inputWeight * ratio) / 100,
                 )}
               </td>
               <td className="centered">
-                {/* <strong> */}
                 {Math.ceil(
-                  (ingredient.inputWeight * ratio) / ingredient.weight
+                  (ingredient.inputWeight * ratio) / ingredient.weight,
                 ) * ingredient.price}
-                {/* </strong> */}
               </td>
-
               <td className="centered">
-                {/* <strong> */}
                 {Math.ceil(
-                  (ingredient.inputWeight * ratio) / ingredient.weight
+                  (ingredient.inputWeight * ratio) / ingredient.weight,
                 )}
-                {/* </strong> */}
               </td>
             </tr>
           ))}
@@ -70,17 +55,3 @@ export default class IngredientsListTable extends React.Component {
     );
   }
 }
-
-// function mapStateToProps(store) {
-//   //   return {
-//   //     isLoggedIn: store.isLoggedIn,
-//   //   };
-// }
-
-// function mapDispatchToProps(dispatch) {
-//   //   return {
-//   //     logoutFetch: () => dispatch(logoutFetchAC()),
-//   //   };
-// }
-
-// export default connect(mapStateToProps, mapDispatchToProps)(IngredientsList);

@@ -19,18 +19,20 @@ router.route('/isLogged').get((req, res) => {
 
 router.route('/registration').post(async (req, res, next) => {
   try {
-    const user = await User.findOne({ username: req.body.username });
+    const user = await User.findOne({
+      $or: [{ username: req.body.username }, { email: req.body.email }],
+    });
     if (user) {
       const registrationError = new Error('Такой пользователь уже существует');
       throw registrationError;
     } else {
       const password = await bcrypt.hash(req.body.password, saltRounds);
-      const user = new User({
+      const newUser = new User({
         username: req.body.username,
         password,
         email: req.body.email,
       });
-      await user.save();
+      await newUser.save();
       res.send({
         registrationStatus:
           'Вы успешно зарегистрированы. Теперь войдите под своим логином и паролем.',

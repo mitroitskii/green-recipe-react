@@ -1,19 +1,14 @@
 import React, { Component } from "react";
-import Dropzone from 'react-dropzone'
-import './uploader.css';
+import Dropzone from "react-dropzone";
+import "./uploader.css";
 
-
-export default class Uploader extends Component { 
-
+export default class Uploader extends Component {
   state = {
-    imagelink:''    
-  }
+    imagelink: ""
+  };
 
   send = async acceptedFile => {
-    // console.log("clicked");
-    
-    // e.preventDefault();
-    const link = "http://localhost:5000/api/uploads/";
+    const link = "/api/uploads/";
     const img = new FormData();
     img.append("file", acceptedFile[0]);
 
@@ -24,12 +19,11 @@ export default class Uploader extends Component {
 
     const respJson = await response.json();
     const path = respJson.path;
-    console.log("path:", path);
-    alert('Ваше фото добавлено к рецепту !')
-    this.props.setImage("http://localhost:5000/api/uploads/"+path)
+    alert("Ваше фото добавлено к рецепту !");
+    this.props.setImage("/api/uploads/" + path);
   };
 
- render() {
+  render() {
     return (
       <Dropzone onDrop={acceptedFile => this.send(acceptedFile)}>
         {({ getRootProps, getInputProps }) => (
