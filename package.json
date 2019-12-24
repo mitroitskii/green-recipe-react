@@ -1,5 +1,5 @@
 {
   "scripts": {
-    "start": "npx nodemon back/bin/www --ignore back/sessions/"
+    "start": "node back/bin/www --ignore back/sessions/"
   }
 }
