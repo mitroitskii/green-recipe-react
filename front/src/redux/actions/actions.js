@@ -42,7 +42,7 @@ export const isLoggedErrorAC = error => ({
 export function* isLoggedFetchAsyncAC(action) {
   try {
     yield put(isLoggedRequestAC());
-    const response = yield fetch('http://localhost:5000/api/users/isLogged', {
+    const response = yield fetch('/api/users/isLogged', {
       credentials: 'include'
     });
     const result = yield call(() => response.json());
@@ -77,7 +77,7 @@ export function* loginFetchAsyncAC(action) {
   try {
     yield put(loginRequestAC());
     const response = yield call(() =>
-      fetch('http://localhost:5000/api/users/login', {
+      fetch('/api/users/login', {
         method: 'POST',
         credentials: 'include',
         headers: {
@@ -121,7 +121,7 @@ export function* registerFetchAsyncAC(action) {
   try {
     yield put(registerRequestAC());
     const response = yield call(() =>
-      fetch('http://localhost:5000/api/users/registration', {
+      fetch('/api/users/registration', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -163,7 +163,7 @@ export const logoutErrorAC = error => ({
 export function* logoutFetchAsyncAC(action) {
   try {
     yield put(logoutRequestAC());
-    const response = yield fetch('http://localhost:5000/api/users/logout', {
+    const response = yield fetch('/api/users/logout', {
       credentials: 'include',
       method: 'DELETE'
     });
@@ -200,7 +200,7 @@ export function* parseFetchAsyncAC(action) {
   try {
      console.log('parse');
     yield put(parseRequestAC());
-    const response = yield fetch('http://localhost:5000/api/parses/', {
+    const response = yield fetch('/api/parses/', {
       method: 'POST',
       headers: { 'Content-type': 'application/json' },
       body: JSON.stringify({ productname: action.data.search })

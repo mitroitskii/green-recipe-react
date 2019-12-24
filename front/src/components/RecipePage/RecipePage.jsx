@@ -29,7 +29,7 @@ export default class RecipePage extends Component {
   async componentDidMount() {
     window.scrollTo(0, 0);
     const { id } = this.props.match.params;
-    const response = await fetch(`http://localhost:5000/api/recipes/${id}`);
+    const response = await fetch(`/api/recipes/${id}`);
     const respJson = await response.json();
     const {
       portions,

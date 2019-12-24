@@ -98,7 +98,7 @@ export default function RecipeForm(props) {
         if (instructions[instructions.length - 1].text === '') {
           instructionsTrimmed = instructions.slice(0, instructions.length - 1);
         }
-        const response = await fetch('http://localhost:5000/api/recipes/', {
+        const response = await fetch('/api/recipes/', {
           method: 'POST',
           headers: { 'Content-type': 'application/json' },
           body: JSON.stringify({

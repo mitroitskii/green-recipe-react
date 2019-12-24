@@ -1,7 +1,7 @@
 const createError = require('http-errors');
 const express = require('express');
 const useMiddleware = require('./middleware');
-
+const path = require('path')
 const usersRouter = require('./routes/users');
 const recipesRouter = require('./routes/recipes');
 const parcesRouter = require('./routes/parses');
@@ -22,12 +22,16 @@ mongoose.connect(
     useUnifiedTopology: true,
   },
 );
+app.use(express.static(path.join(__dirname, 'build')));
+
 
 app.use('/api/users/', usersRouter);
 app.use('/api/recipes/', recipesRouter);
 app.use('/api/parses/', parcesRouter);
 app.use('/api/uploads/', uploaderRouter);
-
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
   next(createError(404));

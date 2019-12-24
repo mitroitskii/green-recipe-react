@@ -1,6 +1,6 @@
 const fetch = require('node-fetch');
 
-const link = 'http://localhost:5000';
+const link = '';
 
 async function getAll() {
   const response = await fetch(`${link}/api/recipes/`);
