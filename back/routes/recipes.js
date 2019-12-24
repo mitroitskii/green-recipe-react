@@ -5,32 +5,25 @@ const Recipe = require('../models/recipe');
 
 module.exports = router;
 
-// REST
-
 // api/recipes
 router
   .route('/')
   // получить все рецепты GET
   .get(async (req, res) => {
-    console.log('Received Get all request');
     try {
       const recipes = await Recipe.find();
       return res.send(JSON.stringify({ message: 'ok', recipes }));
     } catch (error) {
       return res.send(JSON.stringify({ message: 'error', error }));
-
     }
   })
   // создать один новый рецепт POST
   .post(async (req, res) => {
-    console.log('Received Post one request');
-    //   console.log('req.body', req.body);
     const recipe = {
       ...req.body,
       author: req.session.userId,
       authorName: req.session.username,
     };
-    console.log(req.session);
     const newRecipe = new Recipe(recipe);
     try {
       await newRecipe.save();
@@ -42,8 +35,7 @@ router
     }
   });
 
-
-//  возвращает отсортированные по стоимости рецепты 
+//  возвращает отсортированные по стоимости рецепты
 router.get('/price', async (req, res) => {
   let sortFlag = 1;
   if (req.query.direction !== 'up') {
@@ -75,8 +67,10 @@ router.get('/calorific', async (req, res) => {
 router.get('/random', async (req, res) => {
   try {
     const recipes = await Recipe.find();
-    const randIndex = Math.floor(Math.random() * (recipes.length))
-    return res.send(JSON.stringify({ message: 'ok', id: recipes[randIndex]._id }));
+    const randIndex = Math.floor(Math.random() * recipes.length);
+    return res.send(
+      JSON.stringify({ message: 'ok', id: recipes[randIndex]._id }),
+    );
   } catch (error) {
     return res.send(JSON.stringify({ message: 'error', error }));
   }
@@ -86,7 +80,6 @@ router
   .route('/category/:category')
   // получить все рецепты GET
   .get(async (req, res) => {
-    console.log('Received Get category request');
     try {
       const recipes = await Recipe.find({ category: req.params.category });
       return res.send(JSON.stringify({ message: 'ok', recipes }));
@@ -95,7 +88,6 @@ router
     }
   });
 
-// api/recipes/:id
 router
   .route('/:id')
   // получить конкретный рецепт GET
@@ -111,7 +103,6 @@ router
   .delete(async (req, res) => {
     try {
       const deleteResult = await Recipe.deleteOne({ _id: req.params.id });
-      console.log('Delete', deleteResult);
       return res.send(JSON.stringify({ message: 'ok' }));
     } catch (error) {
       return res.send(JSON.stringify({ message: 'error', error }));

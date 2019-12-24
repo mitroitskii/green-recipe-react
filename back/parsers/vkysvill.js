@@ -13,35 +13,17 @@ async function parseSearchPageVV(productName) {
       let link = parse('.ProductCard__link', this).attr('href');
       links.push(link);
     });
-    // console.log('links', links);
-
-    // Синхронный запуск
-    // for (let i = 0; i < links.length; i++) {
-    //   productInfo = await parseProductPageVV(links[i]);
-    //   console.log('productInfo'), productInfo;
-    //   products.push(productInfo);
-    // }
 
     // Асинхронный запуск
     await Promise.all(
       links.map(async link => {
         productInfo = await parseProductPageVV(link);
-        // console.log('productInfo', productInfo);
         products.push(productInfo);
       }),
     );
 
-    // console.log('products', products);
-    // if (products.length !== 0) {
-      
-      return products;
-    // } else {
-    //   res.status(400).json(products);
-    // }
-
-
+    return products;
   } catch (err) {
-    // res.status(400).json(err.message);
     return err;
   }
 }
@@ -71,8 +53,6 @@ async function parseProductPageVV(link) {
 
       link: fullLink,
     };
-
-    // parse('.Price.Price--lg > .Price__value', html).map(function() {});
 
     parse('.ProductGallery__image', html).map(function() {
       let Imagelink = parse('.lazyload', this).attr('data-src');
@@ -121,22 +101,14 @@ async function parseProductPageVV(link) {
       result['weight'] = (parseFloat(weightWithType[0]) * 1000).toString();
     }
     result['price'] = result['price'].replace(/\s/, '');
-    // console.log('price before', result['price']);
-    // console.log('typeof price before', typeof result['price']);
 
     result['price'] = parseFloat(result['price']);
-    // console.log('price after', result['price']);
-    // console.log('typeof price after', typeof result['price']);
 
     result['weight'] = result['weight'].trim();
     result['currency'] = result['currency'].trim();
 
     result['weight'] = parseFloat(result['weight']);
-    // console.log('result[weight]', result['weight']);
-    // console.log('typeof result[weight]', typeof result['weight']);
     if (isNaN(result['weight'])) {
-      // console.log('ERROR NAN WEIGHT');
-      // console.log('result[price]', result['price']);
       result['weight'] = 1000;
       result['weightAbsoulte'] = 1;
       result['measureType'] = 'кг';
@@ -155,8 +127,6 @@ async function parseProductPageVV(link) {
     }
 
     result['kcal'] = parseFloat(result['kcal']);
-    // result['inputWeight'] = result['weight'];
-    // console.log('result', result);
 
     const newIngredient = new Ingredient(result);
 
