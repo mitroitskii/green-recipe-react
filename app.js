@@ -1,7 +1,7 @@
 const createError = require('http-errors');
 const express = require('express');
 const useMiddleware = require('./middleware');
-const path = require('path')
+const path = require('path');
 const usersRouter = require('./routes/users');
 const recipesRouter = require('./routes/recipes');
 const parcesRouter = require('./routes/parses');
@@ -23,7 +23,6 @@ mongoose.connect(
   },
 );
 app.use(express.static(path.join(__dirname, 'build')));
-
 
 app.use('/api/users/', usersRouter);
 app.use('/api/recipes/', recipesRouter);
