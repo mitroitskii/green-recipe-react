@@ -43,7 +43,6 @@ export default class IngredientsListTable extends React.Component {
                   (ingredient.inputWeight * ratio) / ingredient.weight,
                 ) * ingredient.price}
               </td>
-
               <td className="centered">
                 {Math.ceil(
                   (ingredient.inputWeight * ratio) / ingredient.weight,
