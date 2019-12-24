@@ -1,5 +1,5 @@
 {
   "scripts": {
-    "start": "node back/bin/www --ignore back/sessions/"
+    "start": "cd back; node ./bin/www --ignore ./sessions/"
   }
 }
