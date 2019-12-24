@@ -20,6 +20,7 @@ import {
 
 const initialState = {
   isLoggedIn: false,
+  loadingRoute: false,
   loadingFetch: false,
   logRegstatusError: '',
   registrationStatus: '',
@@ -37,7 +38,7 @@ export default function (state = initialState, action) {
     case IS_LOGGED_REQUEST: {
       return {
         ...state,
-        loadingFetch: true,
+        loadingRoute: true,
         logRegstatusError: '',
       };
     }
@@ -45,7 +46,7 @@ export default function (state = initialState, action) {
       return {
         ...state,
         isLoggedIn: action.isLoggedIn,
-        loadingFetch: false,
+        loadingRoute: false,
         logRegstatusError: '',
         userId: action.userId,
         userName: action.userName

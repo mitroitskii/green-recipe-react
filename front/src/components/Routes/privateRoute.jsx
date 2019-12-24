@@ -16,10 +16,8 @@ class PrivateRoute extends React.Component {
       <Route
         {...this.props}
         component={() => {
-          return this.props.loadingFetch ? (
-            <div height="100%" width="100%">
+          return this.props.loadingRoute ? (
               <Preloader />
-            </div>
           ) : this.props.isLoggedIn ? (
             <Component {...this.props} />
           ) : (
@@ -33,7 +31,7 @@ class PrivateRoute extends React.Component {
 function mapStateToProps(store) {
   return {
     isLoggedIn: store.isLoggedIn,
-    loadingFetch: store.loadingFetch
+    loadingRoute: store.loadingRoute
   };
 }
 function mapDispatchToProps(dispatch) {

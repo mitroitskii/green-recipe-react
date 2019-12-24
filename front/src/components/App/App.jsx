@@ -50,11 +50,15 @@ class App extends React.Component {
               <Route exact path="/login" component={Login} />
               <Route exact path="/registration" component={Registration} />
               <Route exact path="/recipes/:id" component={RecipePage} />
-              <PrivateRoute
+              {/* <PrivateRoute
                 exact
                 path="/recipes/:id/edit"
                 component={RecipeEdit}
-              />
+              /> */}
+              <Route
+                exact
+                path="/recipes/:id/edit"
+                component={RecipeEdit} />
               <PrivateRoute exact path="/users/:username" component={UserAccount} />
               <PrivateRoute
                 exact
