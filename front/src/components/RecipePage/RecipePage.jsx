@@ -1,23 +1,15 @@
 import {
-  Grommet,
   Box,
-  Grid,
   Image,
   Heading,
-  Text,
   Anchor,
-  Paragraph
 } from 'grommet';
-import { grommet } from 'grommet/themes';
 import { NumberInput } from 'grommet-controls';
 import React, { Component } from 'react';
-import InstructionsList from './Instructions';
-import IngredientsList from './IngredientsList';
 import IngredientsListTable from './IngredientsListTable';
 import LabelledMeter from './Meter';
 import './Ingredients.css';
 
-// const { RecipeExample } = require('./RecipeExample');
 
 export default class RecipePage extends Component {
   state = {
@@ -37,12 +29,8 @@ export default class RecipePage extends Component {
   async componentDidMount() {
     window.scrollTo(0, 0);
     const { id } = this.props.match.params;
-    // console.log("id of page", id);
-    // const testId = '5df87e189fb92116d2af03c4';
     const response = await fetch(`http://localhost:5000/api/recipes/${id}`);
     const respJson = await response.json();
-    // console.log('respJsonReceived', respJson);
-    // respJson.recipe
     const {
       portions,
       ingredients,
@@ -71,7 +59,7 @@ export default class RecipePage extends Component {
       authorName,
       category,
       author,
-      instructions // {id,  text} id text
+      instructions 
     }));
   }
 
@@ -120,8 +108,6 @@ export default class RecipePage extends Component {
           align="center"
           direction="column"
           animation="fadeIn"
-          // justify="center"
-          // alignSelf="center"
           width="100%"
         >
           <Anchor
@@ -167,11 +153,6 @@ export default class RecipePage extends Component {
           elevation="medium"
           alignSelf="center"
           animation="fadeIn"
-          // background={{
-          //   "image" : this.state.image
-          // }}
-          // round="large"
-          // border-radius="48px"
         >
           <Image
             fit="cover"
@@ -208,7 +189,6 @@ export default class RecipePage extends Component {
           />
         </Box>
         <Box
-          // elevation="medium"
           width="100%"
           direction="row"
           animation="fadeIn"
@@ -218,14 +198,9 @@ export default class RecipePage extends Component {
           <Box
             className="testText"
             direction="row"
-            // width="100%"
-            // align="center"
             justify="start"
-            // elevation="medium"
             margin={{
               left: 'large'
-              // top:"none"
-              // right: "large"
             }}
           >
             <Heading
@@ -233,18 +208,14 @@ export default class RecipePage extends Component {
                 left: 'small',
                 top: 'small',
                 bottom: 'small'
-                // right: "large"
               }}
               level={3}
             >
-              {/* Ингредиенты: */}
               ИНГРЕДИЕНТЫ:
             </Heading>
-            {/* Ингредиенты */}
           </Box>
           <Box
             margin={{
-              // left: "large"
               right: 'large'
             }}
             align="center"
@@ -276,7 +247,6 @@ export default class RecipePage extends Component {
             right: 'large'
           }}
         >
-          {/* <IngredientsList */}
           <IngredientsListTable
             defaultPortions={parseFloat(this.state.defaultPortions)}
             portions={parseFloat(this.state.portions)}
@@ -294,12 +264,8 @@ export default class RecipePage extends Component {
           }}
         >
           <Heading
-            // className="testText"
             margin={{
-              // left: "large"
               top: 'small'
-              // bottom: "small"
-              // right: "large"
             }}
             level={3}
           >
@@ -308,15 +274,9 @@ export default class RecipePage extends Component {
           <ul className="list4a">
             {this.state.instructions.map((ingredient, index) => (
               <>
-                {/* <Text className="testText" key={ingredient.id}>
-                {index + 1}. {ingredient.text}
-              </Text> */}
-
                 <li className="testText" key={ingredient.id}>
                   {ingredient.text}
                 </li>
-
-                {/* <br /> */}
               </>
             ))}
           </ul>

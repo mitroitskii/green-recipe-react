@@ -1,4 +1,4 @@
-module.exports = function(app) {
+module.exports = function (app) {
   const express = require('express');
   const morgan = require('morgan');
   const cookieParser = require('cookie-parser');
@@ -6,7 +6,6 @@ module.exports = function(app) {
   const FileStore = require('session-file-store')(session);
   const { cookiesCleaner } = require('./auth');
   const oneWeek = 7 * 24 * 3600 * 1000;
-  // const upload = multer({ dest: 'uploads/' });
 
   app.use(morgan('dev'));
 
@@ -25,10 +24,7 @@ module.exports = function(app) {
     next();
   });
 
-  // initialize cookie-parser to allow us access the cookies stored in the browser.
   app.use(cookieParser());
-
-  // initialize express-session to allow us track the logged-in user across sessions.
 
   app.use(
     session({
