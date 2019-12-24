@@ -23,7 +23,7 @@ npm start
 <ul>
 <li><a href="https://github.com/ArtVolchara">Артём Волков</a></li>
 <li><a href="https://github.com/debbes">Денис Красавин</a></li>
- <li><a href="https://github.com/beshunmo">Денис Лемишевский</a></li>
+ <li><a href="https://github.com/lemishevsky">Денис Лемишевский</a></li>
 <li><a href="https://github.com/mitrafantos">Дмитрий Троицкий</a></li>
 </ul>
 
