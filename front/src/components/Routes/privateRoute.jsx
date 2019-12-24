@@ -1,36 +1,31 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
-
+import Preloader from '../Preloader/preloader';
 import { connect } from 'react-redux';
 import { isLoggedFetchAC } from '../../redux/actions/actions';
 
 class PrivateRoute extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isLoggedIn: false,
-      loading: true,
-    };
-  }
-
   async componentDidMount() {
     // проверка авторизации
     this.props.isLoggedFetch();
   }
 
   render() {
-    const component = this.props.component;
+    const Component = this.props.component;
     return (
       <Route
         {...this.props}
-        render={props =>
-          (this.props.isLoggedIn
-            ? (<component {...props} />)
-            : this.props.loadingFetch
-              ? (<span className={'statustext'}>loading</span>)
-              : (<Redirect to="/login" />)
-          )
-        }
+        component={() => {
+          return this.props.loadingFetch ? (
+            <div height="100%" width="100%">
+              <Preloader />
+            </div>
+          ) : this.props.isLoggedIn ? (
+            <Component {...this.props} />
+          ) : (
+            <Redirect to="/login" />
+          );
+        }}
       />
     );
   }
@@ -38,12 +33,12 @@ class PrivateRoute extends React.Component {
 function mapStateToProps(store) {
   return {
     isLoggedIn: store.isLoggedIn,
-    loadingFetch: store.loadingFetch,
+    loadingFetch: store.loadingFetch
   };
 }
 function mapDispatchToProps(dispatch) {
   return {
-    isLoggedFetch: () => dispatch(isLoggedFetchAC()),
+    isLoggedFetch: () => dispatch(isLoggedFetchAC())
   };
 }
 
